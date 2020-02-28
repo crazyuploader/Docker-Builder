@@ -3,6 +3,6 @@ language: bash
 services:
   - docker
 before_script:
-  - docker build -t crazyuploader:kernel/latest .
+  - docker build -t kernel/latest .
 script:
   - docker images
