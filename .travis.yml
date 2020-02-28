@@ -3,6 +3,8 @@ language: bash
 services:
   - docker
 before_script:
-  - docker build -t kernel/latest .
+  - docker build -t crazyuploader/kernel:latest .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
   - docker images
+  - docker push crazyuploader/kernel
