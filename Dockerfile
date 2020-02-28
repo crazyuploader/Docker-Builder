@@ -17,5 +17,4 @@ RUN cd kernel && \
        wget -nv https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r377782b.tar.gz && \
        tar -xf clang-r377782b.tar.gz && \
        rm clang-r377782b.tar.gz
-RUN ls
-RUN ls kernel/
+ENV KERNEL /kernel
