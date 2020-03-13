@@ -42,13 +42,13 @@ RUN cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 gcc32
 
 # Downloading Prebuilt AOSP Clang
-RUN echo "Downloading Clang 10.0.4..." && \
+RUN echo "Downloading Clang..." && \
     cd toolchains && \
-    mkdir clang-r377782b && \
-    cd clang-r377782b && \
-    wget -nv https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r377782b.tar.gz && \
-    tar -xf clang-r377782b.tar.gz && \
-    rm clang-r377782b.tar.gz
+    mkdir clang && \
+    cd clang && \
+    wget -nv https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r377782c.tar.gz && \
+    tar -xf clang-r377782c.tar.gz && \
+    rm clang-r377782c.tar.gz
 
 # Setting up an environment variable
 ENV TOOLCHAIN /toolchains
