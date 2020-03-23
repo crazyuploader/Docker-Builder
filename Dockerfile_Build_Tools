@@ -9,5 +9,8 @@ FROM ubuntu:rolling
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y autoremove
-RUN apt-get install -y git curl python3 python3-pip clang g++ wget nano
-RUN pip3 --version
+RUN apt-get install -y git curl python3 python3-pip clang g++ wget nano tar zip unzip
+RUN pip3 install --upgrade pip && \
+    pip3 install flake8 pyflakes black
+RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com"
+RUN git config --global user.name "crazyuploader"
