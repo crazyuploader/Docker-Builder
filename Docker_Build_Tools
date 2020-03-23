@@ -1,0 +1,12 @@
+#
+# Jugal Kishore -- 2020
+#
+# All the required tools for coding and stuff
+#
+# Base Image: Ubuntu
+FROM ubuntu:rolling
+
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y autoremove
+RUN python --version

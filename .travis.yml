@@ -2,9 +2,16 @@ dist: bionic
 language: bash
 services:
   - docker
-before_script:
-  - docker build -t crazyuploader/kernel:latest .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-script:
-  - docker images
-  - docker push crazyuploader/kernel
+jobs:
+  include:
+    - stage: "Kernel Builder"
+      name: "Kernel Image"
+      script:
+      - docker build -f Dockerfile_Kernel -t crazyuploader/kernel:latest .
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker push crazyuploader/kernel
+    - stage: "Build Tools"
+      script:
+      - docker build -f Dockerfile_Kernel -t crazyuploader/build_tools:latest .
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker images
