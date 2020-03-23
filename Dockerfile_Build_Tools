@@ -9,4 +9,5 @@ FROM ubuntu:rolling
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y autoremove
-RUN python --version
+RUN apt-get install -y git curl python3 python3-pip clang g++ wget nano
+RUN pip --version
