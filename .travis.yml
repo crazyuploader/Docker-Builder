@@ -7,9 +7,12 @@ jobs:
     - stage: "Building Docker Images"
       name: "Kernel Builder"
       script:
-      - echo "Kernel Image Here"
+      - docker build -t crazyuploader/kernel:latest .
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker push crazyuploader/kernel
     - name: "Build Tools"
       script:
       - docker build -f Dockerfile_Build_Tools -t crazyuploader/build_tools:latest .
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker images
+      - docker push crazyuploader/build_tools
