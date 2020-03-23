@@ -10,6 +10,6 @@ jobs:
       - echo "Kernel Image Here"
       name: "Build Tools"
       script:
-      - docker build -f Dockerfile_Kernel -t crazyuploader/build_tools:latest .
+      - docker build -f Dockerfile_Build_Tools -t crazyuploader/build_tools:latest .
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker images
