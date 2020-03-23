@@ -4,13 +4,11 @@ services:
   - docker
 jobs:
   include:
-    - stage: "Kernel Builder"
+    - stage: "Building Docker Images"
       name: "Kernel Image"
       script:
-      - docker build -f Dockerfile_Kernel -t crazyuploader/kernel:latest .
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker push crazyuploader/kernel
-    - stage: "Build Tools"
+      - echo "Kernel Image Here"
+      name: "Build Tools"
       script:
       - docker build -f Dockerfile_Kernel -t crazyuploader/build_tools:latest .
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
