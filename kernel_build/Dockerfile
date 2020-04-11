@@ -30,7 +30,7 @@ RUN apt-get install -y \
 RUN apt-get -y autoremove --purge
 
 # APT clean up
-RUN RUN apt-get clean && \
+RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Directory to store cross-compilers
