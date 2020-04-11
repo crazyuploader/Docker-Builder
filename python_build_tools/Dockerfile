@@ -29,6 +29,9 @@ RUN apt-get install -y          \
                     zip                   \
                     unzip
 
+# Custom Functions
+RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
+
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -40,3 +43,5 @@ RUN pip3 install --upgrade pip && \
 # Setting Git Identity
 RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
     git config --global user.name "crazyuploader"
+
+CMD ["bash"]
