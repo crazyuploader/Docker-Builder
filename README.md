@@ -2,6 +2,6 @@
 
 [![Build Status](https://travis-ci.com/crazyuploader/Docker-Builder.svg?branch=master)](https://travis-ci.com/crazyuploader/Docker-Builder)
 
-[`Dockerfile for Kernel Builder`](kernel/Dockerfile)  | *Dockerfile for Android Kernel Building*  | [`Docker Image`](https://hub.docker.com/r/crazyuploader/kernel)
+[`Dockerfile for Kernel Builder`](kernel_build/Dockerfile)  | *Dockerfile for Android Kernel Building*  | [`Docker Image`](https://hub.docker.com/r/crazyuploader/kernel_build)
 
-[`Dockerfile for Build Tools`](build_tools/Dockerfile)  | *Dockerfile for Build Tools*  | [`Docker Image`](https://hub.docker.com/r/crazyuploader/build_tools)
+[`Dockerfile for Python Build Tools`](python_build_tools/Dockerfile)  | *Dockerfile for Build Tools*  | [`Docker Image`](https://hub.docker.com/r/crazyuploader/python_build_tools)
