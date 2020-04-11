@@ -1,6 +1,6 @@
 # Docker-Builder
 
-[![Build Status](https://travis-ci.com/crazyuploader/Docker-Builder.svg?branch=master)](https://travis-ci.com/crazyuploader/Docker-Builder)
+[![Build Status](https://travis-ci.com/crazyuploader/Docker-Builder.svg?branch=master)](https://travis-ci.com/crazyuploader/Docker-Builder) [![Build Status](https://crazyuploader.semaphoreci.com/badges/Docker-Builder.svg)](https://crazyuploader.semaphoreci.com/projects/Docker-Builder)
 
 [`Dockerfile for Kernel Builder`](kernel_build/Dockerfile)  | *Dockerfile for Android Kernel Building*  | [`Docker Image`](https://hub.docker.com/r/crazyuploader/kernel_build)
 
