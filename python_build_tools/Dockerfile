@@ -27,7 +27,8 @@ RUN apt-get install -y          \
                     nano                \
                     tar                  \
                     zip                   \
-                    unzip
+                    unzip                  \
+                    speedtest-cli
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
