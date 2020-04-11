@@ -1,7 +1,7 @@
 #
 # Jugal Kishore -- 2020
 #
-# All the required tools for coding and stuff
+# All the required tools for Python coding and stuff
 #
 # Base Image: Ubuntu
 FROM ubuntu:rolling
