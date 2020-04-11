@@ -4,7 +4,7 @@
 # All the required tools for Python coding and stuff
 #
 # Base Image: Ubuntu
-FROM ubuntu:rolling
+FROM ubuntu:latest
 
 # Upating packages list
 RUN apt-get update
@@ -13,7 +13,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # Removing unused packages
-RUN apt-get -y autoremove
+RUN apt-get -y autoremove --purge
 
 # Installing packages
 RUN apt-get install -y          \
@@ -28,6 +28,10 @@ RUN apt-get install -y          \
                     tar                  \
                     zip                   \
                     unzip
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
