@@ -1,0 +1,25 @@
+version: v1.0
+name: Docker
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Kernel Builder
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .'
+            - docker images
+  - name: Python Build Tools
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .'
+            - docker images
