@@ -13,46 +13,48 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # Installing required packages
-RUN apt-get install -y \
-                    curl \
-                    git \
-                    python \
-                    bc \
-                    tar \
-                    make \
-                    wget \
-                    gcc \
-                    clang\
-                    libssl-dev \
-                    zip
+RUN apt-get install -y   \
+                    curl  \
+                    git    \
+                    python  \
+                    bc       \
+                    tar       \
+                    make       \
+                    wget        \
+                    gcc          \
+                    clang         \
+                    libssl-dev     \
+                    zip             \
+                    unzip            \
+                    speedtest-cli
 
 # Removing all unused packages
 RUN apt-get -y autoremove --purge
 
 # APT clean up
 RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Directory to store cross-compilers
 RUN mkdir toolchains
 
 # ARM Cross Compiler
-RUN echo "Cloning Toolchains..." && \
+RUN echo -e "Cloning Toolchains...\n" && \
+    echo "Getting AOSP ARM Cross Compiler..." && \
     cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc
 
 # ARM_64 Cross Compiler
-RUN cd toolchains && \
+RUN echo "Getting AOSP ARM_64 Cross Compiler..."
+    cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 gcc32
 
 # Downloading Prebuilt AOSP Clang
-RUN echo "Downloading Clang..." && \
+RUN echo "Cloning Clang..." && \
     cd toolchains && \
-    mkdir clang && \
-    cd clang && \
-    wget -nv https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r377782c.tar.gz && \
-    tar -xf clang-r377782c.tar.gz && \
-    rm clang-r377782c.tar.gz
+    git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
 # Setting up an environment variable
 ENV TOOLCHAIN /toolchains
+
+CMD ["bash"]

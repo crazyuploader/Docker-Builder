@@ -21,13 +21,12 @@ RUN apt-get install -y          \
                     curl          \
                     python3        \
                     python3-pip     \
-                    clang            \
-                    g++               \
-                    wget               \
-                    nano                \
-                    tar                  \
-                    zip                   \
-                    unzip                  \
+                    tmate            \
+                    wget              \
+                    nano               \
+                    tar                 \
+                    zip                  \
+                    unzip                 \
                     speedtest-cli
 
 # Custom Functions
@@ -35,7 +34,7 @@ RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >
 
 # Clean up
 RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
