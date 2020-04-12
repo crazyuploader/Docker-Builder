@@ -22,10 +22,9 @@ RUN apt-get install -y   \
                     make       \
                     wget        \
                     gcc          \
-                    clang         \
-                    libssl-dev     \
-                    zip             \
-                    unzip            \
+                    libssl-dev    \
+                    zip            \
+                    unzip           \
                     speedtest-cli
 
 # Removing all unused packages
