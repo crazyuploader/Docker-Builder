@@ -27,7 +27,8 @@ RUN apt-get install -y          \
                     tar                 \
                     zip                  \
                     unzip                 \
-                    speedtest-cli
+                    speedtest-cli          \
+                    locales-all
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
