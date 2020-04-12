@@ -33,6 +33,9 @@ RUN apt-get install -y          \
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
+# Making Python 3 as default
+RUN echo -e "\nalias python=\"python3\"" >> ~/.bashrc
+
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
