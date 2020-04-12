@@ -45,7 +45,7 @@ RUN echo -e "Cloning Toolchains...\n" && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc
 
 # ARM_64 Cross Compiler
-RUN echo "Getting AOSP ARM_64 Cross Compiler..."
+RUN echo "Getting AOSP ARM_64 Cross Compiler..." && \
     cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 gcc32
 
