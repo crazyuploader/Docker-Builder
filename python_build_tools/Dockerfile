@@ -18,7 +18,7 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl python3 python3-pip tmate wget nano \
-                    tar zip unzip speedtest-cli locales-cli
+                    tar zip unzip speedtest-cli locales-all
 
 # Clean up
 RUN apt-get clean && \
