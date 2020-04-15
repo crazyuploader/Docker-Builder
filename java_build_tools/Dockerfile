@@ -5,7 +5,7 @@
 FROM ubuntu:latest
 
 # Update apt packages lists
-RUN apt-get Update
+RUN apt-get update
 
 # Upgrade packages to latest version
 RUN apt-get upgrade -y
