@@ -23,3 +23,12 @@ blocks:
             - checkout
             - 'docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .'
             - docker images
+- name: Java Build Tools
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .'
+            - docker images
