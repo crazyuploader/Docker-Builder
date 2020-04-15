@@ -10,13 +10,19 @@ jobs:
     - stage: "Building Docker Images"
       name: "Kernel Builder"
       script:
-      - docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker images
-      - docker push crazyuploader/kernel_build
+        - docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker images
+        - docker push crazyuploader/kernel_build
     - name: "Python Build Tools"
       script:
-      - docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker images
-      - docker push crazyuploader/python_build_tools
+        - docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker images
+        - docker push crazyuploader/python_build_tools
+    - name: "Java Build Tools"
+      script:
+        - docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker images
+        - docker push crazyuploader/java_build_tools
