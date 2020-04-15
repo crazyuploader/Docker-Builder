@@ -56,5 +56,4 @@ ENV CLANG_DIRECTORY /toolchains/clang
 ENV GCC_DIRECTORY /toolchains/gcc
 ENV GCC32_DIRECTORY /toolchains/gcc32
 
-
 CMD ["bash"]

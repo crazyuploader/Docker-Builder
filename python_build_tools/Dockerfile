@@ -28,7 +28,7 @@ RUN apt-get clean && \
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Making Python 3 as default
-RUN echo -e "\nalias python=\"python3\"" >> ~/.bashrc
+RUN echo "\nalias python=\"python3\"" >> ~/.bashrc
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
