@@ -13,19 +13,12 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # Installing required packages
-RUN apt-get install -y   \
-                    curl  \
-                    git    \
-                    python  \
-                    bc       \
-                    tar       \
-                    make       \
-                    wget        \
-                    gcc          \
-                    libssl-dev    \
-                    zip            \
-                    unzip           \
-                    speedtest-cli
+RUN apt-get install -y --no-install-recommends \
+                    curl git python bc tar make wget gcc libssl-dev \
+                    zip unzip speedtest-cli
+
+# Custom Functions
+RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Removing all unused packages
 RUN apt-get -y autoremove --purge
@@ -53,7 +46,15 @@ RUN echo "Cloning Clang..." && \
     cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
+# Setting Git Identity
+RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
+    git config --global user.name "crazyuploader"
+
 # Setting up an environment variable
 ENV TOOLCHAIN /toolchains
+ENV CLANG_DIRECTORY /toolchains/clang
+ENV GCC_DIRECTORY /toolchains/gcc
+ENV GCC32_DIRECTORY /toolchains/gcc32
+
 
 CMD ["bash"]

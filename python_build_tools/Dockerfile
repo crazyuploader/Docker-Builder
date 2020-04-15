@@ -16,29 +16,19 @@ RUN apt-get -y upgrade
 RUN apt-get -y autoremove --purge
 
 # Installing packages
-RUN apt-get install -y          \
-                    git          \
-                    curl          \
-                    python3        \
-                    python3-pip     \
-                    tmate            \
-                    wget              \
-                    nano               \
-                    tar                 \
-                    zip                  \
-                    unzip                 \
-                    speedtest-cli          \
-                    locales-all
+RUN apt-get install -y --no-install-recommends \
+                    git curl python3 python3-pip tmate wget nano \
+                    tar zip unzip speedtest-cli locales-cli
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Making Python 3 as default
 RUN echo -e "\nalias python=\"python3\"" >> ~/.bashrc
-
-# Clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
