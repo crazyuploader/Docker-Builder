@@ -29,8 +29,8 @@ RUN mkdir /opt/gradle && \
 RUN mkdir /opt/android-sdk && \
     cd /opt/android-sdk && \
     export ANDROID_HOME="$(pwd)" && \
-    wget -O command.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip && \
-    unzip command.zip && \
+    wget -q -O command.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip && \
+    unzip command.zip>> /dev/null 2>&1 && \
     rm command.zip && \
     ls && \
     yes | ./tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-29"
