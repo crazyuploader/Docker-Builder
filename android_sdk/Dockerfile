@@ -32,4 +32,5 @@ RUN mkdir /opt/android-sdk && \
     wget -O command.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip && \
     unzip command.zip && \
     rm command.zip && \
-    ./tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --list
+    ls && \
+    yes | ./tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-29"
