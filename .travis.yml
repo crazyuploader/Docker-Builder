@@ -26,7 +26,7 @@ jobs:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/java_build_tools
-    - name: "Java Build Tools"
+    - name: "Android SDK"
       script:
         - docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
