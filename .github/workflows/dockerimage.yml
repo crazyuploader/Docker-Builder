@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  Kernel_Builder:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
+  
+  Python_Build_Tools:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
+  
+  Java_Build_Tools:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
+  
+  Android_SDK:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
