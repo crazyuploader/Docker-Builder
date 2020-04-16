@@ -39,4 +39,8 @@ ENV ANDROID_HOME /opt/android-sdk
 ENV GRADLE_HOME /opt/gradle/gradle-6.3
 ENV PATH ${PATH}:${ANDROID_HOME}:/tools/bin:${ANDROID_HOME}:/platform-tools:${GRADLE_HOME}:/bin
 
+# Custom Functions
+RUN echo "\nalias gradle=\"${GRADLE_HOME}/bin/gradle\"" >> ~/.bashrc && \
+    echo "\nalias sdkmanager=\"${ANDROID_HOME}/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME\"" >> ~/.bashrc
+
 CMD ["bash"]
