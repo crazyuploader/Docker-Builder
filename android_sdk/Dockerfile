@@ -33,4 +33,10 @@ RUN mkdir /opt/android-sdk && \
     unzip command.zip>> /dev/null 2>&1 && \
     rm command.zip && \
     yes | ./tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-29" && \
-    ls
+
+# Environment Variables
+ENV ANDROID_HOME /opt/android-sdk
+ENV GRADLE_HOME /opt/gradle/gradle-6.3
+ENV PATH ${PATH}:${ANDROID_HOME}:/tools/bin:${ANDROID_HOME}:/platform-tools:${GRADLE_HOME}:/bin
+
+CMD ["bash"]
