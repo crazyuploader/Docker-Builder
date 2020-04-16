@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  Kernel Builder:
+  Kernel_Builder:
 
     runs-on: ubuntu-latest
 
@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
   
-  Python Build Tools:
+  Python_Build_Tools:
 
     runs-on: ubuntu-latest
 
@@ -26,7 +26,7 @@ jobs:
     - name: Build the Docker image
       run: docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
   
-  Java Build Tools:
+  Java_Build_Tools:
 
     runs-on: ubuntu-latest
 
@@ -35,7 +35,7 @@ jobs:
     - name: Build the Docker image
       run: docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
   
-  Android SDK:
+  Android_SDK:
 
     runs-on: ubuntu-latest
 
