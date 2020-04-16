@@ -17,3 +17,10 @@ RUN apt-get install -y --no-install-recommends \
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
+
+# Download Gradle
+RUN mkdir /opt/gradle && \
+    wget -q https://services.gradle.org/distributions/gradle-6.3-all.zip && \
+    unzip -d gradle* /opt/gradle
+    ls /opt/gradle
+    rm gradle*.zip
