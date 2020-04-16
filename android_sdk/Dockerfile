@@ -22,6 +22,6 @@ RUN apt-get clean && \
 # Download Gradle
 RUN mkdir /opt/gradle && \
     wget -q https://services.gradle.org/distributions/gradle-6.3-all.zip && \
-    unzip -d gradle* /opt/gradle && \
+    unzip -d /opt/gradle gradle* && \
     ls /opt/gradle && \
     rm gradle*.zip
