@@ -23,5 +23,12 @@ RUN apt-get clean && \
 RUN mkdir /opt/gradle && \
     wget -q https://services.gradle.org/distributions/gradle-6.3-all.zip && \
     unzip -d /opt/gradle gradle* && \
-    ls /opt/gradle && \
     rm gradle*.zip
+
+# Download Android SDK
+RUN mkdir /opt/android-sdk && \
+    cd /opt/android-sdk && \
+    export ANDROID_HOME="$(changes)" && \
+    wget -O command.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip && \
+    unzip command.zip && \
+    rm command.zip
