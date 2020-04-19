@@ -17,7 +17,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk tmate nano \
                     tar zip unzip speedtest-cli locales-all shellcheck \
-                    ant maven
+                    ant maven gpg
 
 # Clean up
 RUN apt-get clean && \
