@@ -6,6 +6,9 @@
 # Base Image: Ubuntu
 FROM ubuntu:latest
 
+# Setting Non-Interactive Environment Variable
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Upating packages list
 RUN apt-get update
 

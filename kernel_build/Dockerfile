@@ -6,6 +6,9 @@
 # Using Ubuntu as a base OS
 FROM ubuntu:bionic
 
+# Setting Non-Interactive Environment Variable
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Updating apt packages list
 RUN apt-get update
 
