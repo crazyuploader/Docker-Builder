@@ -40,10 +40,10 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
     wget -q -O command.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
     unzip command.zip>> /dev/null 2>&1 && \
     rm command.zip && \
-    yes | sdkmanager --licenses && \
+    yes | sdkmanager --licenses 1> /dev/null && \
     yes | sdkmanager --update && \
     yes | sdkmanager "platform-tools" \
                      "platforms;android-29" \
-                     "build-tools;29.0.3"
+                     "build-tools;29.0.3" 1> /dev/null
 
 CMD ["bash"]
