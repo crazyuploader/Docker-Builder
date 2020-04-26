@@ -50,7 +50,7 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
                      "build-tools;29.0.3" 1> /dev/null
 
 # Getting Flutter stable from GitHub source https://github.com/flutter/flutter.git
-RUN git clone https://github.com/flutter/flutter.git -b stable && \
+RUN git clone https://github.com/flutter/flutter.git -b stable ${FLUTTER_HOME} && \
     flutter doctor
 
 CMD ["bash"]
