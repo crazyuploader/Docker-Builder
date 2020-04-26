@@ -1,7 +1,7 @@
 #
 # Created by Jugal Kishore --- 2020
 #
-# Android SDK
+# Android SDK with Flutter
 #
 # Base Image: Ubuntu
 FROM ubuntu:latest
@@ -33,7 +33,8 @@ RUN mkdir /opt/gradle && \
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
 ENV GRADLE_HOME /opt/gradle/gradle-6.3
-ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin
+ENV FLUTTER_HOME /opt/flutter
+ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${FLUTTER_HOME}/bin
 
 # Download Android SDK
 RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.android/repositories.cfg && \
@@ -47,5 +48,9 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
     yes | sdkmanager "platform-tools" \
                      "platforms;android-29" \
                      "build-tools;29.0.3" 1> /dev/null
+
+# Getting Flutter stable from GitHub source https://github.com/flutter/flutter.git
+RUN git clone --depth=1 https://github.com/flutter/flutter.git -b stable ${FLUTTER_HOME} && \
+    flutter doctor
 
 CMD ["bash"]
