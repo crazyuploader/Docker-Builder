@@ -41,3 +41,12 @@ blocks:
             - checkout
             - 'docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .'
             - docker images
+  - name: CPP & C Build Tools
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .'
+            - docker images
