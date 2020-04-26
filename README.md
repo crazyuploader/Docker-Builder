@@ -8,6 +8,8 @@
 
 [`Dockerfile for Java Build Tools`](java_build_tools/Dockerfile)  | *Dockerfile for Java Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/java_build_tools)
 
-[`Dockerfile for Android SDK`](android_sdk/Dockerfile)  | *Dockerfile for Java Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/android_sdk)
+[`Dockerfile for Android SDK`](android_sdk/Dockerfile)  | *Dockerfile for Android SDK*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/android_sdk)
+
+[`Dockerfile for Android SDK with Flutter`](android_sdk/with_flutter/Dockerfile)  | *Dockerfile for Android SDK with Flutter*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/android_sdk)
 
 [`Dockerfile for C++ Build Tools`](cpp_build_tools/Dockerfile)  | *Dockerfile for C++ Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/cpp_build_tools)
