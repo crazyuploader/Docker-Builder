@@ -44,14 +44,6 @@ jobs:
     - name: Build the Docker image
       run: docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
   
-  CPP_Build_Tools:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f cpp_build_tools/Dockerfile -t crazyuploader/android_sdk:latest .
   Android_SDK_with_Flutter:
 
     runs-on: ubuntu-latest
@@ -60,3 +52,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f android_sdk/with_flutter/Dockerfile -t crazyuploader/android_sdk:flutter .
+
+  CPP_Build_Tools:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
