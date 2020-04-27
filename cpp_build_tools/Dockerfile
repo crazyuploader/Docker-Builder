@@ -21,7 +21,7 @@ RUN apt-get -y autoremove --purge
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget clang g++ gcc nano \
-                    ca-certificates locales-all tmate gpg
+                    ca-certificates locales-all tmate gpg ssh
 
 # Clean up
 RUN apt-get clean && \
