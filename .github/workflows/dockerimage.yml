@@ -51,7 +51,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -f android_sdk/with_flutter/Dockerfile -t crazyuploader/android_sdk:flutter .
+      run: docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
 
   CPP_Build_Tools:
 

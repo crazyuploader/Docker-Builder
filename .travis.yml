@@ -34,7 +34,7 @@ jobs:
         - docker push crazyuploader/android_sdk
     - name: "Android SDK with Flutter"
       script:
-        - docker build -f android_sdk/with_flutter/Dockerfile -t crazyuploader/android_sdk:flutter .
+        - docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/android_sdk
