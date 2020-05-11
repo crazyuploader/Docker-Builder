@@ -37,7 +37,7 @@ jobs:
         - docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
-        - docker push crazyuploader/android_sdk
+        - docker push crazyuploader/android_sdk_flutter
     - name: "CPP & C Build Tools"
       script:
         - docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
