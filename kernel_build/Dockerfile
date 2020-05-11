@@ -34,7 +34,7 @@ RUN apt-get clean && \
 RUN mkdir toolchains
 
 # ARM Cross Compiler
-RUN echo "Cloning Toolchains...\n" && \
+RUN printf "Cloning Toolchains...\n" && \
     echo "Getting AOSP ARM Cross Compiler..." && \
     cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc
