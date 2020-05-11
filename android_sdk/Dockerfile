@@ -4,7 +4,7 @@
 # Android SDK
 #
 # Base Image: Ubuntu
-FROM ubuntu:latest
+FROM ubuntu:focal
 
 # Setting Non-Interactive Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
