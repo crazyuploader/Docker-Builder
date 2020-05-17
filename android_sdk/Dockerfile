@@ -26,13 +26,13 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    wget -q https://services.gradle.org/distributions/gradle-6.4-all.zip && \
+    wget -q https://services.gradle.org/distributions/gradle-6.4.1-all.zip && \
     unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
     rm gradle*.zip
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-6.4
+ENV GRADLE_HOME /opt/gradle/gradle-6.4.1
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin
 
 # Download Android SDK
