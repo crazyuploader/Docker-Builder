@@ -14,33 +14,45 @@ jobs:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/kernel_build
+
     - name: "Python Build Tools"
       script:
         - docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/python_build_tools
+
     - name: "Java Build Tools"
       script:
         - docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/java_build_tools
+
     - name: "Android SDK"
       script:
         - docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/android_sdk
+
     - name: "Android SDK with Flutter"
       script:
         - docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/android_sdk_flutter
+
     - name: "CPP & C Build Tools"
       script:
         - docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker images
         - docker push crazyuploader/cpp_build_tools
+
+    - name: "NodeJS Build Tools"
+      script:
+        - docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker images
+        - docker push crazyuploader/node_build_tools
