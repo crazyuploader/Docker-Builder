@@ -59,3 +59,13 @@ blocks:
             - checkout
             - 'docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .'
             - docker images
+
+  - name: NodeJS Build Tools
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .'
+            - docker images

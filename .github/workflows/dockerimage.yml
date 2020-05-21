@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
-  
+
   Python_Build_Tools:
 
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
-  
+
   Java_Build_Tools:
 
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
-  
+
   Android_SDK:
 
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
-  
+
   Android_SDK_with_Flutter:
 
     runs-on: ubuntu-latest
@@ -57,3 +57,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
+
+  Node_Build_Tools:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
