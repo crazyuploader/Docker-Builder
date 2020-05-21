@@ -30,10 +30,17 @@ RUN mkdir /opt/gradle && \
     unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
     rm gradle*.zip
 
+# Download Kotlin
+RUN cd /opt && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.72/kotlin-compiler-1.3.72.zip && \
+    unzip *kotlin*.zip && \
+    rm *kotlin*.zip
+
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
 ENV GRADLE_HOME /opt/gradle/gradle-6.4.1
-ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin
+ENV KOTLIN_HOME /opt/kotlinc
+ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
 # Download Android SDK
 RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.android/repositories.cfg && \
