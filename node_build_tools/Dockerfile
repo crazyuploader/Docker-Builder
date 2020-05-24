@@ -24,7 +24,7 @@ RUN apt-get install -y --no-install-recommends \
                     tar zip unzip speedtest-cli locales-all gpg ssh
 
 # Installing Yarn
-RUN npm install --global yarn
+RUN npm install --global yarn@1.22.4
 
 # Clean up
 RUN apt-get clean && \
