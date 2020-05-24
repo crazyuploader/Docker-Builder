@@ -23,6 +23,9 @@ RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nodejs npm nano \
                     tar zip unzip speedtest-cli locales-all gpg ssh
 
+# Installing Yarn
+RUN npm install --global yarn
+
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
