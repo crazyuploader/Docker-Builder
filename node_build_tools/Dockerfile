@@ -30,8 +30,8 @@ RUN npm install --global yarn@1.22.4
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Setting Git Identity
-RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
-    git config --global user.name "crazyuploader"
+# Git Identity Setup
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
+    echo "bash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]

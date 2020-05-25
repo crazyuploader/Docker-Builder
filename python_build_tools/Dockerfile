@@ -38,8 +38,8 @@ RUN printf "\nalias python=\"python3\"" >> ~/.bashrc && \
 RUN pip3 install --upgrade pip && \
     pip3 install flake8 pyflakes black
 
-# Setting Git Identity
-RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
-    git config --global user.name "crazyuploader"
+# Git Identity Setup
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
+    echo "bash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]

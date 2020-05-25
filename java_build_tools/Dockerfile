@@ -31,8 +31,8 @@ RUN apt-get clean && \
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
-# Setting Git Identity
-RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
-    git config --global user.name "crazyuploader"
+# Git Identity Setup
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
+    echo "bash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]
