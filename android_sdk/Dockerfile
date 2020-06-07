@@ -26,7 +26,7 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    wget -q https://services.gradle.org/distributions/gradle-6.4.1-all.zip && \
+    wget -q https://services.gradle.org/distributions/gradle-6.5-all.zip && \
     unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
     rm gradle*.zip
 
@@ -38,7 +38,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-6.4.1
+ENV GRADLE_HOME /opt/gradle/gradle-6.5
 ENV KOTLIN_HOME /opt/kotlinc
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
