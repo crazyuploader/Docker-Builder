@@ -18,7 +18,8 @@ RUN apt-get -y upgrade
 # Installing required packages
 RUN apt-get install -y \
                     curl git python bc tar make wget gcc libssl-dev \
-                    zip unzip speedtest-cli ca-certificates gpg ssh
+                    zip unzip speedtest-cli ca-certificates gpg ssh \
+                    nano
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
