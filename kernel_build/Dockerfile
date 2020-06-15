@@ -56,8 +56,8 @@ RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.c
 
 # Setting up an environment variable
 ENV TOOLCHAIN /toolchains
-ENV CLANG_DIRECTORY /toolchains/clang
-ENV GCC_DIRECTORY /toolchains/gcc
-ENV GCC32_DIRECTORY /toolchains/gcc32
+ENV CLANG /toolchains/clang/bin/clang
+ENV GCC /toolchains/gcc/bin/aarch64-linux-android-
+ENV GCC32 /toolchains/gcc32/bin/arm-linux-androideabi-
 
 CMD ["bash"]
