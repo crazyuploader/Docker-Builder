@@ -9,7 +9,7 @@ YELLOW="\033[1;33m"
 MAGENTA="\033[1;35m"
 RED="\033[0;31m"
 
-git show --pretty="" --name-only 5b272c4a3c1ee41c58beea3041f5b664fcf3308c | grep "Dockerfile" >> to_build.txt
+git show --pretty="" --name-only | grep "Dockerfile" >> to_build.txt
 FILES=$(cat to_build.txt)
 rm to_build.txt
 echo -e "${GREEN} Available Dockerfile -${NC}"
