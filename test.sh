@@ -20,7 +20,21 @@ for f in ${FILES}; do
     echo -e "${MAGENTA}${f}${NC}"
 done
 ERROR_FILE=0
+echo ""
+echo "Checking Docker..."
+IF_DOCKER="command -v docker"
+if [[ -n "${IF_DOCKER}" ]]; then
+    echo ""
+    echo -e "${RED}Docker not installed, can't continue.${NC}"
+    echo "Exiting..."
+    exit 1
+else
+    echo ""
+    echo "Docker installed, good to go!"
+fi
 for FILE in ${FILES}; do
+    echo ""
+    echo -e "Building ---> ${YELLOW}${FILE}${NC}"
     echo ""
     DIR=$(dirname "${FILE}")
     BUILD_OUTPUT=$(docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .)
