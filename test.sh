@@ -13,7 +13,7 @@ git show --pretty="" --name-only 5b272c4a3c1ee41c58beea3041f5b664fcf3308c | grep
 FILES=$(cat to_build.txt)
 rm to_build.txt
 echo -e "${GREEN} Available Dockerfile -${NC}"
-find * -name "Dockerfile"
+find -- * -name "Dockerfile"
 echo ""
 echo -e "${YELLOW} Dockerfile changed -${NC}"
 for f in ${FILES}; do
