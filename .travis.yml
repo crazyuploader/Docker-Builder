@@ -42,3 +42,8 @@ jobs:
       script:
         - docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
         - docker images
+
+    - name: "Minimal Ubuntu"
+      script:
+        - docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
+        - docker images

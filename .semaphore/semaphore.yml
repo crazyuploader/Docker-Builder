@@ -138,3 +138,22 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/node_build_tools
+
+  - name: Minimal Ubuntu
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .'
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/minimal_ubuntu
