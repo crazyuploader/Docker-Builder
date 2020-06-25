@@ -2,9 +2,6 @@ dist: bionic
 language: bash
 services:
   - docker
-branches:
-  only:
-    - master
 jobs:
   include:
     - stage: "Building Docker Images"
@@ -41,4 +38,9 @@ jobs:
     - name: "NodeJS Build Tools"
       script:
         - docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
+        - docker images
+
+    - name: "Minimal Ubuntu"
+      script:
+        - docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
         - docker images

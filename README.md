@@ -15,3 +15,5 @@
 [`Dockerfile for C++ Build Tools`](cpp_build_tools/Dockerfile)  | *Dockerfile for C++ Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/cpp_build_tools)
 
 [`Dockerfile for NodeJS Build Tools`](node_build_tools/Dockerfile)  | *Dockerfile for NodeJS Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/node_build_tools)
+
+[`Dockerfile for Minimal Ubuntu`](minimal_ubuntu/Dockerfile)  | *Dockerfile for Minimal Ubuntu*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/minimal_ubuntu)
