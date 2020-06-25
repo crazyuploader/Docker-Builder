@@ -15,10 +15,16 @@ rm to_build.txt
 echo -e "${GREEN} Available Dockerfile -${NC}"
 find -- * -name "Dockerfile"
 echo ""
-echo -e "${YELLOW} Dockerfile changed -${NC}"
-for f in ${FILES}; do
-    echo -e "${MAGENTA}${f}${NC}"
-done
+if [[ -n ${FILES} ]]; then
+    echo -e "${YELLOW} Dockerfile changed -${NC}"
+    for f in ${FILES}; do
+        echo -e "${MAGENTA}${f}${NC}"
+    done
+else
+    echo -e "${GREEN}No Dockerfile have been changed in this commit, nothing to build.${NC}"
+    echo "Exiting..."
+    exit 0
+fi
 ERROR_FILE=0
 echo ""
 echo "Checking Docker..."
