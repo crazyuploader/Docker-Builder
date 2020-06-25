@@ -32,6 +32,6 @@ RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    echo "\nbash /git_identity.sh" >> ~/.bashrc
+    printf "\nbash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]

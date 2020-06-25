@@ -57,6 +57,6 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    echo "\nbash /git_identity.sh" >> ~/.bashrc
+    printf "\nbash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]
