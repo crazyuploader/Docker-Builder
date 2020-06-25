@@ -23,7 +23,7 @@ ERROR_FILE=0
 echo ""
 echo "Checking Docker..."
 IF_DOCKER=$(command -v docker)
-if [[ -n "${IF_DOCKER}" ]]; then
+if [[ -z "${IF_DOCKER}" ]]; then
     echo ""
     echo -e "${RED}Docker not installed, can't continue.${NC}"
     echo "Exiting..."
