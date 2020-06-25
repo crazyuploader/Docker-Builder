@@ -18,7 +18,7 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nano tar zip unzip \
-                    speedtest-cli locales-all gpg ssh
+                    speedtest-cli locales-all gpg ssh tmate
 
 # Clean up
 RUN apt-get clean && \
