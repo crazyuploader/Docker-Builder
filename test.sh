@@ -43,20 +43,20 @@ for FILE in ${FILES}; do
     echo -e "Building ---> ${YELLOW}${FILE}${NC}"
     echo ""
     DIR=$(dirname "${FILE}")
-    BUILD_OUTPUT=$(docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .)
+    docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest . | tee > output.txt
     EXIT_CODE="$?"
     if [[ "${EXIT_CODE}" != "0" ]]; then
         ((ERROR_FILE = ERROR_FILE + 1))
         echo ""
         echo -e "${RED}---E-R-R-O-R---${NC}"
         echo ""
-        echo "${BUILD_OUTPUT}"
+        cat output.txt
         echo ""
         echo -e "${RED}---E-R-R-O-R---${NC}"
         echo ""
     else
         echo ""
-        echo "${BUILD_OUTPUT}"
+        cat output.txt
     fi
 done
 if [[ "${ERROR_FILE}" != "0"  ]]; then
