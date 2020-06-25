@@ -2,9 +2,6 @@ dist: bionic
 language: bash
 services:
   - docker
-branches:
-  only:
-    - master
 jobs:
   include:
     - stage: "Building Docker Images"
