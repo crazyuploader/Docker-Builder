@@ -33,8 +33,8 @@ RUN mkdir /opt/gradle && \
 # Download Kotlin
 RUN cd /opt && \
     wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.72/kotlin-compiler-1.3.72.zip && \
-    unzip *kotlin*.zip && \
-    rm *kotlin*.zip
+    unzip ./*kotlin*.zip && \
+    rm ./*kotlin*.zip
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
