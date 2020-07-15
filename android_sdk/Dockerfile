@@ -53,6 +53,8 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
     yes | sdkmanager --update && \
     yes | sdkmanager "platform-tools" \
                      "platforms;android-29" \
+                     "platforms;android-30" \
+                     "build-tools;30.0.0" \
                      "build-tools;29.0.3" 1> /dev/null
 
 # Git Identity Setup
