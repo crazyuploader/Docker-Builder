@@ -22,7 +22,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk nano \
                     tar xz-utils zip unzip speedtest-cli locales-all shellcheck \
-                    ant maven gpg ssh
+                    ant maven gpg ssh 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -

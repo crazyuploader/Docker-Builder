@@ -18,7 +18,7 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nano tar zip unzip \
-                    speedtest-cli locales-all gpg ssh xz-utils
+                    speedtest-cli locales-all gpg ssh xz-utils 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
