@@ -29,13 +29,13 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    wget -q https://services.gradle.org/distributions/gradle-6.5-all.zip && \
+    curl -sLO https://services.gradle.org/distributions/gradle-6.5-all.zip && \
     unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
     rm gradle*.zip
 
 # Download Kotlin
 RUN cd /opt && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.72/kotlin-compiler-1.3.72.zip && \
+    curl -sLO https://github.com/JetBrains/kotlin/releases/download/v1.3.72/kotlin-compiler-1.3.72.zip && \
     unzip ./*kotlin*.zip && \
     rm ./*kotlin*.zip
 
@@ -49,7 +49,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRAD
 RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.android/repositories.cfg && \
     mkdir /opt/android-sdk && \
     cd /opt/android-sdk && \
-    wget -q -O command.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
+    curl -sLo command.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
     unzip command.zip>> /dev/null 2>&1 && \
     rm command.zip && \
     yes | sdkmanager --licenses 1> /dev/null && \
@@ -61,7 +61,7 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
                      "build-tools;29.0.3" 1> /dev/null
 
 # Git Identity Setup
-RUN wget -q https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
+RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
     printf "\nbash /git_identity.sh" >> ~/.bashrc
 
 CMD ["bash"]
