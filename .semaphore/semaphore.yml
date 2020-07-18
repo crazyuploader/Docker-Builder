@@ -157,3 +157,22 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/minimal_ubuntu
+
+  - name: Hugo Site Generator
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - 'docker build -f hugo/Dockerfile -t crazyuploader/hugo:latest .'
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/hugo
