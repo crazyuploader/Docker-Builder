@@ -44,3 +44,8 @@ jobs:
       script:
         - docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
         - docker images
+
+    - name: "Hugo Site Generator"
+      script:
+        - docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/hugo:latest .
+        - docker images
