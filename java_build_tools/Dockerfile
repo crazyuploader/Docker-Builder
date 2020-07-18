@@ -20,9 +20,12 @@ RUN apt-get -y autoremove --purge
 
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
-                    git curl wget default-jdk tmate nano \
-                    tar zip unzip speedtest-cli locales-all shellcheck \
+                    git curl wget default-jdk nano \
+                    tar xz-utils zip unzip speedtest-cli locales-all shellcheck \
                     ant maven gpg ssh
+
+# Install tmate
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

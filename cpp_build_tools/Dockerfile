@@ -21,7 +21,10 @@ RUN apt-get -y autoremove --purge
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget clang g++ gcc nano \
-                    ca-certificates locales-all tmate gpg ssh
+                    ca-certificates locales-all gpg ssh tar xz-utils
+
+# Install tmate
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

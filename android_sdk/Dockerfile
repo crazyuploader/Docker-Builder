@@ -18,7 +18,10 @@ RUN apt-get upgrade -y
 # Install Packages
 RUN apt-get install -y --no-install-recommends \
                     git curl nano ca-certificates openjdk-8-jdk \
-                    wget zip unzip gpg ftp ssh
+                    wget zip unzip gpg ftp ssh tar xz-utils
+
+# Install tmate
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

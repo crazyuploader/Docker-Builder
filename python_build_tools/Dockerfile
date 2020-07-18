@@ -20,8 +20,11 @@ RUN apt-get -y autoremove --purge
 
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
-                    git curl python3 python3-pip tmate wget nano \
-                    tar zip unzip speedtest-cli locales-all gpg ssh
+                    git curl python3 python3-pip wget nano \
+                    tar zip unzip speedtest-cli locales-all gpg ssh xz-utils
+
+# Install tmate
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

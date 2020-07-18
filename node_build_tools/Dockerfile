@@ -21,7 +21,10 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nodejs npm nano \
-                    tar zip unzip speedtest-cli locales-all gpg ssh
+                    tar zip unzip speedtest-cli locales-all gpg ssh xz-utils
+
+# Install tmate
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Installing Yarn
 RUN npm install --global yarn@1.22.4
