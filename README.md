@@ -21,3 +21,5 @@
 [`Dockerfile for NodeJS Build Tools`](node_build_tools/Dockerfile)  | *Dockerfile for NodeJS Build Tools*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/node_build_tools)
 
 [`Dockerfile for Minimal Ubuntu`](minimal_ubuntu/Dockerfile)  | *Dockerfile for Minimal Ubuntu*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/minimal_ubuntu)
+
+[`Dockerfile for Hugo Site Generator`](minimal_ubuntu/Dockerfile)  | *Dockerfile for Hugo Site Generator*  | [`Docker Image on Docker Hub`](https://hub.docker.com/r/crazyuploader/hugo)

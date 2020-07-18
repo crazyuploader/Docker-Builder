@@ -75,7 +75,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
-  
+
   Hugo_Site_Generator:
 
     runs-on: ubuntu-latest
