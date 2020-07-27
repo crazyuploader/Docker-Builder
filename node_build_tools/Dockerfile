@@ -27,7 +27,9 @@ RUN apt-get install -y --no-install-recommends \
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
 
 # Installing Yarn
-RUN npm install --global yarn@1.22.4
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+    apt update && apt install -y yarn
 
 # Clean up
 RUN apt-get clean && \
