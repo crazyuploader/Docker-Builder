@@ -39,7 +39,7 @@ RUN printf "\nalias python=\"python3\"" >> ~/.bashrc && \
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
-    pip3 install flake8 pyflakes black
+    pip3 install flake8 pyflakes black csvtomd
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
