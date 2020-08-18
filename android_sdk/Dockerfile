@@ -29,13 +29,14 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLO https://services.gradle.org/distributions/gradle-6.5-all.zip && \
+    curl -sLO https://services.gradle.org/distributions/gradle-6.6-all.zip && \
     unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
     rm gradle*.zip
 
 # Download Kotlin
+ARG KOTLIN_VERSION=1.4.0
 RUN cd /opt && \
-    curl -sLO https://github.com/JetBrains/kotlin/releases/download/v1.3.72/kotlin-compiler-1.3.72.zip && \
+    curl -sLO https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
     unzip ./*kotlin*.zip && \
     rm ./*kotlin*.zip
 
