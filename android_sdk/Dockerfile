@@ -42,7 +42,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-6.5
+ENV GRADLE_HOME /opt/gradle/gradle-6.6
 ENV KOTLIN_HOME /opt/kotlinc
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
