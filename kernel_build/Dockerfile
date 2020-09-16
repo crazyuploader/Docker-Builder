@@ -58,7 +58,7 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     mkdir ~/misc && \
     mv ./kbuild.sh ~/misc && \
     cd ~/misc && \
-    chmod +x misc.sh && \
+    chmod +x kbuild.sh && \
     printf "\nalias kbuild=\"~/misc/kbuild.sh\""
 
 # Setting Git Identity
