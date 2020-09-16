@@ -53,6 +53,14 @@ RUN echo "Cloning Clang..." && \
     cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
+# Setting Kernel Build Script
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
+    mkdir ~/misc && \
+    mv ./kbuild.sh ~/misc && \
+    cd ~/misc && \
+    chmod +x misc.sh && \
+    printf "\nalias kbuild=\"~/misc/kbuild.sh\""
+
 # Setting Git Identity
 RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
     git config --global user.name "crazyuploader"
