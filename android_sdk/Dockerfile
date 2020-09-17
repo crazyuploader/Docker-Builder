@@ -34,7 +34,7 @@ RUN mkdir /opt/gradle && \
     rm gradle*.zip
 
 # Download Kotlin
-ARG KOTLIN_VERSION=1.4.0
+ARG KOTLIN_VERSION=1.4.10
 RUN cd /opt && \
     curl -sLO https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
     unzip ./*kotlin*.zip && \
