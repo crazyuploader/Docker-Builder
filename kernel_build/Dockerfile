@@ -59,7 +59,7 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     mv ./kbuild.sh ~/misc && \
     cd ~/misc && \
     chmod +x kbuild.sh && \
-    printf "\nalias kbuild=\"~/misc/kbuild.sh\""
+    printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
 
 # Setting Git Identity
 RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
