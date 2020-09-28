@@ -3,84 +3,74 @@ name: Docker Image CI
 on: [push, pull_request]
 
 jobs:
-
   Kernel_Builder:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .
 
   Python_Build_Tools:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest .
 
   Java_Build_Tools:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .
 
   Android_SDK:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .
 
   Android_SDK_with_Flutter:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .
 
   CPP_Build_Tools:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .
 
   Node_Build_Tools:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest .
 
   Minimal_Ubuntu:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest .
 
   Hugo_Site_Generator:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -f hugo/Dockerfile -t crazyuploader/hugo:latest .
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -f hugo/Dockerfile -t crazyuploader/hugo:latest .
