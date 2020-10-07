@@ -10,7 +10,7 @@ FROM crazyuploader/minimal_ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.76.1
+ARG HUGO_VERSION=0.76.2
 
 # Get & Install Hugo from its source
 RUN echo "Installing Hugo..." && \
