@@ -43,6 +43,6 @@ RUN pip3 install --upgrade pip && \
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    printf "\nbash /git_identity.sh" >> ~/.bashrc
+    printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
 
 CMD ["bash"]
