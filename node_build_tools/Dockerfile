@@ -35,6 +35,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+# Installing Prettier
+RUN npm install -g prettier && \
+    prettier --version
+
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
     printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
