@@ -6,6 +6,9 @@
 # Using Ubuntu (bionic) as base
 FROM ubuntu:bionic
 
+# Setting Non-Interactive Environment Variable
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Update apt packages lists
 RUN apt-get update
 
@@ -24,8 +27,7 @@ RUN apt-get install -y \
 RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
 
 # Accept license & run it
-RUN speedtest --accept-license && \
-    speedtest
+RUN speedtest --accept-license
 
 # Clean up
 RUN apt-get clean && \
