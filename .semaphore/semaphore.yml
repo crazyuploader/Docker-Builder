@@ -176,3 +176,22 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/hugo
+
+- name: Speedtest
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - "docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest ."
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/speedtest

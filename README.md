@@ -25,3 +25,5 @@
 - [`Minimal Ubuntu`](minimal_ubuntu/Dockerfile)
 
 - [`Hugo Site Generator`](hugo/Dockerfile)
+
+- [`Speedtest`](speedtest/Dockerfile)
