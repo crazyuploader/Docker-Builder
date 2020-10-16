@@ -23,8 +23,8 @@ RUN apt-get install -y \
 # Install Speedtest CLI
 RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
 
-# Run it
-RUN speedtest
+# Accept license & run it
+RUN yes | speedtest
 
 # Clean up
 RUN apt-get clean && \
