@@ -177,7 +177,7 @@ blocks:
           commands:
             - docker push crazyuploader/hugo
 
-- name: Speedtest
+  - name: Speedtest
     dependencies: []
     task:
       jobs:
