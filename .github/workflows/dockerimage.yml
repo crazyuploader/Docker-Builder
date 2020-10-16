@@ -81,4 +81,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build -f hugo/Dockerfile -t crazyuploader/speedtest:latest .
+        run: docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest .

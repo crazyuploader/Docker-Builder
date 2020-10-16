@@ -52,5 +52,5 @@ jobs:
 
     - name: "Speedtest"
       script:
-        - docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/speedtest:latest .
+        - docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest .
         - docker images

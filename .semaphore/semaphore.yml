@@ -184,7 +184,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f hugo/Dockerfile -t crazyuploader/speedtest:latest ."
+            - "docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
