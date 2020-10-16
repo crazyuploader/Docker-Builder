@@ -24,7 +24,8 @@ RUN apt-get install -y \
 RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
 
 # Accept license & run it
-RUN yes | speedtest
+RUN speedtest --accept-license && \
+    speedtest
 
 # Clean up
 RUN apt-get clean && \
