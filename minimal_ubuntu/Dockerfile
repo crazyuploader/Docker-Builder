@@ -19,7 +19,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nano tar zip unzip \
                     mtr dnsutils iputils-ping traceroute \
-                    speedtest-cli locales-all gpg ssh xz-utils 1> /dev/null
+                    python locales-all gpg ssh xz-utils 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
