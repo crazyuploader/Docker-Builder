@@ -25,7 +25,6 @@ else
     echo "Exiting..."
     exit 0
 fi
-ERROR_FILE=0
 echo ""
 echo "Checking Docker..."
 IF_DOCKER=$(command -v docker)
@@ -42,24 +41,5 @@ for FILE in ${FILES}; do
     echo ""
     echo -e "Building ---> ${YELLOW}${FILE}${NC}"
     DIR=$(dirname "${FILE}")
-    docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest . | tee > output.txt
-    EXIT_CODE="$?"
-    if [[ "${EXIT_CODE}" != "0" ]]; then
-        ((ERROR_FILE = ERROR_FILE + 1))
-        echo ""
-        echo -e "${RED}---E-R-R-O-R---${NC}"
-        echo ""
-        cat output.txt
-        echo ""
-        echo -e "${RED}---E-R-R-O-R---${NC}"
-        echo ""
-    else
-        echo ""
-        cat output.txt
-    fi
+    docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
 done
-if [[ "${ERROR_FILE}" != "0"  ]]; then
-    exit 1
-else
-    exit 0
-fi
