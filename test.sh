@@ -40,6 +40,7 @@ fi
 for FILE in ${FILES}; do
     echo ""
     echo -e "Building ---> ${YELLOW}${FILE}${NC}"
+    echo ""
     DIR=$(dirname "${FILE}")
     docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
 done
