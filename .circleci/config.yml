@@ -6,6 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Building Changed Dockerfile
+          name: Building Changed Dockerfile(s)
           command: |
             bash test.sh
