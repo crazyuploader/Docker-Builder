@@ -21,7 +21,7 @@ if [[ -n ${FILES} ]]; then
         echo -e "${MAGENTA}${f}${NC}"
     done
 else
-    echo -e "${GREEN}No Dockerfile have been changed in this commit, nothing to build.${NC}"
+    echo -e "${GREEN}No Dockerfile(s) have been changed in this commit, nothing to build.${NC}"
     echo "Exiting..."
     exit 0
 fi
