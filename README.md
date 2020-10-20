@@ -1,8 +1,8 @@
 # Docker-Builder
 
 [![CircleCI](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/master.svg?style=svg)](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/master)
-![Travis (.com)](https://img.shields.io/travis/com/crazyuploader/Docker-Builder?label=Travis%20CI%20Master%20Branch)
-![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/crazyuploader/Docker-Builder?label=Cirrus%20CI%20Master%20Branch)
+[![Travis (.com)](https://img.shields.io/travis/com/crazyuploader/Docker-Builder?label=Travis%20CI%20Master%20Branch)](https://travis-ci.com/crazyuploader/Docker-Builder)
+[![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/crazyuploader/Docker-Builder?label=Cirrus%20CI%20Master%20Branch)](https://cirrus-ci.com/github/crazyuploader/Docker-Builder)
 [![Docker Image CI](https://github.com/crazyuploader/Docker-Builder/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/crazyuploader/Docker-Builder/actions)
 
 [![Build Status](https://crazyuploader.semaphoreci.com/badges/Docker-Builder.svg)](https://crazyuploader.semaphoreci.com/projects/Docker-Builder)
