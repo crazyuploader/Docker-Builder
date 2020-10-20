@@ -22,7 +22,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y \
                     curl ca-certificates nano \
                     lsb-release mtr nmap iputils-ping \
-                    traceroute
+                    traceroute 1> /dev/null
 
 # Install Speedtest CLI
 RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
