@@ -8,5 +8,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Build Changed Dockerfile(s)
         run: bash test.sh
