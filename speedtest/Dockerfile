@@ -21,7 +21,8 @@ RUN apt-get -y autoremove --purge
 # Install dependencies
 RUN apt-get install -y \
                     curl ca-certificates nano \
-                    lsb-release mtr nmap
+                    lsb-release mtr nmap iputils-ping \
+                    traceroute
 
 # Install Speedtest CLI
 RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
