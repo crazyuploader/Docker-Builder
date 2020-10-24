@@ -21,7 +21,8 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl python3 python3-pip wget nano \
-                    tar zip unzip speedtest-cli locales-all gpg ssh xz-utils 1> /dev/null
+                    tar zip unzip speedtest-cli locales-all \
+                    python-is-python3 gpg ssh xz-utils 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
@@ -33,13 +34,9 @@ RUN apt-get clean && \
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
-# Making Python 3 & Pip 3 as default
-RUN printf "\nalias python=\"python3\"" >> ~/.bashrc && \
-    printf "\nalias pip=\"pip3\"" >> ~/.bashrc
-
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
-    pip3 install flake8 pyflakes black csvtomd
+    pip install flake8 pyflakes black csvtomd
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
