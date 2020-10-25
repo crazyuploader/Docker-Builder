@@ -45,8 +45,8 @@ for FILE in ${FILES}; do
     echo ""
     DIR=$(dirname "${FILE}")
     docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
-    (( FILES = FILES + 1 ))
     ERROR_CODE="$?"
+    (( FILES = FILES + 1 ))
     if [[ "${ERROR_CODE}" -ne "0" ]]; then
         (( ERROR_FILES = ERROR_FILES + 1 ))
     fi
