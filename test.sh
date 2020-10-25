@@ -37,10 +37,25 @@ else
     echo ""
     echo "Docker installed, good to go!"
 fi
+FILES=0
+ERROR_FILES=0
 for FILE in ${FILES}; do
     echo ""
     echo -e "Building ---> ${YELLOW}${FILE}${NC}"
     echo ""
     DIR=$(dirname "${FILE}")
     docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
+    (( FILES = FILES + 1 ))
+    ERROR_CODE="$?"
+    if [[ "${ERROR_CODE}" -ne "0" ]]; then
+        (( ERROR_FILES = ERROR_FILES + 1 ))
+    fi
 done
+if [[ "${ERROR_FILES}" -ne "0" ]]; then
+    echo ""
+    echo -e "Number of Dockerfile(s) built: ${RED}${FILES}${NC}"
+    exit 1
+else
+    echo ""
+    echo -e "Number of Dockerfile(s) built: ${GREEN}${FILES}${NC}"
+fi
