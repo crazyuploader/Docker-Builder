@@ -19,7 +19,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nano tar zip unzip \
                     mtr dnsutils iputils-ping traceroute \
-                    python3 python-is-python3 locales-all 
+                    python3 python-is-python3 locales-all \
                     gpg ssh xz-utils ca-certificates \
                     iputils-ping traceroute tmux screen 1> /dev/null
 
