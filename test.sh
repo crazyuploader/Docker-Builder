@@ -37,7 +37,7 @@ else
     echo ""
     echo "Docker installed, good to go!"
 fi
-FILES=0
+NFILES=0
 ERROR_FILES=0
 for FILE in ${FILES}; do
     echo ""
@@ -46,16 +46,16 @@ for FILE in ${FILES}; do
     DIR=$(dirname "${FILE}")
     docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
     ERROR_CODE="$?"
-    (( FILES = FILES + 1 ))
+    (( NFILES = NFILES + 1 ))
     if [[ "${ERROR_CODE}" -ne "0" ]]; then
         (( ERROR_FILES = ERROR_FILES + 1 ))
     fi
 done
 if [[ "${ERROR_FILES}" -ne "0" ]]; then
     echo ""
-    echo -e "Number of Dockerfile(s) built: ${RED}${FILES}${NC}"
+    echo -e "Number of Dockerfile(s) built: ${RED}${NFILES}${NC}"
     exit 1
 else
     echo ""
-    echo -e "Number of Dockerfile(s) built: ${GREEN}${FILES}${NC}"
+    echo -e "Number of Dockerfile(s) built: ${GREEN}${NFILES}${NC}"
 fi
