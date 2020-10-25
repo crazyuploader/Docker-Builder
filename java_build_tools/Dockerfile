@@ -21,7 +21,8 @@ RUN apt-get -y autoremove --purge
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk nano \
-                    tar xz-utils zip unzip speedtest-cli locales-all shellcheck \
+                    tar xz-utils zip unzip speedtest-cli \
+                    locales-all shellcheck screen tmux \
                     ant maven gpg ssh 1> /dev/null
 
 # Install tmate

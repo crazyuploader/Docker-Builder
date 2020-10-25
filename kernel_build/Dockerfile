@@ -19,7 +19,7 @@ RUN apt-get -y upgrade
 RUN apt-get install -y \
                     curl git python bc tar make wget gcc libssl-dev \
                     zip unzip speedtest-cli ca-certificates gpg ssh \
-                    nano xz-utils 1> /dev/null
+                    nano xz-utils tmux screen 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
