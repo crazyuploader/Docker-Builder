@@ -18,6 +18,6 @@ RUN echo "Installing Hugo..." && \
     dpkg -i hugo.deb && \
     rm -rf hugo.deb && \
     printf "\nInstalled!\n" && \
-    hugo --version
+    hugo version
 
 CMD ["bash"]
