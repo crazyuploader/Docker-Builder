@@ -17,7 +17,7 @@ RUN echo "Installing Hugo..." && \
     curl -sLo hugo.deb https://github.com/gohugoio/hugo/releases/download/v"${HUGO_VERSION}"/hugo_"${HUGO_VERSION}"_Linux-64bit.deb && \
     dpkg -i hugo.deb && \
     rm -rf hugo.deb && \
-    printf "\nInstalled!\n" && \
+    printf "\nInstalled!\n\n" && \
     hugo version
 
 CMD ["bash"]
