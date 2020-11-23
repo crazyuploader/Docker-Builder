@@ -29,3 +29,5 @@
 - [`Hugo Site Generator`](hugo/Dockerfile)
 
 - [`Speedtest`](speedtest/Dockerfile)
+
+- [`Networking`](networking/Dockerfile)
