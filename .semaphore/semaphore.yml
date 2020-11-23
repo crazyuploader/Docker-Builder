@@ -209,7 +209,7 @@ blocks:
         - name: GITHUBCR_SECRET
       prologue:
         commands:
-          - echo "$GITHUBCR_TOKEN" | docker login -u "$GITHUBCR_USERNAME" --password-stdin
+          - echo "$GITHUBCR_TOKEN" | docker login ghcr.io -u "$GITHUBCR_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
