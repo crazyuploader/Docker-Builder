@@ -195,3 +195,22 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/speedtest
+
+  - name: Networking
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - "docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest ."
+            - docker images
+      secrets:
+        - name: GITHUBCR_SECRET
+      prologue:
+        commands:
+          - echo "$GITHUBCR_TOKEN" | docker login -u "$GITHUBCR_USERNAME" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push ghcr.io/crazyuploader/networking
