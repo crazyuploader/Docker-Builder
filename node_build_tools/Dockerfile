@@ -38,7 +38,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Installing Prettier
-RUN npm install -g prettier && \
+RUN npm install -g prettier@latest && \
     prettier --version
 
 # Git Identity Setup
