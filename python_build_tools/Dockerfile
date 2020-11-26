@@ -23,7 +23,7 @@ RUN apt-get install -y --no-install-recommends \
                     git curl python3 python3-pip wget nano \
                     tar zip unzip speedtest-cli locales-all \
                     python-is-python3 gpg ssh xz-utils \
-                    tmux screen 1> /dev/null
+                    iputils-ping traceroute tmux screen 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -

@@ -22,7 +22,8 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nodejs npm nano \
                     tar zip unzip speedtest-cli locales-all gpg \
-                    ssh xz-utils gpg-agent tmux screen 1> /dev/null
+                    ssh xz-utils gpg-agent tmux screen \
+                    iputils-ping traceroute 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
