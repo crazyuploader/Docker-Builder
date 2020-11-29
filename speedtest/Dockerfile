@@ -20,7 +20,7 @@ RUN apt-get -y autoremove --purge
 
 # Install dependencies
 RUN apt-get install -y \
-                    curl ca-certificates nano \
+                    curl wget ca-certificates nano \
                     lsb-release mtr nmap iputils-ping \
                     traceroute 1> /dev/null
 
