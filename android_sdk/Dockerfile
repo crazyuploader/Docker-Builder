@@ -62,6 +62,9 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
                      "build-tools;30.0.0" \
                      "build-tools;29.0.3" 1> /dev/null
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 # Git Identity Setup
 RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
     printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc

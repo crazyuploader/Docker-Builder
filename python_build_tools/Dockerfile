@@ -32,12 +32,15 @@ RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Custom Functions
-RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
 
 # Installing pip packages
 RUN pip3 install --upgrade pip && \
     pip install flake8 pyflakes black csvtomd
+
+# Custom Functions
+RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \

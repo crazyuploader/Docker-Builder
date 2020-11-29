@@ -20,4 +20,7 @@ RUN echo "Installing Hugo..." && \
     printf "\nInstalled!\n\n" && \
     hugo version
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 CMD ["bash"]

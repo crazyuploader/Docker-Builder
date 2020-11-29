@@ -31,6 +31,9 @@ RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 

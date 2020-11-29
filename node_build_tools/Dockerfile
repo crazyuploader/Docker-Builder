@@ -38,6 +38,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 # Installing Prettier
 RUN npm install -g prettier@latest && \
     prettier --version

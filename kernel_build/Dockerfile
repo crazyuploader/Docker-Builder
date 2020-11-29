@@ -53,6 +53,9 @@ RUN echo "Cloning Clang..." && \
     cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 # Setting Kernel Build Script
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
     mkdir ~/misc && \

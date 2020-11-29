@@ -30,6 +30,9 @@ RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+# Install ffsend
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+
 # Git Identity Setup
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
     printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
