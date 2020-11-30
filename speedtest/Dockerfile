@@ -38,4 +38,7 @@ RUN apt-get clean && \
 # Install ffsend
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
 
+# Install tcping
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/tcping.sh | bash -
+
 CMD ["bash"]
