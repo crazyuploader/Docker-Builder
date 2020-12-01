@@ -41,4 +41,4 @@ RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.
 # Install tcping
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/tcping.sh | bash -
 
-CMD ["bash"]
+ENTRYPOINT ["/usr/bin/speedtest"]
