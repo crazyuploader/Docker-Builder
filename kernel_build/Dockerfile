@@ -65,7 +65,7 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
 
 # Setting Git Identity
-RUN git config --global user.name "49350241+crazyuploader@users.noreply.github.com" && \
+RUN git config --global user.email "49350241+crazyuploader@users.noreply.github.com" && \
     git config --global user.name "crazyuploader"
 
 # Setting up an environment variable
