@@ -18,7 +18,7 @@ RUN apt-get -y upgrade
 # Installing required packages
 RUN apt-get install -y \
                     curl git python bc tar make wget gcc libssl-dev \
-                    zip unzip speedtest-cli ca-certificates gpg ssh \
+                    zip unzip speedtest-cli ca-certificates gpg gpg-agent ssh \
                     nano xz-utils tmux screen 1> /dev/null
 
 # Install tmate

@@ -23,7 +23,7 @@ RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk nano \
                     tar xz-utils zip unzip speedtest-cli \
                     locales-all shellcheck screen tmux \
-                    ant maven gpg ssh 1> /dev/null
+                    ant maven gpg gpg-agent ssh 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -

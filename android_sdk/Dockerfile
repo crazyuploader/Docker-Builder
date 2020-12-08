@@ -18,7 +18,7 @@ RUN apt-get upgrade -y
 # Install Packages
 RUN apt-get install -y --no-install-recommends \
                     git curl nano ca-certificates openjdk-8-jdk \
-                    wget zip unzip gpg ftp ssh tar xz-utils \
+                    wget zip unzip gpg gpg-agent ftp ssh tar xz-utils \
                     tmux screen 1> /dev/null
 
 # Install tmate
