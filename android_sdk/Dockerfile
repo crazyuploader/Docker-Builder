@@ -31,7 +31,7 @@ RUN apt-get clean && \
 # Download Gradle
 RUN mkdir /opt/gradle && \
     curl -sLO https://services.gradle.org/distributions/gradle-6.7.1-all.zip && \
-    unzip -d /opt/gradle gradle*>> /dev/null 2>&1 && \
+    unzip -d /opt/gradle gradle* 1> /dev/null && \
     rm gradle*.zip
 
 # Download Kotlin
