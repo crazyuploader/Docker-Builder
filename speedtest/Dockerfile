@@ -3,42 +3,22 @@
 #
 # Speedtest CLI Docker Image
 #
-# Using Ubuntu (bionic) as base
-FROM ubuntu:bionic
+# Using Alpine as base
+FROM alpine
 
-# Setting Non-Interactive Environment Variable
-ARG DEBIAN_FRONTEND=noninteractive
-
-# Update apt packages lists
-RUN apt-get update
-
-# Upgrade packages to latest version
-RUN apt-get upgrade -y
-
-# Remove unused packages
-RUN apt-get -y autoremove --purge
+# Update packages lists
+RUN apk update
 
 # Install dependencies
-RUN apt-get install -y \
-                    curl wget ca-certificates nano \
-                    lsb-release mtr nmap iputils-ping \
-                    traceroute gpg gpg-agent net-tools 1> /dev/null
+RUN apk add wget
 
 # Install Speedtest CLI
-RUN curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/speedtest.sh | bash -
+RUN wget -q https://github.com/crazyuploader/SpeedTest_Official_CLI/raw/main/linux/speedtest && \
+    chmod +x ./speedtest && \
+    mv ./speedtest /usr/bin
 
 # Accept license & run it
 RUN speedtest --accept-license || \
     speedtest --accept-gdpr
-
-# Clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
-
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
-
-# Install tcping
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/tcping.sh | bash -
 
 ENTRYPOINT ["/usr/bin/speedtest"]
