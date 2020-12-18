@@ -4,13 +4,10 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM alpine
+FROM alpine:latest
 
-# Update packages lists
-RUN apk update
-
-# Install dependencies
-RUN apk add wget
+# Installing Dependencies
+RUN apk --no-cache add wget
 
 # Install Speedtest CLI
 RUN wget -q https://github.com/crazyuploader/SpeedTest_Official_CLI/raw/main/linux/speedtest && \
