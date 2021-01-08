@@ -6,8 +6,11 @@
 # Using Ubuntu as a base OS
 FROM ubuntu:bionic
 
-# Setting Non-Interactive Environment Variable
+# Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Setting TERM Environment Variable
+ENV TERM=xterm-256color
 
 # Updating apt packages list
 RUN apt-get update

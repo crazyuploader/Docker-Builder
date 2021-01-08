@@ -6,8 +6,11 @@
 # Base Image: crazyuploader/minimal_ubuntu
 FROM crazyuploader/minimal_ubuntu:latest
 
-# Setting Non-Interactive Environment Variable
+# Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Setting TERM Environment Variable
+ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
 ARG HUGO_VERSION=0.80.0

@@ -6,8 +6,11 @@
 # Base Image: Ubuntu
 FROM ubuntu:focal
 
-# Setting Non-Interactive Environment Variable
+# Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Setting TERM Environment Variable
+ENV TERM=xterm-256color
 
 # Update apt packages lists
 RUN apt-get update
