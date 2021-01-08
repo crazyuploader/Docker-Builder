@@ -26,13 +26,13 @@ RUN apt-get install -y \
                     net-tools bc 1> /dev/null
 
 # Install tcping
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tcping.sh | bash -
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -
 
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 CMD ["bash"]

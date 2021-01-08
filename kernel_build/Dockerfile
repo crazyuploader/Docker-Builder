@@ -22,7 +22,7 @@ RUN apt-get install -y \
                     nano xz-utils tmux screen 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
@@ -54,7 +54,7 @@ RUN echo "Cloning Clang..." && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
 # Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Setting Kernel Build Script
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \

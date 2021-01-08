@@ -26,7 +26,7 @@ RUN apt-get install -y --no-install-recommends \
                     iputils-ping traceroute 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Installing Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -39,7 +39,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Installing Prettier
 RUN npm install -g prettier@latest && \

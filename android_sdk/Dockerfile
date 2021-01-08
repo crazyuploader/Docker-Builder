@@ -22,7 +22,7 @@ RUN apt-get install -y --no-install-recommends \
                     tmux screen 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \
@@ -63,7 +63,7 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
                      "build-tools;29.0.3" 1> /dev/null
 
 # Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Git Identity Setup
 RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \

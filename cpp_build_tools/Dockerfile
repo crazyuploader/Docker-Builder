@@ -25,14 +25,14 @@ RUN apt-get install -y --no-install-recommends \
                     tar xz-utils screen tmux gpg-agent 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/tmate.sh | bash -
+RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/ffsend.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
