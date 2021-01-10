@@ -6,8 +6,11 @@
 # Base Image: crazyuploader/android_sdk
 FROM crazyuploader/android_sdk:latest
 
-# Setting Non-Interactive Environment Variable
+# Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Setting TERM Environment Variable
+ENV TERM=xterm-256color
 
 # Environment Variables
 ENV FLUTTER_HOME /opt/flutter
