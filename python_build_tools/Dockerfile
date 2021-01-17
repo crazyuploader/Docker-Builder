@@ -40,8 +40,8 @@ RUN apt-get clean && \
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Installing pip packages
-RUN pip3 install --upgrade pip && \
-    pip install flake8 pyflakes black csvtomd
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir flake8 pyflakes black csvtomd
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
