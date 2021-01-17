@@ -12,6 +12,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest ."
             - docker images
       secrets:
@@ -23,7 +24,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/kernel_build
-
   - name: Python Build Tools
     dependencies: []
     task:
@@ -31,6 +31,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest ."
             - docker images
       secrets:
@@ -42,7 +43,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/python_build_tools
-
   - name: Java Build Tools
     dependencies: []
     task:
@@ -50,6 +50,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest ."
             - docker images
       secrets:
@@ -61,7 +62,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/java_build_tools
-
   - name: Android SDK
     dependencies: []
     task:
@@ -69,6 +69,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest ."
             - docker images
       secrets:
@@ -80,7 +81,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/android_sdk
-
   - name: Android SDK with Flutter
     dependencies:
       - Android SDK
@@ -89,6 +89,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest ."
             - docker images
       secrets:
@@ -100,7 +101,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/android_sdk_flutter
-
   - name: CPP & C Build Tools
     dependencies: []
     task:
@@ -108,6 +108,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest ."
             - docker images
       secrets:
@@ -119,7 +120,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/cpp_build_tools
-
   - name: NodeJS Build Tools
     dependencies: []
     task:
@@ -127,6 +127,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest ."
             - docker images
       secrets:
@@ -138,7 +139,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/node_build_tools
-
   - name: Minimal Ubuntu
     dependencies: []
     task:
@@ -146,6 +146,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest ."
             - docker images
       secrets:
@@ -157,7 +158,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/minimal_ubuntu
-
   - name: Hugo Site Generator
     dependencies: []
     task:
@@ -165,6 +165,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f hugo/Dockerfile -t crazyuploader/hugo:latest ."
             - docker images
       secrets:
@@ -176,7 +177,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/hugo
-
   - name: Speedtest
     dependencies: []
     task:
@@ -184,6 +184,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest ."
             - docker images
       secrets:
@@ -195,7 +196,6 @@ blocks:
         on_pass:
           commands:
             - docker push crazyuploader/speedtest
-
   - name: Networking
     dependencies: []
     task:
@@ -203,6 +203,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
+            - "sudo service docker stop && sudo umount /var/lib/docker && sudo service docker start"
             - "docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest ."
             - docker images
       secrets:
