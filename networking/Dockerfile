@@ -24,7 +24,7 @@ RUN apt-get -y autoremove --purge
 # Install dependencies
 RUN apt-get install -y \
                     curl wget ca-certificates nano \
-                    lsb-release mtr nmap iputils-ping \
+                    lsb-release mtr-tiny nmap iputils-ping \
                     traceroute tcptraceroute gpg gpg-agent \
                     net-tools bc jq 1> /dev/null
 
