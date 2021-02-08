@@ -7,7 +7,7 @@
 
 [![Build Status](https://crazyuploader.semaphoreci.com/badges/Docker-Builder.svg)](https://crazyuploader.semaphoreci.com/projects/Docker-Builder)
 [![CodeFactor](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/badge/master)](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/overview/master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/17fa9f267ca748ca841ab338644d2086)](https://www.codacy.com/gh/crazyuploader/Docker-Builder/dashboard?utm_source=github.com&utm_medium=referral&utm_content=crazyuploader/Docker-Builder&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/17fa9f267ca748ca841ab338644d2086)](https://www.codacy.com/gh/crazyuploader/Docker-Builder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=crazyuploader/Docker-Builder&amp;utm_campaign=Badge_Grade)
 
 ---
 
