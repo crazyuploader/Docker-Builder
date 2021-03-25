@@ -41,7 +41,12 @@ RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install
 
 # Installing pip packages
 RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir flake8 pyflakes black csvtomd
+    pip install --no-cache-dir \
+    flake8 \
+    pyflakes \
+    black \
+    csvtomd \
+    requests
 
 # Custom Functions
 RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
