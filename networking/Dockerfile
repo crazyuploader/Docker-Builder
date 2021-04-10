@@ -26,7 +26,7 @@ RUN apt-get install -y \
                     curl wget ca-certificates nano \
                     lsb-release mtr-tiny nmap iputils-ping \
                     traceroute tcptraceroute gpg gpg-agent \
-                    net-tools bc jq 1> /dev/null
+                    net-tools bc jq tree 1> /dev/null
 
 # Install tcping
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -

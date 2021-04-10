@@ -26,7 +26,7 @@ RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip nodejs npm nano \
                     tar zip unzip speedtest-cli locales-all gpg \
                     ssh xz-utils gpg-agent tmux screen \
-                    iputils-ping traceroute jq 1> /dev/null
+                    iputils-ping traceroute jq tree 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -

@@ -22,7 +22,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y --no-install-recommends \
                     git curl nano ca-certificates openjdk-8-jdk \
                     wget zip unzip gpg gpg-agent ftp ssh tar xz-utils \
-                    tmux screen jq 1> /dev/null
+                    tmux screen jq tree 1> /dev/null
 
 # Install tmate
 RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
