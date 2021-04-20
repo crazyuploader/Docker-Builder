@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.82.0
+ARG HUGO_VERSION=0.82.1
 
 # Get & Install Hugo from its source
 RUN echo "Installing Hugo..." && \
