@@ -6,8 +6,11 @@
 # Using node:current-alpine as Base Image
 FROM node:current-alpine
 
+# Markserv Version
+ARG MARKSERV_VERSION=1.17.4
+
 # Add Markserve
-RUN npm install --global markserv@1.17.4
+RUN npm install --global markserv@"${MARKSERV_VERSION}"
 
 # Creating a Directory for Markserv
 RUN mkdir /markdown
