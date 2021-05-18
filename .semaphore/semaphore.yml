@@ -214,3 +214,22 @@ blocks:
         on_pass:
           commands:
             - docker push ghcr.io/crazyuploader/networking
+
+  - name: Markdown Server
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - "docker build -f markdown_server/Dockerfile -t crazyuploader/markdown_server:latest ."
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/markdown_server
