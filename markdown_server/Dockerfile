@@ -7,7 +7,7 @@
 FROM node:current-alpine
 
 # Add Markserve
-RUN npm install --global markserv
+RUN npm install --global markserv@1.17.4
 
 # Creating a Directory for Markserv
 RUN mkdir /markdown
