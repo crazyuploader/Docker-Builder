@@ -7,12 +7,12 @@
 FROM node:current-alpine
 
 # Add Markserve
-RUN npm install --global markserve
+RUN npm install --global markserv
 
-# Creating a Directory for Markserve
+# Creating a Directory for Markserv
 RUN mkdir /markdown
 
 # Exposing port 80
 EXPOSE 80
 
-CMD ["markserve", "-p", "80", "-a", "0.0.0.0", "/markdown"]
+CMD ["markserv", "-p", "80", "-a", "0.0.0.0", "/markdown"]
