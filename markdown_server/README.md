@@ -2,8 +2,8 @@
 
 > A NodeJS based Markdown Server
 
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/crazyuploader/markdown_server/latest)
-![Docker Pulls](https://img.shields.io/docker/pulls/crazyuploader/markdown_server)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/crazyuploader/markdown_server/latest)](https://hub.docker.com/r/crazyuploader/markdown_server)
+[![Docker Pulls](https://img.shields.io/docker/pulls/crazyuploader/markdown_server)](https://hub.docker.com/r/crazyuploader/markdown_server)
 
 ## Usage
 
