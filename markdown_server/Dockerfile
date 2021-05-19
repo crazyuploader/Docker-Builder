@@ -15,7 +15,7 @@ RUN npm install --global markserv@"${MARKSERV_VERSION}"
 # Creating a Directory for Markserv
 RUN mkdir /markdown
 
-# Exposing port 80
-EXPOSE 80
+# Exposing port(s)
+EXPOSE 80 35729
 
 CMD ["markserv", "-p", "80", "-a", "0.0.0.0", "/markdown"]
