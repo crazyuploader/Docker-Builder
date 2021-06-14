@@ -33,7 +33,7 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLO https://services.gradle.org/distributions/gradle-7.0.2-all.zip && \
+    curl -sLO https://services.gradle.org/distributions/gradle-7.1-all.zip && \
     unzip -d /opt/gradle gradle* 1> /dev/null && \
     rm gradle*.zip
 
@@ -46,7 +46,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-7.0.2
+ENV GRADLE_HOME /opt/gradle/gradle-7.1
 ENV KOTLIN_HOME /opt/kotlinc
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
