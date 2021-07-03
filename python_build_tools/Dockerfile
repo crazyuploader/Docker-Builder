@@ -24,7 +24,7 @@ RUN apt-get -y autoremove --purge
 # Installing packages
 RUN apt-get install -y --no-install-recommends \
                     git curl python3 python3-pip wget nano \
-                    tar zip unzip speedtest-cli locales-all \
+                    tar zip unzip locales-all \
                     python-is-python3 gpg ssh xz-utils \
                     iputils-ping traceroute tmux screen \
                     gpg-agent jq python3-venv tree 1> /dev/null

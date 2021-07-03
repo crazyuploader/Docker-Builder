@@ -24,7 +24,7 @@ RUN apt-get -y autoremove --purge
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk nano \
-                    tar xz-utils zip unzip speedtest-cli \
+                    tar xz-utils zip unzip \
                     locales-all shellcheck screen tmux \
                     ant maven gpg gpg-agent ssh jq tree 1> /dev/null
 
