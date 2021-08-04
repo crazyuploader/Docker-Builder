@@ -11,12 +11,10 @@ RUN apk --no-cache add wget bash
 
 # Build time Environment Variable
 ARG VERSION="1.0.0"
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
 ARG SHELL=/usr/bin/bash
 
 # Install Speedtest CLI
-RUN wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${TARGETPLATFORM}"-linux.tgz || \
+RUN wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"$(arch)"-linux.tgz || \
     echo "Getting Speedtest Failed!" && \
     exit 1
 
