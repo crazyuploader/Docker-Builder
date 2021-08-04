@@ -3,4 +3,4 @@ docker_builder:
     - docker buildx create --name multibuilder
     - docker buildx use multibuilder
     - docker buildx inspect --bootstrap
-  build_script: docker buildx build --platform linux/amd64,linux/arm64 --file markdown_server/Dockerfile --tag crazyuploader/markdown_server:latest . && docker images
+  build_script: docker buildx build --platform linux/amd64,linux/arm64 --file speedtest/Dockerfile --tag crazyuploader/speedtest:latest . && docker images
