@@ -7,12 +7,24 @@
 FROM alpine:latest
 
 # Installing Dependencies
-RUN apk --no-cache add wget
+RUN apk --no-cache add wget bash
+
+# Build time Environment Variable
+ARG VERSION="1.0.0"
+ARG SHELL=/bin/bash
+
+# Copy helper script
+COPY speedtest/helper.sh /tmp/helper.sh
 
 # Install Speedtest CLI
-RUN wget -q https://github.com/crazyuploader/SpeedTest_Official_CLI/raw/main/linux/speedtest && \
-    chmod +x ./speedtest && \
-    mv ./speedtest /usr/bin
+RUN cd /tmp && \
+    bash helper.sh && \
+    tar xf /tmp/speedtest.tar.tgz && \
+    mv ./speedtest /usr/bin && \
+    rm speedtest* helper.sh
+
+# Cleaning up
+RUN apk --no-cache del wget bash
 
 # Accept license & run it
 RUN speedtest --accept-license || \
