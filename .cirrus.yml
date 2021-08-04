@@ -1,2 +1,6 @@
 docker_builder:
-  build_script: bash test.sh
+  setup_script:
+    - docker buildx create --name multibuilder
+    - docker buildx use multibuilder
+    - docker buildx inspect --bootstrap
+  build_script: docker buildx build --platform linux/amd64,linux/arm64 --file speedtest/Dockerfile --tag crazyuploader/speedtest:latest .
