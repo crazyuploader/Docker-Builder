@@ -1,11 +1,27 @@
 version: 2.1
 jobs:
-  build:
+  build-amd64:
     machine:
-      image: ubuntu-2004:202010-01
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run:
           name: Building Changed Dockerfile(s)
           command: |
             bash test.sh
+
+  build-arm64:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run:
+          name: Building Dockerfile(s) on arm64
+          command: |
+            dockerfiles=("minimal_ubuntu" "node_build_tools" "python_build_tools" "speedtest")
+            for dockerfile in ${dockerfiles[@]}; do
+                echo "Building --> ${dockerfile}/Dockerfile"
+                echo ""
+                docker build --file ${dockerfile}/Dockerfile --tag crazyuploader/${dockerfile}:arm64 .
+            done
