@@ -25,3 +25,9 @@ jobs:
                 echo ""
                 docker build --file ${dockerfile}/Dockerfile --tag crazyuploader/${dockerfile}:arm64 .
             done
+
+workflows:
+  build:
+    jobs:
+      - build-amd64
+      - build-arm64
