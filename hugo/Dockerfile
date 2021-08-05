@@ -17,7 +17,20 @@ ARG HUGO_VERSION=0.86.0
 
 # Get & Install Hugo from its source
 RUN echo "Installing Hugo..." && \
-    curl -sLo hugo.deb https://github.com/gohugoio/hugo/releases/download/v"${HUGO_VERSION}"/hugo_"${HUGO_VERSION}"_Linux-64bit.deb && \
+    OS_ARCH="$(arch)" && \
+    case ${OS_ARCH} in \
+        "x86_64") \
+            ARCH="64bit" \
+            ;; \
+        "aarch64") \
+            ARCH="ARM64" \
+            ;; \
+        "*") \
+            echo "Unsupported Architecture" \
+            exit 1 \
+            ;; \
+    esac && \
+    curl -sLo hugo.deb https://github.com/gohugoio/hugo/releases/download/v"${HUGO_VERSION}"/hugo_"${HUGO_VERSION}"_Linux-"${ARCH}".deb && \
     dpkg -i hugo.deb && \
     rm -rf hugo.deb && \
     printf "\nInstalled!\n\n" && \
