@@ -13,7 +13,7 @@ RUN apk --no-cache add wget
 ARG VERSION="1.0.0"
 
 # Install Speedtest CLI
-RUN set -ex && \
+RUN set -e && \
     ARCH=$(arch) && \
     if ! wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${ARCH}"-linux.tgz; \
     then \
@@ -21,7 +21,7 @@ RUN set -ex && \
         exit 1; \
     fi
 
-RUN set -ex && \
+RUN set -e && \
     tar xf /tmp/speedtest.tar.tgz && \
     mv ./speedtest /usr/bin && \
     rm speedtest*

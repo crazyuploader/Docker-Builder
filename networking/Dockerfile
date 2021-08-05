@@ -29,7 +29,7 @@ RUN apt-get install -y \
                     net-tools bc jq tree 1> /dev/null
 
 # Install tcping
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

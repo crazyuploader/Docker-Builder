@@ -35,7 +35,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Installing Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -54,7 +54,7 @@ RUN npm install --global npm@latest && \
     npm install --global prettier@latest
 
 # Git Identity Setup
-RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
+RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
     printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
 
 # Displaying Versions

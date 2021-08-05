@@ -19,12 +19,14 @@ jobs:
       - run:
           name: Building Dockerfile(s) on arm64
           command: |
-            dockerfiles=("minimal_ubuntu" "node_build_tools" "python_build_tools" "speedtest")
-            for dockerfile in ${dockerfiles[@]}; do
+            set -x
+            for dockerfile in $(cat arm64.list); do
+                echo ""
                 echo "Building --> ${dockerfile}/Dockerfile"
                 echo ""
                 docker build --file ${dockerfile}/Dockerfile --tag crazyuploader/${dockerfile}:arm64 .
             done
+            docker images
 
 workflows:
   build:

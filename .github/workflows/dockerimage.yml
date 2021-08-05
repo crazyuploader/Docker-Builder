@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         Docker_Image:
-          [minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
+          [markdown_server, minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
 
     steps:
       - uses: actions/checkout@v2.3.4
