@@ -101,32 +101,6 @@ blocks:
           commands:
             - docker push crazyuploader/cpp_build_tools
 
-  - name: Build  for arm64
-    dependencies: []
-    task:
-      jobs:
-        - name: Building Dockerfile(s)
-          commands:
-            - checkout
-            - docker images
-            - |
-              files="$(grep -v -E "\#|^$" arm64.list)"
-              for directory in ${files}; do
-                  echo ""
-                  echo "Building --> ${GREEN}${directory}/Dockerfile${NC}"
-                  echo ""
-                  docker buildx build --file "${directory}"/Dockerfile --tag crazyuploader/"${directory}":latest --push .
-              done
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - docker run --privileged --rm tonistiigi/binfmt --install all
-          - docker buildx create --name multibuilder
-          - docker buildx use multibuilder
-          - docker buildx inspect --bootstrap
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
   - name: Networking
     dependencies: []
     task:
