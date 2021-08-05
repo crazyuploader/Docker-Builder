@@ -7,7 +7,7 @@
 FROM alpine:latest
 
 # Installing Dependencies
-RUN apk --no-cache add wget bash
+RUN apk --no-cache add wget
 
 # Build time Environment Variable
 ARG VERSION="1.0.0"
@@ -21,8 +21,7 @@ RUN set -ex && \
         exit 1; \
     fi
 
-RUN cd /tmp && \
-    tar xf /tmp/speedtest.tar.tgz && \
+RUN tar xf /tmp/speedtest.tar.tgz && \
     mv ./speedtest /usr/bin && \
     rm speedtest*
 
