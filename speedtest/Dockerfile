@@ -15,9 +15,7 @@ ARG VERSION="1.0.0"
 # Install Speedtest CLI
 RUN set -ex && \
     ARCH=$(arch) && \
-    wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${ARCH}"-linux.tgz || \
-    echo "Getting Speedtest Failed!" && \
-    exit 1
+    wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${ARCH}"-linux.tgz
 
 RUN cd /tmp && \
     tar xf /tmp/speedtest.tar.tgz && \
