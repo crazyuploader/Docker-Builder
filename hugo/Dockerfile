@@ -3,8 +3,8 @@
 #
 # Minimal Docker Image with Hugo installed
 #
-# Base Image: crazyuploader/minimal_ubuntu
-FROM crazyuploader/minimal_ubuntu:latest
+# Base Image: ubuntu:focal
+FROM ubuntu:focal
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
@@ -14,6 +14,14 @@ ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
 ARG HUGO_VERSION=0.86.0
+
+# Installing dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    ca-certificates \
+    wget \
+    gpg
 
 # Get & Install Hugo from its source
 RUN echo "Installing Hugo..." && \
