@@ -1,14 +1,43 @@
 name: Docker Image CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
 
 jobs:
   Docker_Images_Builder:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        Docker_Image:
+          [hugo, markdown_server, minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
 
     steps:
       - uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0
-      - name: Build Changed Dockerfile(s)
-        run: bash test.sh
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Dockerfile(s)
+        run: docker buildx build --platform linux/amd64,linux/arm64 --file "${{ matrix.Docker_Image }}"/Dockerfile --tag crazyuploader/"${{ matrix.Docker_Image }}":latest --push .

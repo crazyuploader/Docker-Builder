@@ -1,0 +1,8 @@
+# List of Docker Image(s) that are available for arm64, etc.
+
+hugo
+markdown_server
+minimal_ubuntu
+node_build_tools
+python_build_tools
+speedtest

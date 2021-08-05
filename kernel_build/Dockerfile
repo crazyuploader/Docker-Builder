@@ -25,10 +25,10 @@ RUN apt-get install -y \
                     nano vim xz-utils tmux screen jq tree 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Custom Functions
-RUN curl https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Removing all unused packages
 RUN apt-get -y autoremove --purge
@@ -68,7 +68,7 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
 
 # Setting Git Identity
-RUN git config --global user.email "49350241+crazyuploader@users.noreply.github.com" && \
+RUN git config --global user.email "me@devjugal.com" && \
     git config --global user.name "crazyuploader"
 
 # Setting up an environment variable
