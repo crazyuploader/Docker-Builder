@@ -4,10 +4,10 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM --platform=$BUILDPLATFORM alpine:latest
+FROM alpine:latest
 
 # Installing Dependencies
-RUN apk --no-cache add wget bash
+RUN apk --no-cache add wget
 
 # Build time Environment Variable
 ARG VERSION="1.0.0"
@@ -21,7 +21,7 @@ RUN set -ex && \
         exit 1; \
     fi
 
-RUN cd /tmp && \
+RUN set -ex && \
     tar xf /tmp/speedtest.tar.tgz && \
     mv ./speedtest /usr/bin && \
     rm speedtest*
