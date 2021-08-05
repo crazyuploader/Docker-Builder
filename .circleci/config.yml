@@ -19,8 +19,9 @@ jobs:
       - run:
           name: Building Dockerfile(s) on arm64
           command: |
-            set -x
-            for dockerfile in $(cat arm64.list); do
+            set -e
+            files=$(cat arm64.list)
+            for dockerfile in ${files}; do
                 echo ""
                 echo "Building --> ${dockerfile}/Dockerfile"
                 echo ""
