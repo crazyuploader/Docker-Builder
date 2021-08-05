@@ -12,7 +12,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest ."
+            - 'docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .'
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -24,25 +24,6 @@ blocks:
           commands:
             - docker push crazyuploader/kernel_build
 
-  - name: Python Build Tools
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f python_build_tools/Dockerfile -t crazyuploader/python_build_tools:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/python_build_tools
-
   - name: Java Build Tools
     dependencies: []
     task:
@@ -50,7 +31,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest ."
+            - 'docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .'
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -69,7 +50,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest ."
+            - 'docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .'
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -89,7 +70,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest ."
+            - 'docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .'
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -108,7 +89,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest ."
+            - 'docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .'
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -120,82 +101,6 @@ blocks:
           commands:
             - docker push crazyuploader/cpp_build_tools
 
-  - name: NodeJS Build Tools
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f node_build_tools/Dockerfile -t crazyuploader/node_build_tools:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/node_build_tools
-
-  - name: Minimal Ubuntu
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f minimal_ubuntu/Dockerfile -t crazyuploader/minimal_ubuntu:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/minimal_ubuntu
-
-  - name: Hugo Site Generator
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f hugo/Dockerfile -t crazyuploader/hugo:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/hugo
-
-  - name: Speedtest
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f speedtest/Dockerfile -t crazyuploader/speedtest:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/speedtest
-
   - name: Networking
     dependencies: []
     task:
@@ -203,7 +108,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - "docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest ."
+            - 'docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest .'
             - docker images
       secrets:
         - name: GITHUBCR_SECRET
@@ -214,22 +119,3 @@ blocks:
         on_pass:
           commands:
             - docker push ghcr.io/crazyuploader/networking
-
-  - name: Markdown Server
-    dependencies: []
-    task:
-      jobs:
-        - name: Build Dockerfile
-          commands:
-            - checkout
-            - "docker build -f markdown_server/Dockerfile -t crazyuploader/markdown_server:latest ."
-            - docker images
-      secrets:
-        - name: DOCKERHUB_SECRET
-      prologue:
-        commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      epilogue:
-        on_pass:
-          commands:
-            - docker push crazyuploader/markdown_server

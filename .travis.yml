@@ -1,4 +1,8 @@
+os: linux
 dist: focal
+arch:
+  - amd64
+  - arm64
 language: bash
 services:
   - docker

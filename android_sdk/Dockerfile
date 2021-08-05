@@ -25,7 +25,7 @@ RUN apt-get install -y --no-install-recommends \
                     tmux screen jq tree 1> /dev/null
 
 # Install tmate
-RUN curl https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \
@@ -60,10 +60,10 @@ RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.and
     yes | sdkmanager --licenses 1> /dev/null && \
     yes | sdkmanager --update && \
     yes | sdkmanager "platform-tools" \
-                     "platforms;android-29" \
-                     "platforms;android-30" \
-                     "build-tools;30.0.0" \
-                     "build-tools;29.0.3" 1> /dev/null
+                    "platforms;android-29" \
+                    "platforms;android-30" \
+                    "build-tools;30.0.0" \
+                    "build-tools;29.0.3" 1> /dev/null
 
 # Install ffsend
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
