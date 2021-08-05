@@ -21,7 +21,8 @@ RUN set -ex && \
         exit 1; \
     fi
 
-RUN tar xf /tmp/speedtest.tar.tgz && \
+RUN set -ex && \
+    tar xf /tmp/speedtest.tar.tgz && \
     mv ./speedtest /usr/bin && \
     rm speedtest*
 
