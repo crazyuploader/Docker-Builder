@@ -4,18 +4,18 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM alpine:latest
+FROM --platform=$BUILDPLATFORM alpine:latest
 
 # Installing Dependencies
 RUN apk --no-cache add wget bash
 
 # Build time Environment Variable
 ARG VERSION="1.0.0"
-ARG SHELL=/usr/bin/bash
+ARG TARGETPLATFORM
 
 # Install Speedtest CLI
-RUN ARCH="$(arch)" && \
-    wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${ARCH}"-linux.tgz || \
+RUN set -ex && \
+    wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${TARGETPLATFORM:6}"-linux.tgz || \
     echo "Getting Speedtest Failed!" && \
     exit 1
 
