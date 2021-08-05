@@ -12,7 +12,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest .'
+            - "docker build -f kernel_build/Dockerfile -t crazyuploader/kernel_build:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -31,7 +31,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest .'
+            - "docker build -f java_build_tools/Dockerfile -t crazyuploader/java_build_tools:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -50,7 +50,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest .'
+            - "docker build -f android_sdk/Dockerfile -t crazyuploader/android_sdk:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -70,7 +70,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest .'
+            - "docker build -f android_sdk_flutter/Dockerfile -t crazyuploader/android_sdk_flutter:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -89,7 +89,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest .'
+            - "docker build -f cpp_build_tools/Dockerfile -t crazyuploader/cpp_build_tools:latest ."
             - docker images
       secrets:
         - name: DOCKERHUB_SECRET
@@ -108,7 +108,7 @@ blocks:
         - name: Build Dockerfile
           commands:
             - checkout
-            - 'docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest .'
+            - "docker build -f networking/Dockerfile -t ghcr.io/crazyuploader/networking:latest ."
             - docker images
       secrets:
         - name: GITHUBCR_SECRET
