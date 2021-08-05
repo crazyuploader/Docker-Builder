@@ -66,7 +66,7 @@ function build_dockerfile_arm64() {
     files="$(grep -v -E "\#|^$" arm64.list)"
     for directory in ${files}; do
         echo ""
-        echo "Building --> ${GREEN}${directory}/Dockerfile${NC}"
+        echo -e "Building --> ${GREEN}${directory}/Dockerfile${NC}"
         echo ""
         docker build --file "${directory}"/Dockerfile --tag crazyuploader/"${directory}":arm64 .
     done

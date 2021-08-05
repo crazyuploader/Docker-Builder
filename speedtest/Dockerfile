@@ -21,10 +21,10 @@ RUN set -e && \
         exit 1; \
     fi
 
-RUN set -e && \
-    tar xf /tmp/speedtest.tar.tgz && \
-    mv ./speedtest /usr/bin && \
-    rm speedtest*
+# Extracting Speedtest CLI, and putting in /usr/bin
+RUN tar xf /tmp/speedtest.tar.tgz
+RUN mv ./speedtest /usr/bin
+RUN rm speedtest*
 
 # Cleaning up
 RUN apk --no-cache del wget
