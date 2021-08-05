@@ -4,7 +4,7 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM --platform=$BUILDPLATFORM alpine:latest
+FROM alpine:latest
 
 # Installing Dependencies
 RUN apk --no-cache add wget bash
