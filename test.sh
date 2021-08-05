@@ -63,12 +63,12 @@ function build_dockerfile_amd64() {
 }
 
 function build_dockerfile_arm64() {
-    files="$(cat arm64.list)"
-    for dockerfile in ${files}; do
+    files="$(grep -v -E "\#|^$" arm64.list)"
+    for directory in ${files}; do
         echo ""
-        echo "Building --> ${dockerfile}/Dockerfile"
+        echo "Building --> ${GREEN}${directory}/Dockerfile${NC}"
         echo ""
-        docker build --file "${dockerfile}"/Dockerfile --tag crazyuploader/"${dockerfile}":arm64 .
+        docker build --file "${directory}"/Dockerfile --tag crazyuploader/"${directory}":arm64 .
     done
     docker images
 }

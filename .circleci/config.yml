@@ -19,15 +19,7 @@ jobs:
       - run:
           name: Building Dockerfile(s) on arm64
           command: |
-            set -e
-            files=$(cat arm64.list)
-            for dockerfile in ${files}; do
-                echo ""
-                echo "Building --> ${dockerfile}/Dockerfile"
-                echo ""
-                docker build --file ${dockerfile}/Dockerfile --tag crazyuploader/${dockerfile}:arm64 .
-            done
-            docker images
+            bash test.sh
 
 workflows:
   build:
