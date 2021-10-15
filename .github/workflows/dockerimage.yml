@@ -20,7 +20,7 @@ jobs:
           [hugo, markdown_server, minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
         with:
           fetch-depth: 0
 
