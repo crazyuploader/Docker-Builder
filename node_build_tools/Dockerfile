@@ -30,7 +30,7 @@ RUN apt-get install -y --no-install-recommends \
                     ca-certificates 1> /dev/null
 
 # Setting up NodeJS
-RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs
 
