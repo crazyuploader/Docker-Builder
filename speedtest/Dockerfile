@@ -10,12 +10,12 @@ FROM alpine:latest
 RUN apk --no-cache add wget
 
 # Build time Environment Variable
-ARG VERSION="1.0.0"
+ARG VERSION="1.1.1"
 
 # Install Speedtest CLI
 RUN set -e && \
     ARCH=$(arch) && \
-    if ! wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-1.0.0-"${ARCH}"-linux.tgz; \
+    if ! wget --quiet --output-document /tmp/speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-"${VERSION}"-"${ARCH}"-linux.tgz; \
     then \
         echo "Getting Speedtest Failed"; \
         exit 1; \
