@@ -31,9 +31,6 @@ FROM alpine:latest AS runner
 
 # Copy Speedtest CLI binary to /usr/bin
 COPY --from=builder /tmp/speedtest /usr/bin
+COPY entrypoint.sh /
 
-# Accept license & run it
-RUN speedtest --accept-license || \
-    speedtest --accept-gdpr
-
-ENTRYPOINT ["/usr/bin/speedtest"]
+ENTRYPOINT ["/entrypoint.sh"]
