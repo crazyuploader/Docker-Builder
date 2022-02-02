@@ -60,6 +60,7 @@ function build_dockerfile_amd64() {
         echo ""
         echo -e "Number of Dockerfile(s) built: ${GREEN}${NFILES}${NC}"
     fi
+    docker images
 }
 
 function build_dockerfile_arm64() {
