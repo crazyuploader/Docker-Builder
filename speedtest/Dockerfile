@@ -31,6 +31,6 @@ FROM alpine:latest AS runner
 
 # Copy Speedtest CLI binary to /usr/bin
 COPY --from=builder /tmp/speedtest /usr/bin
-COPY entrypoint.sh /
+COPY speedtest/entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
