@@ -46,4 +46,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Dockerfile(s)
-        run: docker buildx build --platform linux/amd64,linux/arm64 --file "${{ matrix.Docker_Image }}"/Dockerfile --tag crazyuploader/"${{ matrix.Docker_Image }}":latest --push .
+        run: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --file "${{ matrix.Docker_Image }}"/Dockerfile --tag crazyuploader/"${{ matrix.Docker_Image }}":latest --push .
