@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.92.0
+ARG HUGO_VERSION=0.92.1
 
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
@@ -46,5 +46,9 @@ RUN echo "Installing Hugo..." && \
 
 # Install ffsend
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 CMD ["bash"]
