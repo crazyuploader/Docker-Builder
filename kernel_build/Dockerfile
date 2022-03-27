@@ -4,7 +4,7 @@
 # All the dependencies requred for Android Kernel Building
 #
 # Using Ubuntu as a base OS
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
