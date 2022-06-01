@@ -4,7 +4,7 @@
 # CPP & C Build Tools
 #
 # Base Image: Ubuntu
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive

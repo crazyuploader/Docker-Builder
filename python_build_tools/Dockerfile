@@ -4,7 +4,7 @@
 # All the required tools for Python coding and stuff
 #
 # Base Image: Ubuntu
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
