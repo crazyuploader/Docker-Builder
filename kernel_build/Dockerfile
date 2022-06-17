@@ -20,7 +20,7 @@ RUN apt-get -y upgrade
 
 # Installing required packages
 RUN apt-get install -y \
-                    curl git python bc tar make wget gcc libssl-dev \
+                    curl git python3 bc tar make wget gcc libssl-dev \
                     zip unzip ca-certificates gpg gpg-agent ssh \
                     nano vim xz-utils tmux screen jq tree 1> /dev/null
 
