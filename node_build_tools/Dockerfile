@@ -4,7 +4,7 @@
 # Docker Image with Nodejs, and NPM installed
 #
 # Using "ubuntu:focal" as Base Image
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
