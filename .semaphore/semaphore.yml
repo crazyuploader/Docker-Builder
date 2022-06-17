@@ -119,3 +119,22 @@ blocks:
         on_pass:
           commands:
             - docker push ghcr.io/crazyuploader/networking
+
+  - name: Alpine
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - "docker build -f alpine/Dockerfile -t crazyuploader/alpine:latest ."
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/alpine
