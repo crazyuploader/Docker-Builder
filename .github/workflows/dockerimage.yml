@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         Docker_Image:
-          [hugo, markdown_server, minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
+          [alpine, hugo, markdown_server, minimal_ubuntu, node_build_tools, python_build_tools, speedtest]
 
     steps:
       - uses: actions/checkout@v3.0.2
