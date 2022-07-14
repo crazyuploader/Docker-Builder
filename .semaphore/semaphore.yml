@@ -18,7 +18,7 @@ blocks:
         - name: DOCKERHUB_SECRET
       prologue:
         commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
@@ -37,7 +37,7 @@ blocks:
         - name: DOCKERHUB_SECRET
       prologue:
         commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
@@ -56,7 +56,7 @@ blocks:
         - name: DOCKERHUB_SECRET
       prologue:
         commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
@@ -76,7 +76,7 @@ blocks:
         - name: DOCKERHUB_SECRET
       prologue:
         commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
@@ -95,7 +95,7 @@ blocks:
         - name: DOCKERHUB_SECRET
       prologue:
         commands:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       epilogue:
         on_pass:
           commands:
