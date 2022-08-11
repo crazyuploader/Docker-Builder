@@ -10,7 +10,7 @@ FROM alpine:latest AS builder
 RUN apk --no-cache add wget
 
 # Build time Environment Variable
-ARG VERSION="1.1.1"
+ARG VERSION="1.2.0"
 
 # Setting Work Directory
 WORKDIR /tmp
