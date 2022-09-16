@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.102.1
+ARG HUGO_VERSION=0.103.0
 
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
