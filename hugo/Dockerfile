@@ -28,10 +28,10 @@ RUN echo "Installing Hugo..." && \
     OS_ARCH="$(arch)" && \
     case ${OS_ARCH} in \
         "x86_64") \
-            ARCH="64bit" \
+            ARCH="amd64" \
             ;; \
         "aarch64") \
-            ARCH="ARM64" \
+            ARCH="arm64" \
             ;; \
         "*") \
             echo "Unsupported Architecture" \
