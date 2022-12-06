@@ -33,12 +33,12 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLO https://services.gradle.org/distributions/gradle-7.5.1-all.zip && \
+    curl -sLO https://services.gradle.org/distributions/gradle-7.6-all.zip && \
     unzip -d /opt/gradle gradle* 1> /dev/null && \
     rm gradle*.zip
 
 # Download Kotlin
-ARG KOTLIN_VERSION=1.6.21
+ARG KOTLIN_VERSION=1.7.22
 RUN cd /opt && \
     curl -sLO https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
     unzip ./*kotlin*.zip && \
@@ -46,7 +46,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-7.5.1
+ENV GRADLE_HOME /opt/gradle/gradle-7.6
 ENV KOTLIN_HOME /opt/kotlinc
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
