@@ -4,7 +4,7 @@
 # Simple Alpine Docker Image non-root user 'worker' and sudo access
 #
 # Using Alpine as base
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 
 # Add sudo
 RUN apk --no-cache add sudo
