@@ -3,7 +3,7 @@
 #
 # Minimal Docker Image on top of Ubuntu (focal), including git, and some other necessary stuffs
 #
-# Using "ubuntu:focal" as Base Image
+# Using "ubuntu:jammy" as Base Image
 FROM ubuntu:jammy
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -24,7 +24,7 @@ RUN apt-get install -y --no-install-recommends \
                     mtr-tiny dnsutils iputils-ping traceroute \
                     python3 python-is-python3 locales-all \
                     gpg ssh xz-utils ca-certificates \
-                    tmux screen gpg-agent jq tree 1> /dev/null
+                    tmux screen gpg-agent jq tree bc 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
