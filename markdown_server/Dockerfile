@@ -4,37 +4,26 @@
 # Markdown Server based on https://github.com/xyproto/algernon
 #
 # Base Image: alpine:3.18
-FROM alpine:3.18 AS builder
+FROM golang:1.20.4-alpine AS builder
 
 # Setting Algernon Version
-ARG ALGERNON_VERSION=1.15.1
+ARG ALGERNON_VERSION=v1.15.1
 
 # Adding curl
-RUN apk --no-cache add curl
+RUN apk --no-cache add git
 
 # Setting Working Directory to /tmp
 WORKDIR /tmp
 
-# Check OS Architecture, and download Algernon binaries
-RUN OS_ARCH="$(arch)" && \
-    case ${OS_ARCH} in \
-        "x86_64") \
-            URL="https://github.com/xyproto/algernon/releases/download/${ALGERNON_VERSION}/algernon-${ALGERNON_VERSION}-linux.tar.xz" \
-            ;; \
-        "aarch64") \
-            URL="https://github.com/xyproto/algernon/releases/download/${ALGERNON_VERSION}/algernon-${ALGERNON_VERSION}-linux_arm64.tar.xz" \
-            ;; \
-        "*") \
-            echo "Unsupported Architecture" \
-            exit 1 \
-            ;; \
-    esac && \
-    curl -Lo algernon.tar.xz ${URL}
+# Clone algernon repository
+RUN git clone https://github.com/xyproto/algernon -b ${ALGERNON_VERSION}
+
+# Setting working directory to /tmp/algernon
+WORKDIR /tmp/algernon
 
 # Extract Algernon binaries
-RUN tar xf algernon.tar.xz && \
-    cd algernon* && \
-    mv algernon* /usr/bin/algernon
+RUN go build -o algernon . && \
+    mv algernon /usr/bin/algernon
 
 # Compress Algernon binaries
 RUN if [[ $(arch) == "x86_64" ]]; then apk add upx; upx /usr/bin/algernon; fi
