@@ -29,7 +29,7 @@ RUN OS_ARCH="$(arch)" && \
             exit 1 \
             ;; \
     esac && \
-    curl -sLo algernon.tar.xz ${URL}
+    curl -Lo algernon.tar.xz ${URL}
 
 # Extract Algernon binaries
 RUN tar xf algernon.tar.xz && \
