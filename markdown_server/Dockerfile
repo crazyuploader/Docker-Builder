@@ -1,21 +1,62 @@
 #
-# Created by Jugal Kishore -- 2021
+# Created by Jugal Kishore --- 2023
 #
-# A NodeJS based Markdown Server
+# Markdown Server based on https://github.com/xyproto/algernon
 #
-# Using node:current-alpine as Base Image
-FROM node:current-alpine
+# Base Image: alpine:3.18
+FROM alpine:3.18 AS builder
 
-# Markserv Version
-ARG MARKSERV_VERSION=1.17.4
+# Setting Algernon Version
+ARG ALGERNON_VERSION=1.15.1
 
-# Add Markserve
-RUN npm install --global markserv@"${MARKSERV_VERSION}"
+# Adding curl
+RUN apk --no-cache add curl
 
-# Creating a Directory for Markserv
-RUN mkdir /markdown
+# Setting Working Directory to /tmp
+WORKDIR /tmp
 
-# Exposing port(s)
-EXPOSE 80 35729
+# Check OS Architecture, and download Algernon binaries
+RUN OS_ARCH="$(arch)" && \
+    case ${OS_ARCH} in \
+        "x86_64") \
+            URL="https://github.com/xyproto/algernon/releases/download/${ALGERNON_VERSION}/algernon-${ALGERNON_VERSION}-linux.tar.xz" \
+            ;; \
+        "aarch64") \
+            URL="https://github.com/xyproto/algernon/releases/download/${ALGERNON_VERSION}/algernon-${ALGERNON_VERSION}-linux_arm64.tar.xz" \
+            ;; \
+        "*") \
+            echo "Unsupported Architecture" \
+            exit 1 \
+            ;; \
+    esac && \
+    curl -sLo algernon.tar.xz ${URL}
 
-CMD ["markserv", "-p", "80", "-a", "0.0.0.0", "/markdown"]
+# Extract Algernon binaries
+RUN tar xf algernon.tar.xz && \
+    cd algernon* && \
+    mv algernon* /usr/bin/algernon
+
+# Compress Algernon binaries
+RUN if [[ $(arch) == "x86_64" ]]; then apk add upx; upx /usr/bin/algernon; fi
+
+# Clean up /tmp directory
+RUN rm -rf /tmp/*
+
+# Use only Algernon binaries
+FROM scratch
+
+# Copy Algernon binaries
+COPY --from=builder /usr/bin/algernon /usr/bin/algernon
+
+# Required Directories
+COPY --from=builder /tmp /tmp
+VOLUME /srv/algernon
+WORKDIR /srv/algernon
+
+# Expose 3000 port
+EXPOSE 3000
+
+# Entrypoint
+#
+# Serve /srv/algernon directory with Algernon on port 3000 with HTTP only
+ENTRYPOINT [ "algernon", "--simple", "--addr", ":3000", "--httponly", "/srv/algernon" ]
