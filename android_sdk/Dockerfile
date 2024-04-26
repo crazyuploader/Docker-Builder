@@ -4,7 +4,7 @@
 # Android SDK
 #
 # Base Image: Ubuntu
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive

@@ -4,7 +4,7 @@
 # Minimal Docker Image on top of Ubuntu (focal), including git, and some other necessary stuffs
 #
 # Using "ubuntu:jammy" as Base Image
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
