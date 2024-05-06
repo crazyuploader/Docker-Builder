@@ -7,11 +7,9 @@
 
 ## Usage
 
-We need to mount our markdown directory to `/markdown` in the container.
-For example to serve current directory with [Markserve](https://github.com/markserv/markserv) on port `8080` -
+We need to mount our markdown directory to `/srv/algernon` in the container.
+For example to serve current directory with [Algernon](https://github.com/xyproto/algernon) on port `8080` -
 
 ```bash
 docker run -v "${PWD}:/markdown" -p 8080:80 -p 35729:35729 crazyuploader/markdown_server:latest
 ```
-
-**Note:** We map port `35729` as well for _live-reloading_ to work.

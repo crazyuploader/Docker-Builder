@@ -7,7 +7,7 @@
 FROM golang:1.22.2-alpine AS builder
 
 # Setting Algernon Version
-ARG ALGERNON_VERSION=v1.15.1
+ARG ALGERNON_VERSION=v1.16.0
 
 # Adding curl
 RUN apk --no-cache add git
