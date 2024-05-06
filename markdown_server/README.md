@@ -11,5 +11,5 @@ We need to mount our markdown directory to `/srv/algernon` in the container.
 For example to serve current directory with [Algernon](https://github.com/xyproto/algernon) on port `8080` -
 
 ```bash
-docker run -v "${PWD}:/markdown" -p 8080:80 -p 35729:35729 crazyuploader/markdown_server:latest
+docker run -v "${PWD}:/markdown" -p 8080:3000 -p 35729:35729 crazyuploader/markdown_server:latest
 ```
