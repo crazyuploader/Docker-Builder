@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build-amd64:
     machine:
-      image: ubuntu-2004:202111-02
+      image: default
     steps:
       - checkout
       - run:
@@ -12,7 +12,7 @@ jobs:
 
   build-arm64:
     machine:
-      image: ubuntu-2004:202101-01
+      image: default
     resource_class: arm.medium
     steps:
       - checkout
