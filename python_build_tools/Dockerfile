@@ -40,8 +40,7 @@ RUN apt-get clean && \
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 # Installing pip packages
-RUN pip3 install --no-cache-dir --upgrade --break-system-packages pip && \
-    pip install --no-cache-dir --break-system-packages \
+RUN pip install --no-cache-dir --break-system-packages \
     flake8 \
     pyflakes \
     black \
