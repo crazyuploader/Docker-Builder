@@ -34,10 +34,8 @@ FROM alpine:3.18 AS runner
 # Copy Speedtest CLI binary to /usr/bin
 COPY --from=builder /usr/bin/speedtest /usr/bin/speedtest
 
-# Accept License Agreement & GDPR License
-RUN /usr/bin/speedtest \
-    --accept-license \
-    --accept-gdpr
+# Accept License Agreement & GDPR License with a timeout
+RUN ( /usr/bin/speedtest --accept-license --accept-gdpr & sleep 2 && kill $! ) || true
 
 # Ensure the ENTRYPOINT includes license acceptance
 ENTRYPOINT ["/usr/bin/speedtest", "--accept-license", "--accept-gdpr"]
