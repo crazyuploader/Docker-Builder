@@ -4,7 +4,7 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM alpine:3.18 AS builder
+FROM alpine:3.20 AS builder
 
 # Installing Dependencies
 RUN apk --no-cache add wget curl jq
@@ -29,7 +29,7 @@ RUN set -e && \
     mv speedtest /usr/bin/speedtest
 
 # Using Alpine as base image
-FROM alpine:3.18 AS runner
+FROM alpine:3.20 AS runner
 
 # Copy Speedtest CLI binary to /usr/bin
 COPY --from=builder /usr/bin/speedtest /usr/bin/speedtest
