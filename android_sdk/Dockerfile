@@ -16,16 +16,13 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrade Packages to latest
-RUN apt-get upgrade -y
+RUN apt-get upgrade --yes
 
 # Install Packages
-RUN apt-get install -y --no-install-recommends \
-                    git curl nano ca-certificates openjdk-8-jdk \
+RUN apt-get install --yes --no-install-recommends \
+                    git curl nano ca-certificates openjdk-21-jdk \
                     wget zip unzip gpg gpg-agent ftp ssh tar xz-utils \
-                    tmux screen jq tree 1> /dev/null
-
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
+                    tmux screen jq tree btop 1> /dev/null
 
 # Clean up
 RUN apt-get clean && \
@@ -33,40 +30,45 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLO https://services.gradle.org/distributions/gradle-7.6-all.zip && \
-    unzip -d /opt/gradle gradle* 1> /dev/null && \
-    rm gradle*.zip
+    curl -sLo gradle.zip https://services.gradle.org/distributions/gradle-8.10-all.zip && \
+    unzip -d /opt/gradle gradle.zip 1> /dev/null && \
+    rm gradle.zip
 
 # Download Kotlin
-ARG KOTLIN_VERSION=1.7.22
+ARG KOTLIN_VERSION=2.0.20
 RUN cd /opt && \
-    curl -sLO https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
-    unzip ./*kotlin*.zip && \
-    rm ./*kotlin*.zip
+    curl -sLo kotlin.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
+    unzip kotlin.zip && \
+    rm kotlin.zip
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-7.6
+ENV GRADLE_HOME /opt/gradle/gradle-8.10
 ENV KOTLIN_HOME /opt/kotlinc
-ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
+ENV PATH ${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
 # Download Android SDK
-RUN mkdir ~/.android && echo "### User Sources for Android SDK Manager" > ~/.android/repositories.cfg && \
-    mkdir /opt/android-sdk && \
-    cd /opt/android-sdk && \
-    curl -sLo command.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
-    unzip command.zip>> /dev/null 2>&1 && \
-    rm command.zip && \
-    yes | sdkmanager --licenses 1> /dev/null && \
+RUN mkdir -p /opt/android-sdk/cmdline-tools && \
+    cd /opt/android-sdk/cmdline-tools && \
+    curl -sLo cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
+    unzip cmdline-tools.zip >> /dev/null 2>&1 && \
+    rm cmdline-tools.zip && \
+    mv cmdline-tools latest
+
+# Install Android SDK & Platform Tools
+RUN yes | sdkmanager --licenses 1> /dev/null && \
     yes | sdkmanager --update && \
     yes | sdkmanager "platform-tools" \
-                    "platforms;android-29" \
-                    "platforms;android-30" \
-                    "build-tools;30.0.0" \
-                    "build-tools;29.0.3" 1> /dev/null
+                    "platforms;android-33" \
+                    "platforms;android-34" \
+                    "build-tools;33.0.3" \
+                    "build-tools;34.0.0" 1> /dev/null
 
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
+# Version Check
+RUN java --version && \
+    kotlin -version && \
+    gradle --version && \
+    echo "SDK Manager Version: $(sdkmanager --version)"
 
 # Git Identity Setup
 RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
