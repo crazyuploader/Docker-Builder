@@ -4,13 +4,13 @@
 # Speedtest CLI Docker Image
 #
 # Using Alpine as base
-FROM alpine:latest AS builder
+FROM alpine:3.18 AS builder
 
 # Installing Dependencies
-RUN apk --no-cache add wget
+RUN apk --no-cache add wget curl jq
 
-# Build time Environment Variable
-ARG VERSION="1.2.0"
+# Set API URL
+ARG API_URL="https://api.devjugal.com/speedtest_latest"
 
 # Setting Work Directory
 WORKDIR /tmp
@@ -18,19 +18,26 @@ WORKDIR /tmp
 # Install Speedtest CLI
 RUN set -e && \
     ARCH=$(arch) && \
-    if ! wget --quiet --output-document speedtest.tar.tgz https://install.speedtest.net/app/cli/ookla-speedtest-"${VERSION}"-linux-"${ARCH}".tgz; \
-    then \
-        echo "Getting Speedtest Failed"; \
+    JSON=$(curl --silent "$API_URL") && \
+    DOWNLOAD_URL=$(echo "$JSON" | jq -r ".links.linux[\"$ARCH\"]") && \
+    if [ -z "$DOWNLOAD_URL" ]; then \
+        echo "Architecture $ARCH not supported or download link not found."; \
         exit 1; \
-    fi
+    fi && \
+    wget --quiet --output-document speedtest.tar.tgz "$DOWNLOAD_URL" && \
+    tar xf speedtest.tar.tgz && \
+    mv speedtest /usr/bin/speedtest
 
-# Extracting Speedtest CLI, and putting in /usr/bin
-RUN tar xf speedtest.tar.tgz
-
-FROM alpine:latest AS runner
+# Using Alpine as base image
+FROM alpine:3.18 AS runner
 
 # Copy Speedtest CLI binary to /usr/bin
-COPY --from=builder /tmp/speedtest /usr/bin
-COPY speedtest/entrypoint.sh /
+COPY --from=builder /usr/bin/speedtest /usr/bin/speedtest
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Accept License Agreement & GDPR License
+RUN /usr/bin/speedtest \
+    --accept-license \
+    --accept-gdpr
+
+# Ensure the ENTRYPOINT includes license acceptance
+ENTRYPOINT ["/usr/bin/speedtest", "--accept-license", "--accept-gdpr"]
