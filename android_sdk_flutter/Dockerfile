@@ -3,7 +3,7 @@
 #
 # Android SDK with Flutter
 #
-# Base Image: crazyuploader/android_sdk
+# Base Image: crazyuploader/android_sdk:latest
 FROM crazyuploader/android_sdk:latest
 
 # Setting Non-Interactive Build Time Environment Variable

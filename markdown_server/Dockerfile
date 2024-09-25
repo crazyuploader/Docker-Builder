@@ -3,11 +3,11 @@
 #
 # Markdown Server based on https://github.com/xyproto/algernon
 #
-# Base Image: alpine:3.18
+# Base Image: alpine:3.23.1-alpine
 FROM golang:1.23.1-alpine AS builder
 
 # Setting Algernon Version
-ARG ALGERNON_VERSION=v1.16.0
+ARG ALGERNON_VERSION=v1.17.1
 
 # Adding curl
 RUN apk --no-cache add git

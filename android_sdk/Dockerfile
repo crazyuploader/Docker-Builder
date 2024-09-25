@@ -3,7 +3,7 @@
 #
 # Android SDK
 #
-# Base Image: Ubuntu
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -21,8 +21,8 @@ RUN apt-get upgrade --yes
 # Install Packages
 RUN apt-get install --yes --no-install-recommends \
                     git curl nano ca-certificates openjdk-21-jdk \
-                    wget zip unzip gpg gpg-agent ftp ssh tar xz-utils \
-                    tmux screen jq tree btop 1> /dev/null
+                    wget zip unzip gpg ftp tar xz-utils \
+                    tmux screen jq tree btop openssh-client 1> /dev/null
 
 # Clean up
 RUN apt-get clean && \

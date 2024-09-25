@@ -3,7 +3,7 @@
 #
 # All the required tools for Python coding and stuff
 #
-# Base Image: Ubuntu
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -25,9 +25,9 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl python3 python3-pip wget nano \
                     tar zip unzip locales-all \
-                    python-is-python3 gpg ssh xz-utils \
+                    python-is-python3 gpg openssh-client xz-utils \
                     iputils-ping traceroute tmux screen \
-                    gpg-agent jq python3-venv tree 1> /dev/null
+                    gpg jq python3-venv tree 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -

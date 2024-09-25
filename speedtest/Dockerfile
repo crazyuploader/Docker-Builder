@@ -3,7 +3,7 @@
 #
 # Speedtest CLI Docker Image
 #
-# Using Alpine as base
+# Base Image: alpine:3.20
 FROM alpine:3.20 AS builder
 
 # Installing Dependencies
@@ -28,7 +28,7 @@ RUN set -e && \
     tar xf speedtest.tar.tgz && \
     mv speedtest /usr/bin/speedtest
 
-# Using Alpine as base image
+# Base Image: alpine:3.20
 FROM alpine:3.20 AS runner
 
 # Copy Speedtest CLI binary to /usr/bin

@@ -3,7 +3,7 @@
 #
 # All the dependencies requred for Android Kernel Building
 #
-# Using Ubuntu as a base OS
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -21,7 +21,7 @@ RUN apt-get -y upgrade
 # Installing required packages
 RUN apt-get install -y \
                     curl git python3 bc tar make wget gcc libssl-dev \
-                    zip unzip ca-certificates gpg gpg-agent ssh \
+                    zip unzip ca-certificates gpg openssh-client \
                     nano vim xz-utils tmux screen jq tree 1> /dev/null
 
 # Install tmate

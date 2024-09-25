@@ -3,7 +3,7 @@
 #
 # Minimal Docker Image with Hugo installed
 #
-# Base Image: ubuntu:focal
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -13,15 +13,14 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.130.0
+ARG HUGO_VERSION=0.134.3
 
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
     ca-certificates \
-    wget \
-    gpg
+    wget
 
 # Get & Install Hugo from its source
 RUN echo "Installing Hugo..." && \

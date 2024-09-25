@@ -3,7 +3,7 @@
 #
 # CPP & C Build Tools
 #
-# Base Image: Ubuntu
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -23,10 +23,10 @@ RUN apt-get -y autoremove --purge
 
 # Install essential packages
 RUN apt-get install -y --no-install-recommends \
-                    git curl wget clang g++ gcc nano \
-                    ca-certificates locales-all gpg ssh \
-                    tar xz-utils screen tmux gpg-agent jq \
-                    tree 1> /dev/null
+                    build-essential git curl wget \
+                    clang g++ gcc nano ca-certificates \
+                    locales-all gpg jq tar xz-utils screen \
+                    tmux tree openssh-client 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -

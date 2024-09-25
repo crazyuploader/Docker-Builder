@@ -25,8 +25,8 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y \
                     curl wget ca-certificates nano \
                     lsb-release mtr-tiny nmap iputils-ping \
-                    traceroute tcptraceroute gpg gpg-agent \
-                    net-tools bc jq tree 1> /dev/null
+                    traceroute tcptraceroute gpg \
+                    net-tools bc jq tree openssh-client 1> /dev/null
 
 # Install tcping
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -

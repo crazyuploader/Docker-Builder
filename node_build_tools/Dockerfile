@@ -3,7 +3,7 @@
 #
 # Docker Image with Nodejs, and NPM installed
 #
-# Using "ubuntu:focal" as Base Image
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -25,7 +25,7 @@ RUN apt-get -y autoremove --purge
 RUN apt-get install -y --no-install-recommends \
                     git curl wget zip unzip vim nano \
                     tar zip unzip locales-all gpg \
-                    ssh xz-utils gpg-agent tmux screen \
+                    openssh-client xz-utils tmux screen \
                     iputils-ping traceroute jq tree \
                     ca-certificates 1> /dev/null
 

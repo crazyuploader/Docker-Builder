@@ -3,8 +3,8 @@
 #
 # Docker Image for Broken Link Checker
 #
-# Using Node JS LTS Alpine as base
-FROM node:lts-alpine3.15
+# Base Image: node:lts-alpine3.20
+FROM node:lts-alpine3.20
 
 # Install Broken Link Checker
 RUN npm install --location=global broken-link-checker

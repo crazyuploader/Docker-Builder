@@ -3,7 +3,7 @@
 #
 # Java Build Tools
 #
-# Base Image: Ubuntu
+# Base Image: ubuntu:noble
 FROM ubuntu:noble
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -26,7 +26,7 @@ RUN apt-get install -y --no-install-recommends \
                     git curl wget default-jdk nano \
                     tar xz-utils zip unzip \
                     locales-all shellcheck screen tmux \
-                    ant maven gpg gpg-agent ssh jq tree 1> /dev/null
+                    ant maven gpg openssh-client jq tree 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
