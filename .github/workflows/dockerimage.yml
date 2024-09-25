@@ -13,6 +13,8 @@ on:
 jobs:
   Docker_Images_Builder:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     strategy:
       fail-fast: false
       matrix:
@@ -54,5 +56,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Dockerfile(s)
+      - name: Build Dockerfile(s) & Push to DockerHub
         run: docker buildx build --platform linux/amd64,linux/arm64 --file "${{ matrix.Docker_Image }}"/Dockerfile --tag crazyuploader/"${{ matrix.Docker_Image }}":latest --push .
+
+      - name: Login to GitHub Packages (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Dockerfile(s) & Push to GHCR
+        run: docker buildx build --platform linux/amd64,linux/arm64 --file "${{ matrix.Docker_Image }}"/Dockerfile --tag ghcr.io/${{ github.repository_owner }}/${{ matrix.Docker_Image }}:latest --push .
