@@ -26,7 +26,7 @@ RUN go build -o algernon . && \
     mv algernon /usr/bin/algernon
 
 # Compress Algernon binaries
-RUN if [[ $(arch) == "x86_64" ]]; then apk add upx; upx /usr/bin/algernon; fi
+RUN if [ $(arch) == "x86_64" ]; then apk add --no-cache upx; upx /usr/bin/algernon; fi
 
 # Clean up /tmp directory
 RUN rm -rf /tmp/*

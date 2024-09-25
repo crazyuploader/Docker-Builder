@@ -7,7 +7,7 @@
 FROM node:lts-alpine3.20
 
 # Install Broken Link Checker
-RUN npm install --location=global broken-link-checker
+RUN npm install --location=global broken-link-checker@0.7.8
 
 # Entrypoint for Broken Link Checker
 ENTRYPOINT [ "blc" ]

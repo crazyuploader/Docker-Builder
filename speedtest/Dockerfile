@@ -7,7 +7,7 @@
 FROM alpine:3.20 AS builder
 
 # Installing Dependencies
-RUN apk --no-cache add wget curl jq
+RUN apk --no-cache add curl jq
 
 # Set API URL
 ARG API_URL="https://api.devjugal.com/speedtest_latest"
@@ -24,7 +24,7 @@ RUN set -e && \
         echo "Architecture $ARCH not supported or download link not found."; \
         exit 1; \
     fi && \
-    wget --quiet --output-document speedtest.tar.tgz "$DOWNLOAD_URL" && \
+    curl -sLo speedtest.tar.tgz "$DOWNLOAD_URL" && \
     tar xf speedtest.tar.tgz && \
     mv speedtest /usr/bin/speedtest
 
