@@ -22,6 +22,7 @@ jobs:
           [
             alpine,
             broken_link_checker,
+            golang,
             hugo,
             markdown_server,
             minimal_ubuntu,
