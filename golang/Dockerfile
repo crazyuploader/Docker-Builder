@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Get the Golang version
-RUN ARCH=$(dpkg --print-architecture) && \
+RUN ARCH="$(dpkg --print-architecture)" && \
     case "$ARCH" in \
         amd64) ARCH="amd64" ;; \
         arm64) ARCH="arm64" ;; \
@@ -44,7 +44,7 @@ ENV GOPATH=/go
 ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Install Releaser
-RUN ARCH=$(dpkg --print-architecture) && \
+RUN ARCH="$(dpkg --print-architecture)" && \
     case "$ARCH" in \
         amd64) RELEASER_ARCH="x86_64" ;; \
         arm64) RELEASER_ARCH="arm64" ;; \
@@ -55,3 +55,9 @@ RUN ARCH=$(dpkg --print-architecture) && \
     mv goreleaser /usr/local/bin/ && \
     chmod +x /usr/local/bin/goreleaser && \
     rm -rf releaser.tar.gz
+
+# Set the working directory
+WORKDIR /go
+
+# Set the default command
+CMD ["bash"]
