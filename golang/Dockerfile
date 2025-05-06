@@ -22,7 +22,8 @@ ARG RELEASER_VERSION=2.8.2
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    ca-certificates && \
+    ca-certificates \
+    wget && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Get the Golang version
