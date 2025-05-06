@@ -38,6 +38,7 @@ The Docker Builder repository contains Dockerfiles for various tools and environ
 - [`Alpine`](alpine/Dockerfile)
 - [`Broken Link Checker`](broken_link_checker/Dockerfile)
 - [`Hugo`](hugo/Dockerfile)
+- [`Golang`](golang/Dockerfile)
 - [`Markdown Server`](markdown_server/Dockerfile)
 - [`Minimal Ubuntu`](minimal_ubuntu/Dockerfile)
 - [`Networking`](networking/Dockerfile)
