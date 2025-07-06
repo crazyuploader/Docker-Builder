@@ -16,17 +16,17 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrade packages to latest version
-RUN apt-get upgrade -y
+RUN apt-get upgrade --yes
 
 # Remove unused packages
-RUN apt-get -y autoremove --purge
+RUN apt-get --yes autoremove --purge
 
 # Install dependencies
-RUN apt-get install -y \
-                    curl wget ca-certificates nano \
-                    lsb-release mtr-tiny nmap iputils-ping \
-                    traceroute tcptraceroute gpg \
-                    net-tools bc jq tree openssh-client 1> /dev/null
+RUN apt-get install --yes --no-install-recommends \
+    curl wget ca-certificates nano \
+    lsb-release mtr-tiny nmap iputils-ping \
+    traceroute tcptraceroute gpg \
+    net-tools bc jq tree openssh-client 1> /dev/null
 
 # Install tcping
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tcping.sh | bash -

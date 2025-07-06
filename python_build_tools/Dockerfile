@@ -16,18 +16,18 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrading packages
-RUN apt-get -y upgrade
+RUN apt-get --yes upgrade
 
 # Removing unused packages
-RUN apt-get -y autoremove --purge
+RUN apt-get --yes autoremove --purge
 
 # Installing packages
-RUN apt-get install -y --no-install-recommends \
-                    git curl python3 python3-pip wget nano \
-                    tar zip unzip locales-all \
-                    python-is-python3 gpg openssh-client xz-utils \
-                    iputils-ping traceroute tmux screen \
-                    gpg jq python3-venv tree 1> /dev/null
+RUN apt-get install --yes --no-install-recommends \
+    git curl python3 python3-pip wget nano \
+    tar zip unzip locales-all \
+    python-is-python3 gpg openssh-client xz-utils \
+    iputils-ping traceroute tmux screen \
+    gpg jq python3-venv tree 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -

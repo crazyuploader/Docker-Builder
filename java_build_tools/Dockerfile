@@ -16,17 +16,17 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrade packages to latest version
-RUN apt-get upgrade -y
+RUN apt-get upgrade --yes
 
 # Remove unused packages
-RUN apt-get -y autoremove --purge
+RUN apt-get --yes autoremove --purge
 
 # Install essential packages
-RUN apt-get install -y --no-install-recommends \
-                    git curl wget default-jdk nano \
-                    tar xz-utils zip unzip \
-                    locales-all shellcheck screen tmux \
-                    ant maven gpg openssh-client jq tree 1> /dev/null
+RUN apt-get install --yes --no-install-recommends \
+    git curl wget default-jdk nano \
+    tar xz-utils zip unzip \
+    locales-all shellcheck screen tmux \
+    ant maven gpg openssh-client jq tree 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -

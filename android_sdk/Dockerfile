@@ -20,9 +20,9 @@ RUN apt-get upgrade --yes
 
 # Install Packages
 RUN apt-get install --yes --no-install-recommends \
-                    git curl nano ca-certificates openjdk-21-jdk \
-                    wget zip unzip gpg ftp tar xz-utils \
-                    tmux screen jq tree btop openssh-client 1> /dev/null
+    git curl nano ca-certificates openjdk-21-jdk \
+    wget zip unzip gpg ftp tar xz-utils \
+    tmux screen jq tree btop openssh-client 1> /dev/null
 
 # Clean up
 RUN apt-get clean && \
@@ -42,10 +42,10 @@ RUN cd /opt && \
     rm kotlin.zip
 
 # Environment Variables
-ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-8.14.3
-ENV KOTLIN_HOME /opt/kotlinc
-ENV PATH ${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
+ENV ANDROID_HOME=/opt/android-sdk
+ENV GRADLE_HOME=/opt/gradle/gradle-8.14.3
+ENV KOTLIN_HOME=/opt/kotlinc
+ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
 # Download Android SDK
 RUN mkdir -p /opt/android-sdk/cmdline-tools && \

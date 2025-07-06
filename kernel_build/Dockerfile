@@ -16,13 +16,13 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrading apt packages to latest
-RUN apt-get -y upgrade
+RUN apt-get --yes upgrade
 
 # Installing required packages
-RUN apt-get install -y \
-                    curl git python3 bc tar make wget gcc libssl-dev \
-                    zip unzip ca-certificates gpg openssh-client \
-                    nano vim xz-utils tmux screen jq tree 1> /dev/null
+RUN apt-get install --yes --no-install-recommends \
+    curl git python3 bc tar make wget gcc libssl-dev \
+    zip unzip ca-certificates gpg openssh-client \
+    nano vim xz-utils tmux screen jq tree 1> /dev/null
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
@@ -72,9 +72,9 @@ RUN git config --global user.email "me@devjugal.com" && \
     git config --global user.name "crazyuploader"
 
 # Setting up an environment variable
-ENV TOOLCHAIN /toolchains
-ENV CLANG /toolchains/clang/bin/clang
-ENV GCC /toolchains/gcc/bin/aarch64-linux-android-
-ENV GCC32 /toolchains/gcc32/bin/arm-linux-androideabi-
+ENV TOOLCHAIN=/toolchains
+ENV CLANG=/toolchains/clang/bin/clang
+ENV GCC=/toolchains/gcc/bin/aarch64-linux-android-
+ENV GCC32=/toolchains/gcc32/bin/arm-linux-androideabi-
 
 CMD ["bash"]

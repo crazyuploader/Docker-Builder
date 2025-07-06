@@ -13,10 +13,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Hugo Version Variable
-ARG HUGO_VERSION=0.134.3
+ARG HUGO_VERSION=0.147.9
 
 # Installing dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
     git \
     curl \
     ca-certificates \
@@ -50,4 +51,4 @@ RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-CMD ["bash"]
+ENTRYPOINT [ "hugo" ]

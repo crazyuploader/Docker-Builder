@@ -19,11 +19,9 @@ ARG GOLANG_VERSION=1.24.4
 ARG RELEASER_VERSION=2.10.2
 
 # Installing dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    ca-certificates \
-    wget && \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
+    git curl ca-certificates wget && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Get the Golang version

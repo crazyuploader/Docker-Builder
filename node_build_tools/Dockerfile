@@ -16,18 +16,18 @@ ENV TERM=xterm-256color
 RUN apt-get update
 
 # Upgrading packages
-RUN apt-get -y upgrade
+RUN apt-get --yes upgrade
 
 # Removing unused packages
-RUN apt-get -y autoremove --purge
+RUN apt-get --yes autoremove --purge
 
 # Installing packages
-RUN apt-get install -y --no-install-recommends \
-                    git curl wget zip unzip vim nano \
-                    tar zip unzip locales-all gpg \
-                    openssh-client xz-utils tmux screen \
-                    iputils-ping traceroute jq tree \
-                    ca-certificates 1> /dev/null
+RUN apt-get install --yes --no-install-recommends \
+    git curl wget zip unzip vim nano \
+    tar zip unzip locales-all gpg \
+    openssh-client xz-utils tmux screen \
+    iputils-ping traceroute jq tree \
+    ca-certificates 1> /dev/null
 
 # Setting up NodeJS
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
