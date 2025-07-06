@@ -30,12 +30,12 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLo gradle.zip https://services.gradle.org/distributions/gradle-8.10-all.zip && \
+    curl -sLo gradle.zip https://services.gradle.org/distributions/gradle-8.14.3-all.zip && \
     unzip -d /opt/gradle gradle.zip 1> /dev/null && \
     rm gradle.zip
 
 # Download Kotlin
-ARG KOTLIN_VERSION=2.0.20
+ARG KOTLIN_VERSION=2.2.0
 RUN cd /opt && \
     curl -sLo kotlin.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
     unzip kotlin.zip && \
@@ -43,7 +43,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME /opt/android-sdk
-ENV GRADLE_HOME /opt/gradle/gradle-8.10
+ENV GRADLE_HOME /opt/gradle/gradle-8.14.3
 ENV KOTLIN_HOME /opt/kotlinc
 ENV PATH ${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
