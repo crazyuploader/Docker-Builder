@@ -13,10 +13,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Golang Version Variable
-ARG GOLANG_VERSION=1.24.2
+ARG GOLANG_VERSION=1.24.4
 
 # Setting Releaser Version Variable
-ARG RELEASER_VERSION=2.8.2
+ARG RELEASER_VERSION=2.10.2
 
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
