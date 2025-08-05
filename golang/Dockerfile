@@ -21,7 +21,8 @@ ARG RELEASER_VERSION=2.11.2
 # Installing dependencies
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
-    git curl ca-certificates wget git build-essential && \
+    git curl ca-certificates wget git build-essential \
+    libssl-dev libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Get the Golang version
