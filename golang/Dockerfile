@@ -16,7 +16,7 @@ ENV TERM=xterm-256color
 ARG GOLANG_VERSION=1.24.4
 
 # Setting Releaser Version Variable
-ARG RELEASER_VERSION=2.10.2
+ARG RELEASER_VERSION=2.11.2
 
 # Installing dependencies
 RUN apt-get update && \
