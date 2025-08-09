@@ -3,11 +3,29 @@
 #
 # Docker Image for Broken Link Checker
 #
-# Base Image: node:lts-alpine3.21
-FROM node:lts-alpine3.21
+# Base Image: alpine:latest
+FROM alpine:latest AS builder
 
-# Install Broken Link Checker
-RUN npm install --location=global broken-link-checker@0.7.8
+# Add curl command
+RUN apk add --no-cache curl
 
-# Entrypoint for Broken Link Checker
-ENTRYPOINT [ "blc" ]
+# Set lychee version
+ARG VERSION=v0.19.1
+
+# Set Working Directory
+WORKDIR /app
+
+# Get lychee based on system architecture
+RUN ARCH="$(arch)" && \
+    curl -sLo lychee.tar.gz https://github.com/lycheeverse/lychee/releases/download/lychee-${VERSION}/lychee-${ARCH}-unknown-linux-gnu.tar.gz && \
+    tar -xvf lychee.tar.gz
+
+# Use ubuntu:noble for final runner
+FROM ubuntu:noble AS runner
+
+# Copy lychee binary from builder stage
+COPY --from=builder /app/lychee /usr/local/bin
+
+# Entry point for the Docker Image
+ENTRYPOINT [ "lychee" ]
+CMD ["--help"]
