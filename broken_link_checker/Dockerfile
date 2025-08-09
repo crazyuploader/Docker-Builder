@@ -23,8 +23,14 @@ RUN ARCH="$(arch)" && \
 # Use ubuntu:noble for final runner
 FROM ubuntu:noble AS runner
 
+# Create a non-root user and group for security
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
 # Copy lychee binary from builder stage
 COPY --from=builder /app/lychee /usr/local/bin
+
+# Switch to the non-root user
+USER appuser
 
 # Entry point for the Docker Image
 ENTRYPOINT [ "lychee" ]
