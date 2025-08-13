@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 # Setting Golang Version Variable
-ARG GOLANG_VERSION=1.24.4
+ARG GOLANG_VERSION=1.25.0
 
 # Setting Releaser Version Variable
 ARG RELEASER_VERSION=2.11.2
@@ -22,7 +22,7 @@ ARG RELEASER_VERSION=2.11.2
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
     git curl ca-certificates wget git build-essential \
-    libssl-dev libsqlite3-dev && \
+    libssl-dev libsqlite3-dev clang && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Get the Golang version
