@@ -1,3 +1,6 @@
 {
-  "extends": ["config:recommended"]
+  "extends": ["config:recommended"],
+    "automerge": true,
+    "rebaseWhen": "conflicted",
+    "recreateWhen": "auto"
 }
