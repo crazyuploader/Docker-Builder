@@ -7,10 +7,10 @@
 FROM alpine:latest AS builder
 
 # Add curl command
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl git openssh-client
 
 # Set lychee version
-ARG VERSION=v0.19.1
+ARG VERSION=v0.20.1
 
 # Set Working Directory
 WORKDIR /app
