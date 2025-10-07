@@ -24,7 +24,8 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install Ansible and common Python dependencies
-RUN pip3 install --no-cache-dir \
+RUN pip3 install --upgrade --no-cache-dir pip && \
+    pip3 install --no-cache-dir \
     ansible \
     ansible-core \
     pyyaml \
