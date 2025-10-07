@@ -22,5 +22,8 @@ RUN apt-get update && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+# Add Ansible
+RUN pip3 install ansible pyyaml
+
 # Set the default command
 CMD ["bash"]
