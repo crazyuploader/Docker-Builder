@@ -17,6 +17,7 @@ jobs:
         Docker_Image:
           [
             alpine,
+            ansible_runner,
             broken_link_checker,
             golang,
             hugo,

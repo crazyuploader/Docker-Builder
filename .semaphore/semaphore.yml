@@ -119,3 +119,22 @@ blocks:
         on_pass:
           commands:
             - docker push ghcr.io/crazyuploader/networking
+
+  - name: Ansible Runner
+    dependencies: []
+    task:
+      jobs:
+        - name: Build Dockerfile
+          commands:
+            - checkout
+            - "docker build -f ansible_runner/Dockerfile -t crazyuploader/ansible_runner:latest ."
+            - docker images
+      secrets:
+        - name: DOCKERHUB_SECRET
+      prologue:
+        commands:
+          - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      epilogue:
+        on_pass:
+          commands:
+            - docker push crazyuploader/ansible_runner
