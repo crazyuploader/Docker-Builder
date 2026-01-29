@@ -30,12 +30,12 @@ RUN apt-get clean && \
 
 # Download Gradle
 RUN mkdir /opt/gradle && \
-    curl -sLo gradle.zip https://services.gradle.org/distributions/gradle-9.0.0-all.zip && \
+    curl -sLo gradle.zip https://services.gradle.org/distributions/gradle-9.3.0-all.zip && \
     unzip -d /opt/gradle gradle.zip 1> /dev/null && \
     rm gradle.zip
 
 # Download Kotlin
-ARG KOTLIN_VERSION=2.2.0
+ARG KOTLIN_VERSION=2.3.0
 RUN cd /opt && \
     curl -sLo kotlin.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && \
     unzip kotlin.zip && \
@@ -43,7 +43,7 @@ RUN cd /opt && \
 
 # Environment Variables
 ENV ANDROID_HOME=/opt/android-sdk
-ENV GRADLE_HOME=/opt/gradle/gradle-9.0.0
+ENV GRADLE_HOME=/opt/gradle/gradle-9.3.0
 ENV KOTLIN_HOME=/opt/kotlinc
 ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
@@ -59,19 +59,15 @@ RUN mkdir -p /opt/android-sdk/cmdline-tools && \
 RUN yes | sdkmanager --licenses 1> /dev/null && \
     yes | sdkmanager --update && \
     yes | sdkmanager "platform-tools" \
-                    "platforms;android-33" \
-                    "platforms;android-34" \
-                    "build-tools;33.0.3" \
-                    "build-tools;34.0.0" 1> /dev/null
+                    "platforms;android-35" \
+                    "platforms;android-36" \
+                    "build-tools;35.0.0" \
+                    "build-tools;36.0.0"
 
 # Version Check
 RUN java --version && \
     kotlin -version && \
     gradle --version && \
     echo "SDK Manager Version: $(sdkmanager --version)"
-
-# Git Identity Setup
-RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
 
 CMD ["bash"]
