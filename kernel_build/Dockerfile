@@ -4,7 +4,7 @@
 # All the dependencies requred for Android Kernel Building
 #
 # Base Image: ubuntu:noble
-FROM ubuntu:noble
+FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
