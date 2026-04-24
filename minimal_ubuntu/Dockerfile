@@ -4,7 +4,7 @@
 # Minimal Docker Image on top of Ubuntu (focal), including git, and some other necessary stuffs
 #
 # Base Image: ubuntu:noble
-FROM ubuntu:noble
+FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive

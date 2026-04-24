@@ -21,7 +21,7 @@ RUN ARCH="$(arch)" && \
     tar -xvf lychee.tar.gz
 
 # Use ubuntu:noble for final runner
-FROM ubuntu:noble AS runner
+FROM ubuntu:resolute AS runner
 
 # Create a non-root user and group for security
 RUN groupadd -r appuser && useradd -r -g appuser appuser
