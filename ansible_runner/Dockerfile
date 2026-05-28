@@ -2,44 +2,46 @@
 # Created by Jugal Kishore --- 2025
 #
 # Docker Image for Ansible Runner
-FROM python:3.14-slim
+FROM python:3.14-alpine
 
-# Setting Non-Interactive Build Time Environment Variable
-ARG DEBIAN_FRONTEND=noninteractive
-
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Installing dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# Install runtime deps
+RUN apk add --no-cache \
+    bash \
     git \
+    curl \
     openssh-client \
     sshpass \
-    rsync \
-    curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/*
+    rsync
 
-# Install Ansible and common Python dependencies
-RUN pip3 install --upgrade --no-cache-dir pip && \
-    pip3 install --no-cache-dir \
-    ansible \
-    ansible-core \
-    pyyaml \
-    jinja2 \
-    netaddr \
-    jmespath \
-    && pip3 cache purge
+# Install Ansible and Python deps
+RUN apk add --no-cache --virtual .build-deps \
+        gcc \
+        musl-dev \
+        python3-dev \
+        libffi-dev \
+        openssl-dev && \
+    pip install --upgrade --no-cache-dir pip && \
+    pip install --no-cache-dir \
+        ansible \
+        pyyaml \
+        jinja2 \
+        netaddr \
+        jmespath && \
+    pip cache purge && \
+    apk del .build-deps
 
-# Install common Ansible collections
+# Install Ansible collections
 RUN ansible-galaxy collection install \
     community.general \
     community.docker \
     ansible.posix
 
-# Create ansible user and directories
-RUN useradd -m -s /bin/bash ansible && \
+# Create ansible user
+RUN addgroup ansible && \
+    adduser -D -s /bin/bash -G ansible ansible && \
     mkdir -p /ansible/playbooks /ansible/inventory /ansible/roles /home/ansible/.ssh && \
     chown -R ansible:ansible /ansible /home/ansible/.ssh && \
     chmod 700 /home/ansible/.ssh
@@ -50,11 +52,8 @@ WORKDIR /ansible
 # Switch to ansible user
 USER ansible
 
-# Create default ansible.cfg
-RUN echo '[defaults]' > /ansible/ansible.cfg && \
-    echo 'host_key_checking = False' >> /ansible/ansible.cfg && \
-    echo 'stdout_callback = yaml' >> /ansible/ansible.cfg && \
-    echo 'interpreter_python = auto_silent' >> /ansible/ansible.cfg
+# Write ansible.cfg
+RUN printf '[defaults]\nhost_key_checking = False\nstdout_callback = yaml\ninterpreter_python = auto_silent\n' \
+    > /ansible/ansible.cfg
 
-# Set the default command
 CMD ["bash"]

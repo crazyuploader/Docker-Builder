@@ -4,16 +4,16 @@
 # Speedtest CLI Docker Image
 FROM alpine:3.23 AS builder
 
-# Installing Dependencies
+# Install dependencies
 RUN apk --no-cache add curl jq
 
-# Set API URL
+# API URL for latest speedtest binary
 ARG API_URL="https://api.devjugal.com/speedtest_latest"
 
-# Setting Work Directory
+# Set working directory
 WORKDIR /tmp
 
-# Install Speedtest CLI
+# Install Speedtest
 RUN set -e && \
     ARCH=$(arch) && \
     JSON=$(curl --silent "$API_URL") && \
@@ -26,14 +26,13 @@ RUN set -e && \
     tar xf speedtest.tar.tgz && \
     mv speedtest /usr/bin/speedtest
 
-# Base Image: alpine:3.23
+# Runner stage
 FROM alpine:3.23 AS runner
 
-# Copy Speedtest CLI binary to /usr/bin
+# Copy binary
 COPY --from=builder /usr/bin/speedtest /usr/bin/speedtest
 
-# Accept License Agreement & GDPR License with a timeout
+# Accept license
 RUN ( /usr/bin/speedtest --accept-license --accept-gdpr & sleep 2 && kill $! ) || true
 
-# Ensure the ENTRYPOINT includes license acceptance
 ENTRYPOINT ["/usr/bin/speedtest", "--accept-license", "--accept-gdpr"]

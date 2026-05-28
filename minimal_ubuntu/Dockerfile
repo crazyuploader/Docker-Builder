@@ -4,19 +4,19 @@
 # Minimal Docker Image on top of Ubuntu (focal), including git, and some other necessary stuffs
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Upating packages list
+# Update packages
 RUN apt-get update
 
-# Removing unused packages
+# Remove unused packages
 RUN apt-get --yes autoremove --purge
 
-# Installing packages
+# Install packages
 RUN apt-get install --yes --no-install-recommends \
     git curl wget zip unzip nano tar zip unzip \
     mtr-tiny dnsutils iputils-ping traceroute \

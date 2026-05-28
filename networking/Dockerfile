@@ -4,22 +4,22 @@
 # Docker Image all about networking
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Update apt packages lists
+# Update packages
 RUN apt-get update
 
-# Upgrade packages to latest version
+# Upgrade packages
 RUN apt-get upgrade --yes
 
 # Remove unused packages
 RUN apt-get --yes autoremove --purge
 
-# Install dependencies
+# Install packages
 RUN apt-get install --yes --no-install-recommends \
     curl wget ca-certificates nano \
     lsb-release mtr-tiny nmap iputils-ping \

@@ -4,22 +4,22 @@
 # All the required tools for Python coding and stuff
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Upating packages list
+# Update packages
 RUN apt-get update
 
-# Upgrading packages
+# Upgrade packages
 RUN apt-get --yes upgrade
 
-# Removing unused packages
+# Remove unused packages
 RUN apt-get --yes autoremove --purge
 
-# Installing packages
+# Install packages
 RUN apt-get install --yes --no-install-recommends \
     git curl python3 python3-pip wget nano \
     tar zip unzip locales-all \
@@ -39,7 +39,7 @@ RUN pip install --no-cache-dir --break-system-packages \
     csvtomd \
     requests
 
-# Install uv (latest via official installer)
+# Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
 
 CMD ["bash"]

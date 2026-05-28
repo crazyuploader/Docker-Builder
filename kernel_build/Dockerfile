@@ -4,51 +4,47 @@
 # All the dependencies requred for Android Kernel Building
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Updating apt packages list
+# Update packages
 RUN apt-get update
 
-# Upgrading apt packages to latest
+# Upgrade packages
 RUN apt-get --yes upgrade
 
-# Installing required packages
+# Install packages
 RUN apt-get install --yes --no-install-recommends \
     curl git python3 bc tar make wget gcc libssl-dev \
     zip unzip ca-certificates gpg openssh-client \
     nano vim xz-utils tmux screen jq tree 1> /dev/null
 
-# Removing all unused packages
+# Remove unused packages
 RUN apt-get -y autoremove --purge
 
-# APT clean up
+# Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Directory to store cross-compilers
+# Create toolchains directory
 RUN mkdir toolchains
 
-# ARM Cross Compiler
-RUN printf "Cloning Toolchains...\n" && \
-    echo "Getting AOSP ARM Cross Compiler..." && \
-    cd toolchains && \
+# Clone ARM cross-compiler
+RUN cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc
 
-# ARM_64 Cross Compiler
-RUN echo "Getting AOSP ARM_64 Cross Compiler..." && \
-    cd toolchains && \
+# Clone ARM64 cross-compiler
+RUN cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 gcc32
 
-# Downloading Prebuilt AOSP Clang
-RUN echo "Cloning Clang..." && \
-    cd toolchains && \
+# Clone Clang toolchain
+RUN cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
-# Setting Kernel Build Script
+# Install kernel build script
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
     mkdir ~/misc && \
     mv ./kbuild.sh ~/misc && \
@@ -56,7 +52,7 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     chmod +x kbuild.sh && \
     printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
 
-# Setting up an environment variable
+# Environment variables
 ENV TOOLCHAIN=/toolchains
 ENV CLANG=/toolchains/clang/bin/clang
 ENV GCC=/toolchains/gcc/bin/aarch64-linux-android-

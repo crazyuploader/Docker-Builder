@@ -4,22 +4,22 @@
 # Docker Image with Nodejs, and NPM installed
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Upating packages list
+# Update packages
 RUN apt-get update
 
-# Upgrading packages
+# Upgrade packages
 RUN apt-get --yes upgrade
 
-# Removing unused packages
+# Remove unused packages
 RUN apt-get --yes autoremove --purge
 
-# Installing packages
+# Install packages
 RUN apt-get install --yes --no-install-recommends \
     git curl wget zip unzip vim nano \
     tar zip unzip locales-all gpg \
@@ -27,7 +27,7 @@ RUN apt-get install --yes --no-install-recommends \
     iputils-ping traceroute jq tree \
     ca-certificates 1> /dev/null
 
-# Setting up NodeJS
+# Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs
@@ -42,7 +42,7 @@ RUN npm install --global npm@latest && \
     npm install --global yarn@latest && \
     npm install --global pnpm@latest
 
-# Display installed versions
+# Version check
 RUN echo "Node Version: $(node --version)" && \
     echo "NPM Version: $(npm --version)" && \
     echo "Yarn Version: $(yarn --version)" && \
