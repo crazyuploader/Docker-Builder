@@ -2,8 +2,6 @@
 # Created by Jugal Kishore --- 2020
 #
 # Speedtest CLI Docker Image
-#
-# Base Image: alpine:3.23
 FROM alpine:3.23 AS builder
 
 # Installing Dependencies

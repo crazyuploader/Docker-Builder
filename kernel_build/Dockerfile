@@ -2,8 +2,6 @@
 # Jugal Kishore -- 2020
 #
 # All the dependencies requred for Android Kernel Building
-#
-# Base Image: ubuntu:resolute
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable

@@ -2,8 +2,6 @@
 # Jugal Kishore -- 2020
 #
 # Docker Image all about networking
-#
-# Base Image: ubuntu:resolute
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable

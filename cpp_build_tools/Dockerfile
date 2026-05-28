@@ -2,7 +2,6 @@
 # Created by Jugal Kishore -- 2020
 #
 # CPP & C Build Tools
-#
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
