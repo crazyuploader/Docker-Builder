@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     bash \
     git \
     curl \
+    jq \
     openssh-client \
     sshpass \
     rsync
@@ -45,6 +46,16 @@ RUN addgroup ansible && \
     mkdir -p /ansible/playbooks /ansible/inventory /ansible/roles /home/ansible/.ssh && \
     chown -R ansible:ansible /ansible /home/ansible/.ssh && \
     chmod 700 /home/ansible/.ssh
+
+# Install sendme
+RUN ARCH="$(uname -m)" && \
+    case "$ARCH" in \
+        x86_64)  TARGET="linux-x86_64" ;; \
+        aarch64) TARGET="linux-aarch64" ;; \
+        *) echo "Unsupported: $ARCH" && exit 1 ;; \
+    esac && \
+    URL="$(curl -fsSL --retry 3 https://api.github.com/repos/n0-computer/sendme/releases/latest | jq -er --arg t "$TARGET" '[.assets[] | select(.name | contains($t)) | select(.name | endswith(".tar.gz")) | .browser_download_url] | .[0]')" && \
+    curl -fsSL "$URL" | tar xzf - -C /usr/local/bin
 
 # Set working directory
 WORKDIR /ansible

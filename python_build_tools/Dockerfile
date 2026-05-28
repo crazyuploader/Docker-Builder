@@ -42,4 +42,14 @@ RUN pip install --no-cache-dir --break-system-packages \
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
 
+# Install sendme
+RUN ARCH="$(uname -m)" && \
+    case "$ARCH" in \
+        x86_64)  TARGET="linux-x86_64" ;; \
+        aarch64) TARGET="linux-aarch64" ;; \
+        *) echo "Unsupported: $ARCH" && exit 1 ;; \
+    esac && \
+    URL="$(curl -fsSL --retry 3 https://api.github.com/repos/n0-computer/sendme/releases/latest | jq -er --arg t "$TARGET" '[.assets[] | select(.name | contains($t)) | select(.name | endswith(".tar.gz")) | .browser_download_url] | .[0]')" && \
+    curl -fsSL "$URL" | tar xzf - -C /usr/local/bin
+
 CMD ["bash"]
