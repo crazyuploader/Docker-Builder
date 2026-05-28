@@ -2,50 +2,49 @@
 # Created by Jugal Kishore --- 2023
 #
 # Markdown Server based on https://github.com/xyproto/algernon
-#
-# Base Image: alpine:3.23.1-alpine
-FROM golang:1.26.3-alpine AS builder
+FROM golang:alpine AS builder
 
-# Setting Algernon Version
-ARG ALGERNON_VERSION=v1.17.5
+# Install deps
+RUN apk --no-cache add git curl jq
 
-# Adding curl
-RUN apk --no-cache add git
-
-# Setting Working Directory to /tmp
+# Set working directory
 WORKDIR /tmp
 
-# Clone algernon repository
-RUN git clone https://github.com/xyproto/algernon -b ${ALGERNON_VERSION}
+# Clone Algernon
+RUN ALGERNON_VERSION="$(curl -fsSL --retry 3 https://api.github.com/repos/xyproto/algernon/releases/latest | jq -er '.tag_name')" && \
+    [ -n "$ALGERNON_VERSION" ] && [ "$ALGERNON_VERSION" != "null" ] && \
+    git clone --depth=1 https://github.com/xyproto/algernon -b "${ALGERNON_VERSION}"
 
-# Setting working directory to /tmp/algernon
+# Set working directory to repo
 WORKDIR /tmp/algernon
 
-# Extract Algernon binaries
+# Build Algernon
 RUN go build -o algernon . && \
     mv algernon /usr/bin/algernon
 
-# Compress Algernon binaries
-RUN if [ "$(arch)" = "x86_64" ]; then apk add --no-cache upx; upx /usr/bin/algernon; fi
+# Compress binary
+RUN if [ "$(arch)" = "x86_64" ]; then apk add --no-cache upx && upx /usr/bin/algernon; fi
 
-# Clean up /tmp directory
+# Clean up
 RUN rm -rf /tmp/*
 
-# Use only Algernon binaries
+# Runner stage
 FROM scratch
 
-# Copy Algernon binaries
+# Copy binary
 COPY --from=builder /usr/bin/algernon /usr/bin/algernon
 
-# Required Directories
+# Copy tmp directory
 COPY --from=builder /tmp /tmp
+
+# Content volume
 VOLUME /srv/algernon
+
+# Set working directory
 WORKDIR /srv/algernon
 
-# Expose 3000 port
+# Expose port
 EXPOSE 3000
 
-# Entrypoint
-#
-# Serve /srv/algernon directory with Algernon on port 3000 with HTTP only
+# Serve content
 ENTRYPOINT [ "algernon", "--simple", "--addr", ":3000", "--httponly", "/srv/algernon" ]

@@ -2,44 +2,28 @@
 # Jugal Kishore -- 2020
 #
 # All the required tools for Python coding and stuff
-#
-# Base Image: ubuntu:noble
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Upating packages list
-RUN apt-get update
-
-# Upgrading packages
-RUN apt-get --yes upgrade
-
-# Removing unused packages
-RUN apt-get --yes autoremove --purge
-
-# Installing packages
-RUN apt-get install --yes --no-install-recommends \
-    git curl python3 python3-pip wget nano \
-    tar zip unzip locales-all \
-    python-is-python3 gpg openssh-client xz-utils \
-    iputils-ping traceroute tmux screen \
-    gpg jq python3-venv tree 1> /dev/null
-
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
-
-# Clean up
-RUN apt-get clean && \
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get --yes upgrade && \
+    apt-get install --yes --no-install-recommends \
+        git curl python3 python3-pip wget nano \
+        tar zip unzip locales-all \
+        python-is-python3 gpg openssh-client xz-utils \
+        iputils-ping traceroute tmux screen \
+        gpg jq python3-venv tree 1> /dev/null && \
+    apt-get --yes autoremove --purge && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
-
-# Installing pip packages
+# Install pip packages
 RUN pip install --no-cache-dir --break-system-packages \
     flake8 \
     pyflakes \
@@ -47,11 +31,19 @@ RUN pip install --no-cache-dir --break-system-packages \
     csvtomd \
     requests
 
-# Custom Functions
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
 
-# Git Identity Setup
-RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
+# Install sendme
+RUN ARCH="$(uname -m)" && \
+    case "$ARCH" in \
+        x86_64)  TARGET="linux-x86_64" ;; \
+        aarch64) TARGET="linux-aarch64" ;; \
+        *) echo "Unsupported: $ARCH" && exit 1 ;; \
+    esac && \
+    URL="$(curl -fsSL --retry 3 https://api.github.com/repos/n0-computer/sendme/releases/latest | jq -er --arg t "$TARGET" '[.assets[] | select(.name | contains($t)) | select(.name | endswith(".tar.gz")) | .browser_download_url] | .[0]')" && \
+    curl -fsSL --retry 3 -o /tmp/sendme.tar.gz "$URL" && \
+    tar -xzf /tmp/sendme.tar.gz -C /usr/local/bin && \
+    rm -f /tmp/sendme.tar.gz
 
 CMD ["bash"]

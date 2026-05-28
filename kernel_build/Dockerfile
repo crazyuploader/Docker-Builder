@@ -2,76 +2,61 @@
 # Jugal Kishore -- 2020
 #
 # All the dependencies requred for Android Kernel Building
-#
-# Base Image: ubuntu:noble
 FROM ubuntu:resolute
 
-# Setting Non-Interactive Build Time Environment Variable
+# Non-interactive build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Setting TERM Environment Variable
+# Terminal type
 ENV TERM=xterm-256color
 
-# Updating apt packages list
-RUN apt-get update
-
-# Upgrading apt packages to latest
-RUN apt-get --yes upgrade
-
-# Installing required packages
-RUN apt-get install --yes --no-install-recommends \
-    curl git python3 bc tar make wget gcc libssl-dev \
-    zip unzip ca-certificates gpg openssh-client \
-    nano vim xz-utils tmux screen jq tree 1> /dev/null
-
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
-
-# Custom Functions
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
-
-# Removing all unused packages
-RUN apt-get -y autoremove --purge
-
-# APT clean up
-RUN apt-get clean && \
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get --yes upgrade && \
+    apt-get install --yes --no-install-recommends \
+        curl git python3 bc tar make wget gcc libssl-dev \
+        zip unzip ca-certificates gpg openssh-client \
+        nano vim xz-utils tmux screen jq tree 1> /dev/null && \
+    apt-get -y autoremove --purge && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Directory to store cross-compilers
+# Create toolchains directory
 RUN mkdir toolchains
 
-# ARM Cross Compiler
-RUN printf "Cloning Toolchains...\n" && \
-    echo "Getting AOSP ARM Cross Compiler..." && \
-    cd toolchains && \
+# Clone ARM cross-compiler
+RUN cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc
 
-# ARM_64 Cross Compiler
-RUN echo "Getting AOSP ARM_64 Cross Compiler..." && \
-    cd toolchains && \
+# Clone ARM64 cross-compiler
+RUN cd toolchains && \
     git clone --depth=1 https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 gcc32
 
-# Downloading Prebuilt AOSP Clang
-RUN echo "Cloning Clang..." && \
-    cd toolchains && \
+# Clone Clang toolchain
+RUN cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
-
-# Setting Kernel Build Script
-RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
+# Install kernel build script
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/main/kbuild.sh && \
     mkdir ~/misc && \
     mv ./kbuild.sh ~/misc && \
     cd ~/misc && \
     chmod +x kbuild.sh && \
     printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
 
-# Setting Git Identity
-RUN git config --global user.email "me@devjugal.com" && \
-    git config --global user.name "crazyuploader"
+# Install sendme
+RUN ARCH="$(uname -m)" && \
+    case "$ARCH" in \
+        x86_64)  TARGET="linux-x86_64" ;; \
+        aarch64) TARGET="linux-aarch64" ;; \
+        *) echo "Unsupported: $ARCH" && exit 1 ;; \
+    esac && \
+    URL="$(curl -fsSL --retry 3 https://api.github.com/repos/n0-computer/sendme/releases/latest | jq -er --arg t "$TARGET" '[.assets[] | select(.name | contains($t)) | select(.name | endswith(".tar.gz")) | .browser_download_url] | .[0]')" && \
+    curl -fsSL --retry 3 -o /tmp/sendme.tar.gz "$URL" && \
+    tar -xzf /tmp/sendme.tar.gz -C /usr/local/bin && \
+    rm -f /tmp/sendme.tar.gz
 
-# Setting up an environment variable
+# Environment variables
 ENV TOOLCHAIN=/toolchains
 ENV CLANG=/toolchains/clang/bin/clang
 ENV GCC=/toolchains/gcc/bin/aarch64-linux-android-
