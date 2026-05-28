@@ -67,7 +67,9 @@ RUN ARCH="$(uname -m)" && \
         *) echo "Unsupported: $ARCH" && exit 1 ;; \
     esac && \
     URL="$(curl -fsSL --retry 3 https://api.github.com/repos/n0-computer/sendme/releases/latest | jq -er --arg t "$TARGET" '[.assets[] | select(.name | contains($t)) | select(.name | endswith(".tar.gz")) | .browser_download_url] | .[0]')" && \
-    curl -fsSL "$URL" | tar xzf - -C /usr/local/bin
+    curl -fsSL --retry 3 -o /tmp/sendme.tar.gz "$URL" && \
+    tar -xzf /tmp/sendme.tar.gz -C /usr/local/bin && \
+    rm -f /tmp/sendme.tar.gz
 
 # Set working directory
 WORKDIR /go
