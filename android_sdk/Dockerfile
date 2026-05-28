@@ -27,17 +27,17 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install Gradle
-RUN GRADLE_VERSION="$(curl -s https://services.gradle.org/versions/current | jq -r '.version')" && \
+RUN GRADLE_VERSION="$(curl -fsSL --retry 3 https://services.gradle.org/versions/current | jq -er '.version')" && \
     mkdir /opt/gradle && \
-    curl -sLo gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip" && \
+    curl -fsSLo --retry 3 gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip" && \
     unzip -d /opt/gradle gradle.zip 1> /dev/null && \
     rm gradle.zip && \
     ln -s "/opt/gradle/gradle-${GRADLE_VERSION}" /opt/gradle/latest
 
 # Install Kotlin
-RUN KOTLIN_VERSION="$(curl -s https://api.github.com/repos/JetBrains/kotlin/releases/latest | jq -r '.tag_name' | sed 's/^v//')" && \
+RUN KOTLIN_VERSION="$(curl -fsSL --retry 3 https://api.github.com/repos/JetBrains/kotlin/releases/latest | jq -er '.tag_name' | sed 's/^v//')" && \
     cd /opt && \
-    curl -sLo kotlin.zip "https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip" && \
+    curl -fsSLo --retry 3 kotlin.zip "https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip" && \
     unzip kotlin.zip && \
     rm kotlin.zip
 
@@ -48,11 +48,11 @@ ENV KOTLIN_HOME=/opt/kotlinc
 ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin
 
 # Install Android SDK command-line tools
-RUN CMDLINE_BUILD="$(curl -s 'https://developer.android.com/studio' | grep -oE 'commandlinetools-linux-[0-9]+_latest\.zip' | head -1 | grep -oE '[0-9]+')" && \
+RUN CMDLINE_BUILD="$(curl -fsSL --retry 3 'https://developer.android.com/studio' | grep -oE 'commandlinetools-linux-[0-9]+_latest\.zip' | head -1 | grep -oE '[0-9]+')" && \
     mkdir -p /opt/android-sdk/cmdline-tools && \
     cd /opt/android-sdk/cmdline-tools && \
-    curl -sLo cmdline-tools.zip "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_BUILD}_latest.zip" && \
-    unzip cmdline-tools.zip >> /dev/null 2>&1 && \
+    curl -fsSLo --retry 3 cmdline-tools.zip "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_BUILD}_latest.zip" && \
+    unzip cmdline-tools.zip 1> /dev/null && \
     rm cmdline-tools.zip && \
     mv cmdline-tools latest
 

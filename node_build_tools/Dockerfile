@@ -43,9 +43,6 @@ RUN npm install --global npm@latest && \
     npm install --global pnpm@latest
 
 # Version check
-RUN echo "Node Version: $(node --version)" && \
-    echo "NPM Version: $(npm --version)" && \
-    echo "Yarn Version: $(yarn --version)" && \
-    echo "PNPM Version: $(pnpm --version)"
+RUN node --version && npm --version && yarn --version && pnpm --version
 
 CMD ["bash"]

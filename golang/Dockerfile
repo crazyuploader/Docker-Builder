@@ -20,14 +20,17 @@ RUN apk add --no-cache \
     clang
 
 # Install Go
-RUN GO_VERSION="$(curl -s 'https://go.dev/dl/?mode=json' | jq -r '.[0].version')" && \
+RUN API_JSON="$(curl -fsSL --retry 3 'https://go.dev/dl/?mode=json')" && \
+    GO_VERSION="$(echo "${API_JSON}" | jq -er '.[0].version')" && \
     ARCH="$(arch)" && \
     case "$ARCH" in \
         x86_64)  GO_ARCH="amd64" ;; \
         aarch64) GO_ARCH="arm64" ;; \
         *) echo "Unsupported architecture: $ARCH" && exit 1 ;; \
     esac && \
+    GO_SHA256="$(echo "${API_JSON}" | jq -er --arg f "${GO_VERSION}.linux-${GO_ARCH}.tar.gz" '.[0].files[] | select(.filename == $f) | .sha256')" && \
     curl -fsSLo go.tar.gz "https://go.dev/dl/${GO_VERSION}.linux-${GO_ARCH}.tar.gz" && \
+    echo "${GO_SHA256}  go.tar.gz" | sha256sum -c - && \
     tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz
 
@@ -40,18 +43,21 @@ ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 RUN mkdir -p /go
 
 # Install GoReleaser
-RUN GORELEASER_TAG="$(curl -s https://api.github.com/repos/goreleaser/goreleaser/releases/latest | jq -r '.tag_name')" && \
+RUN GORELEASER_TAG="$(curl -fsSL --retry 3 https://api.github.com/repos/goreleaser/goreleaser/releases/latest | jq -er '.tag_name')" && \
     ARCH="$(arch)" && \
     case "$ARCH" in \
         x86_64)  RELEASER_ARCH="x86_64" ;; \
         aarch64) RELEASER_ARCH="arm64" ;; \
         *) echo "Unsupported architecture: $ARCH" && exit 1 ;; \
     esac && \
+    curl -fsSLo checksums.txt "https://github.com/goreleaser/goreleaser/releases/download/${GORELEASER_TAG}/checksums.txt" && \
     curl -fsSLo releaser.tar.gz "https://github.com/goreleaser/goreleaser/releases/download/${GORELEASER_TAG}/goreleaser_Linux_${RELEASER_ARCH}.tar.gz" && \
+    EXPECTED="$(grep "goreleaser_Linux_${RELEASER_ARCH}.tar.gz$" checksums.txt | awk '{print $1}')" && \
+    [ -n "$EXPECTED" ] && echo "${EXPECTED}  releaser.tar.gz" | sha256sum -c - && \
     tar -xzf releaser.tar.gz goreleaser && \
     mv goreleaser /usr/local/bin/goreleaser && \
     chmod +x /usr/local/bin/goreleaser && \
-    rm releaser.tar.gz
+    rm releaser.tar.gz checksums.txt
 
 # Set working directory
 WORKDIR /go

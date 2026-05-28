@@ -11,9 +11,10 @@ RUN apk add --no-cache curl jq
 WORKDIR /app
 
 # Install lychee
-RUN VERSION="$(curl -fsS https://api.github.com/repos/lycheeverse/lychee/releases/latest | jq -r '.tag_name')" && \
+RUN VERSION="$(curl -fsSL --retry 3 https://api.github.com/repos/lycheeverse/lychee/releases/latest | jq -er '.tag_name')" && \
+    [ -n "$VERSION" ] && [ "$VERSION" != "null" ] && \
     ARCH="$(arch)" && \
-    curl -fsSLo lychee.tar.gz "https://github.com/lycheeverse/lychee/releases/download/${VERSION}/lychee-${ARCH}-unknown-linux-musl.tar.gz" && \
+    curl -fsSLo --retry 3 lychee.tar.gz "https://github.com/lycheeverse/lychee/releases/download/${VERSION}/lychee-${ARCH}-unknown-linux-musl.tar.gz" && \
     tar --strip-components=1 -xf lychee.tar.gz "lychee-${ARCH}-unknown-linux-musl/lychee" && \
     chmod +x lychee
 

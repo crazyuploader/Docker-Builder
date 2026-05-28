@@ -11,7 +11,8 @@ RUN apk --no-cache add git curl jq
 WORKDIR /tmp
 
 # Clone Algernon
-RUN ALGERNON_VERSION="$(curl -s https://api.github.com/repos/xyproto/algernon/releases/latest | jq -r '.tag_name')" && \
+RUN ALGERNON_VERSION="$(curl -fsSL --retry 3 https://api.github.com/repos/xyproto/algernon/releases/latest | jq -er '.tag_name')" && \
+    [ -n "$ALGERNON_VERSION" ] && [ "$ALGERNON_VERSION" != "null" ] && \
     git clone --depth=1 https://github.com/xyproto/algernon -b "${ALGERNON_VERSION}"
 
 # Set working directory to repo
