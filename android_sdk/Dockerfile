@@ -10,20 +10,14 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
-
-# Upgrade packages
-RUN apt-get upgrade --yes
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    git curl nano ca-certificates openjdk-25-jdk \
-    wget zip unzip gpg ftp tar xz-utils \
-    tmux screen jq tree btop openssh-client 1> /dev/null
-
-# Clean up
-RUN apt-get clean && \
+# Update, upgrade, install, clean in one layer
+RUN apt-get update && \
+    apt-get upgrade --yes && \
+    apt-get install --yes --no-install-recommends \
+        git curl nano ca-certificates openjdk-25-jdk \
+        wget zip unzip gpg ftp tar xz-utils \
+        tmux screen jq tree btop openssh-client 1> /dev/null && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install Gradle

@@ -34,11 +34,12 @@ RUN apk add --no-cache --virtual .build-deps \
     pip cache purge && \
     apk del .build-deps
 
-# Install Ansible collections
-RUN ansible-galaxy collection install \
-    community.general \
-    community.docker \
-    ansible.posix
+# Install Ansible collections into system-wide path so USER ansible can find them
+RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
+        community.general \
+        community.docker \
+        ansible.posix && \
+    chmod -R a+rX /usr/share/ansible/collections
 
 # Create ansible user
 RUN addgroup ansible && \

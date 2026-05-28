@@ -12,7 +12,14 @@ RED="\033[0;31m"
 # Detect changed Dockerfiles across full branch range (not just last commit)
 get_changed_dockerfiles() {
     local base_branch="${BASE_BRANCH:-main}"
-    git fetch origin "${base_branch}" --quiet 2>/dev/null || true
+    local fetch_err
+    if ! fetch_err="$(git fetch origin "${base_branch}" --quiet 2>&1)"; then
+        echo "WARNING: git fetch origin ${base_branch} failed: ${fetch_err}" >&2
+    fi
+    if ! git rev-parse --verify --quiet "origin/${base_branch}" >/dev/null; then
+        echo "ERROR: ref origin/${base_branch} not found. Set BASE_BRANCH or fetch the remote." >&2
+        exit 1
+    fi
     git diff --name-only "origin/${base_branch}...HEAD" | grep '/Dockerfile$'
 }
 

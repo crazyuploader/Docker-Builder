@@ -10,28 +10,20 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
-
-# Upgrade packages
-RUN apt-get upgrade --yes
-
-# Remove unused packages
-RUN apt-get --yes autoremove --purge
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    git curl wget default-jdk nano \
-    tar xz-utils zip unzip \
-    locales-all shellcheck screen tmux \
-    ant maven gpg openssh-client jq tree 1> /dev/null
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get upgrade --yes && \
+    apt-get install --yes --no-install-recommends \
+        git curl wget default-jdk nano \
+        tar xz-utils zip unzip \
+        locales-all shellcheck screen tmux \
+        ant maven gpg openssh-client jq tree 1> /dev/null && \
+    apt-get --yes autoremove --purge && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install tmate
 RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/main/install/tmate.sh | bash -
-
-# Clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install sendme
 RUN ARCH="$(uname -m)" && \

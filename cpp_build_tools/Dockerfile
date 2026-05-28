@@ -10,24 +10,16 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
-
-# Upgrade packages
-RUN apt-get upgrade --yes
-
-# Remove unused packages
-RUN apt-get --yes autoremove --purge
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    build-essential git curl wget \
-    clang g++ gcc nano ca-certificates \
-    locales-all gpg jq tar xz-utils screen \
-    tmux tree openssh-client 1> /dev/null
-
-# Clean up
-RUN apt-get clean && \
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get upgrade --yes && \
+    apt-get install --yes --no-install-recommends \
+        build-essential git curl wget \
+        clang g++ gcc nano ca-certificates \
+        locales-all gpg jq tar xz-utils screen \
+        tmux tree openssh-client 1> /dev/null && \
+    apt-get --yes autoremove --purge && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install sendme

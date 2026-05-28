@@ -10,30 +10,22 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
+# Update, upgrade, install, autoremove in one layer
+RUN apt-get update && \
+    apt-get --yes upgrade && \
+    apt-get install --yes --no-install-recommends \
+        git curl wget zip unzip vim nano \
+        tar zip unzip locales-all gpg \
+        openssh-client xz-utils tmux screen \
+        iputils-ping traceroute jq tree \
+        ca-certificates 1> /dev/null && \
+    apt-get --yes autoremove --purge && \
+    rm -rf /var/lib/apt/lists/*
 
-# Upgrade packages
-RUN apt-get --yes upgrade
-
-# Remove unused packages
-RUN apt-get --yes autoremove --purge
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    git curl wget zip unzip vim nano \
-    tar zip unzip locales-all gpg \
-    openssh-client xz-utils tmux screen \
-    iputils-ping traceroute jq tree \
-    ca-certificates 1> /dev/null
-
-# Install Node.js
+# Install Node.js (refreshes apt lists via NodeSource setup)
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
-    apt-get update && \
-    apt-get install -y nodejs
-
-# Clean up
-RUN apt-get clean && \
+    apt-get install --yes --no-install-recommends nodejs && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install global Node.js tools

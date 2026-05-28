@@ -10,23 +10,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
-
-# Upgrade packages
-RUN apt-get --yes upgrade
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    curl git python3 bc tar make wget gcc libssl-dev \
-    zip unzip ca-certificates gpg openssh-client \
-    nano vim xz-utils tmux screen jq tree 1> /dev/null
-
-# Remove unused packages
-RUN apt-get -y autoremove --purge
-
-# Clean up
-RUN apt-get clean && \
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get --yes upgrade && \
+    apt-get install --yes --no-install-recommends \
+        curl git python3 bc tar make wget gcc libssl-dev \
+        zip unzip ca-certificates gpg openssh-client \
+        nano vim xz-utils tmux screen jq tree 1> /dev/null && \
+    apt-get -y autoremove --purge && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Create toolchains directory

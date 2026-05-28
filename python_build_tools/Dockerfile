@@ -10,25 +10,17 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Terminal type
 ENV TERM=xterm-256color
 
-# Update packages
-RUN apt-get update
-
-# Upgrade packages
-RUN apt-get --yes upgrade
-
-# Remove unused packages
-RUN apt-get --yes autoremove --purge
-
-# Install packages
-RUN apt-get install --yes --no-install-recommends \
-    git curl python3 python3-pip wget nano \
-    tar zip unzip locales-all \
-    python-is-python3 gpg openssh-client xz-utils \
-    iputils-ping traceroute tmux screen \
-    gpg jq python3-venv tree 1> /dev/null
-
-# Clean up
-RUN apt-get clean && \
+# Update, upgrade, install, autoremove, clean in one layer
+RUN apt-get update && \
+    apt-get --yes upgrade && \
+    apt-get install --yes --no-install-recommends \
+        git curl python3 python3-pip wget nano \
+        tar zip unzip locales-all \
+        python-is-python3 gpg openssh-client xz-utils \
+        iputils-ping traceroute tmux screen \
+        gpg jq python3-venv tree 1> /dev/null && \
+    apt-get --yes autoremove --purge && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install pip packages
