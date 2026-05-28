@@ -3,7 +3,7 @@
 #
 # All the dependencies requred for Android Kernel Building
 #
-# Base Image: ubuntu:noble
+# Base Image: ubuntu:resolute
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -23,12 +23,6 @@ RUN apt-get install --yes --no-install-recommends \
     curl git python3 bc tar make wget gcc libssl-dev \
     zip unzip ca-certificates gpg openssh-client \
     nano vim xz-utils tmux screen jq tree 1> /dev/null
-
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
-
-# Custom Functions
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
 
 # Removing all unused packages
 RUN apt-get -y autoremove --purge
@@ -56,9 +50,6 @@ RUN echo "Cloning Clang..." && \
     cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
-
 # Setting Kernel Build Script
 RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
     mkdir ~/misc && \
@@ -66,10 +57,6 @@ RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.
     cd ~/misc && \
     chmod +x kbuild.sh && \
     printf "\nalias kbuild=\"~/misc/kbuild.sh\"" >> ~/.bashrc
-
-# Setting Git Identity
-RUN git config --global user.email "me@devjugal.com" && \
-    git config --global user.name "crazyuploader"
 
 # Setting up an environment variable
 ENV TOOLCHAIN=/toolchains

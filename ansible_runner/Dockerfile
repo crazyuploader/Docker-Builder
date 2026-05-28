@@ -2,8 +2,6 @@
 # Created by Jugal Kishore --- 2025
 #
 # Docker Image for Ansible Runner
-#
-# Base Image: python:3.14-slim
 FROM python:3.14-slim
 
 # Setting Non-Interactive Build Time Environment Variable

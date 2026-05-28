@@ -2,8 +2,6 @@
 # Created by Jugal Kishore --- 2022
 #
 # Simple Alpine Docker Image non-root user 'worker' and sudo access
-#
-# Base Image: alpine:3.22.1
 FROM alpine:3.23.4
 
 # Add sudo

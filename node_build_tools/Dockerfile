@@ -2,8 +2,6 @@
 # Jugal Kishore -- 2020
 #
 # Docker Image with Nodejs, and NPM installed
-#
-# Base Image: ubuntu:noble
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -34,28 +32,20 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs
 
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
-
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
-
-# Installing Prettier, Yarn
+# Install global Node.js tools
 RUN npm install --global npm@latest && \
     npm install --global prettier@latest && \
-    npm install --global yarn@latest
+    npm install --global yarn@latest && \
+    npm install --global pnpm@latest
 
-# Git Identity Setup
-RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
-
-# Displaying Versions
+# Display installed versions
 RUN echo "Node Version: $(node --version)" && \
     echo "NPM Version: $(npm --version)" && \
-    echo "Yarn Version: $(yarn --version)"
+    echo "Yarn Version: $(yarn --version)" && \
+    echo "PNPM Version: $(pnpm --version)"
 
 CMD ["bash"]

@@ -2,36 +2,28 @@
 # Created by Jugal Kishore -- 2022
 #
 # Docker Image for Broken Link Checker
-#
-# Base Image: alpine:latest
 FROM alpine:latest AS builder
 
-# Add curl command
-RUN apk add --no-cache curl git openssh-client
+RUN apk add --no-cache curl jq
 
-# Set lychee version
-ARG VERSION=v0.20.1
-
-# Set Working Directory
 WORKDIR /app
 
-# Get lychee based on system architecture
-RUN ARCH="$(arch)" && \
-    curl -sLo lychee.tar.gz https://github.com/lycheeverse/lychee/releases/download/lychee-${VERSION}/lychee-${ARCH}-unknown-linux-gnu.tar.gz && \
-    tar -xvf lychee.tar.gz
+# Fetch latest lychee release from GitHub API and download musl binary
+RUN VERSION=$(curl -s https://api.github.com/repos/lycheeverse/lychee/releases/latest | jq -r '.tag_name') && \
+    ARCH="$(arch)" && \
+    curl -sLo lychee.tar.gz https://github.com/lycheeverse/lychee/releases/download/${VERSION}/lychee-${ARCH}-unknown-linux-musl.tar.gz && \
+    tar -xf lychee.tar.gz && \
+    chmod +x lychee
 
-# Use ubuntu:noble for final runner
-FROM ubuntu:resolute AS runner
+FROM alpine:latest AS runner
 
-# Create a non-root user and group for security
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN apk add --no-cache ca-certificates
 
-# Copy lychee binary from builder stage
-COPY --from=builder /app/lychee /usr/local/bin
+RUN addgroup -S appuser && adduser -S -G appuser appuser
 
-# Switch to the non-root user
+COPY --from=builder /app/lychee /usr/local/bin/lychee
+
 USER appuser
 
-# Entry point for the Docker Image
 ENTRYPOINT [ "lychee" ]
 CMD ["--help"]

@@ -3,7 +3,6 @@
 #
 # CPP & C Build Tools
 #
-# Base Image: ubuntu:noble
 FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
@@ -28,21 +27,8 @@ RUN apt-get install --yes --no-install-recommends \
     locales-all gpg jq tar xz-utils screen \
     tmux tree openssh-client 1> /dev/null
 
-# Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
-
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
-
-# Custom Functions
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Misc/master/functions >> ~/.bashrc
-
-# Git Identity Setup
-RUN curl -sLO https://raw.githubusercontent.com/crazyuploader/Bash/master/git_identity.sh && \
-    printf "\nalias setgit=\"bash /git_identity.sh\"" >> ~/.bashrc
 
 CMD ["bash"]

@@ -3,8 +3,8 @@
 #
 # Docker Image all about networking
 #
-# Base Image: Ubuntu
-FROM ubuntu:latest
+# Base Image: ubuntu:resolute
+FROM ubuntu:resolute
 
 # Setting Non-Interactive Build Time Environment Variable
 ARG DEBIAN_FRONTEND=noninteractive
@@ -34,8 +34,5 @@ RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install
 # Clean up
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-# Install ffsend
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/ffsend.sh | bash -
 
 CMD ["bash"]

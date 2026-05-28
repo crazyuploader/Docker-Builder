@@ -2,50 +2,46 @@
 # Created by Jugal Kishore --- 2023
 #
 # Markdown Server based on https://github.com/xyproto/algernon
-#
-# Base Image: alpine:3.23.1-alpine
-FROM golang:1.26.3-alpine AS builder
+FROM golang:alpine AS builder
 
-# Setting Algernon Version
-ARG ALGERNON_VERSION=v1.17.5
+# Install build tools and version fetching deps
+RUN apk --no-cache add git curl jq
 
-# Adding curl
-RUN apk --no-cache add git
-
-# Setting Working Directory to /tmp
+# Set working directory
 WORKDIR /tmp
 
-# Clone algernon repository
-RUN git clone https://github.com/xyproto/algernon -b ${ALGERNON_VERSION}
+# Fetch latest Algernon release tag from GitHub API and clone
+RUN ALGERNON_VERSION=$(curl -s https://api.github.com/repos/xyproto/algernon/releases/latest | jq -r '.tag_name') && \
+    git clone --depth=1 https://github.com/xyproto/algernon -b ${ALGERNON_VERSION}
 
-# Setting working directory to /tmp/algernon
+# Set working directory to cloned repo
 WORKDIR /tmp/algernon
 
-# Extract Algernon binaries
+# Build Algernon binary
 RUN go build -o algernon . && \
     mv algernon /usr/bin/algernon
 
-# Compress Algernon binaries
-RUN if [ "$(arch)" = "x86_64" ]; then apk add --no-cache upx; upx /usr/bin/algernon; fi
+# Compress binary on x86_64 (upx not available for arm)
+RUN if [ "$(arch)" = "x86_64" ]; then apk add --no-cache upx && upx /usr/bin/algernon; fi
 
-# Clean up /tmp directory
+# Clean up build artifacts
 RUN rm -rf /tmp/*
 
-# Use only Algernon binaries
+# Final stage — scratch for minimal image size
 FROM scratch
 
-# Copy Algernon binaries
+# Copy Algernon binary from builder
 COPY --from=builder /usr/bin/algernon /usr/bin/algernon
 
-# Required Directories
+# Copy required tmp directory
 COPY --from=builder /tmp /tmp
+
+# Mount point for content to serve
 VOLUME /srv/algernon
 WORKDIR /srv/algernon
 
-# Expose 3000 port
+# Expose port 3000
 EXPOSE 3000
 
-# Entrypoint
-#
-# Serve /srv/algernon directory with Algernon on port 3000 with HTTP only
+# Serve /srv/algernon on port 3000 over HTTP
 ENTRYPOINT [ "algernon", "--simple", "--addr", ":3000", "--httponly", "/srv/algernon" ]
