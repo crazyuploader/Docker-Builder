@@ -45,7 +45,7 @@ RUN cd toolchains && \
     git clone --depth=1 https://gitlab.com/crazyuploader/clang-toolchain.git clang
 
 # Install kernel build script
-RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh && \
+RUN curl -sO https://raw.githubusercontent.com/crazyuploader/Bash/main/kbuild.sh && \
     mkdir ~/misc && \
     mv ./kbuild.sh ~/misc && \
     cd ~/misc && \

@@ -6,12 +6,12 @@ The Docker Builder repository contains Dockerfiles for various tools and environ
 
 ## CI/CD Badges
 
-[![CircleCI](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/master.svg?style=svg)](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/master)
+[![CircleCI](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/main.svg?style=svg)](https://circleci.com/gh/crazyuploader/Docker-Builder/tree/main)
 [![Build Status](https://crazyuploader.semaphoreci.com/badges/Docker-Builder.svg)](https://crazyuploader.semaphoreci.com/projects/Docker-Builder)
-[![Cirrus CI](https://img.shields.io/cirrus/github/crazyuploader/Docker-Builder/master?label=Cirrus%20CI)](https://cirrus-ci.com/github/crazyuploader/Docker-Builder)
+[![Cirrus CI](https://img.shields.io/cirrus/github/crazyuploader/Docker-Builder/main?label=Cirrus%20CI)](https://cirrus-ci.com/github/crazyuploader/Docker-Builder)
 [![Docker Image CI](https://github.com/crazyuploader/Docker-Builder/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/crazyuploader/Docker-Builder/actions/workflows/dockerimage.yml)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/badge/master)](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/overview/master)
+[![CodeFactor](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/badge/main)](https://www.codefactor.io/repository/github/crazyuploader/docker-builder/overview/main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/17fa9f267ca748ca841ab338644d2086)](https://www.codacy.com/gh/crazyuploader/Docker-Builder/dashboard?utm_source=github.com&utm_medium=referral&utm_content=crazyuploader/Docker-Builder&utm_campaign=Badge_Grade)
 
 ## Availabe Image(s)

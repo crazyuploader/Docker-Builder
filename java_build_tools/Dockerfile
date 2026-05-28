@@ -27,7 +27,7 @@ RUN apt-get install --yes --no-install-recommends \
     ant maven gpg openssh-client jq tree 1> /dev/null
 
 # Install tmate
-RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/master/install/tmate.sh | bash -
+RUN curl -sL https://raw.githubusercontent.com/crazyuploader/Bash/main/install/tmate.sh | bash -
 
 # Clean up
 RUN apt-get clean && \

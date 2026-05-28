@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script to test Dockerfile changed in last commit
+# Script to test Dockerfiles changed vs base branch
 
 # Colors
 GREEN="\033[1;32m"
@@ -9,20 +9,25 @@ YELLOW="\033[1;33m"
 MAGENTA="\033[1;35m"
 RED="\033[0;31m"
 
+# Detect changed Dockerfiles across full branch range (not just last commit)
+get_changed_dockerfiles() {
+    local base_branch="${BASE_BRANCH:-main}"
+    git fetch origin "${base_branch}" --quiet 2>/dev/null || true
+    git diff --name-only "origin/${base_branch}...HEAD" | grep '/Dockerfile$'
+}
+
 function build_dockerfile_amd64() {
-    git show --pretty="" --name-only | grep "Dockerfile" >> to_build.txt
-    FILES=$(cat to_build.txt)
-    rm to_build.txt
-    echo -e "${GREEN} Available Dockerfile -${NC}"
+    FILES="$(get_changed_dockerfiles)"
+    echo -e "${GREEN}Available Dockerfiles:${NC}"
     find -- * -name "Dockerfile"
     echo ""
     if [[ -n ${FILES} ]]; then
-        echo -e "${YELLOW} Dockerfile changed -${NC}"
+        echo -e "${YELLOW}Changed Dockerfiles:${NC}"
         for f in ${FILES}; do
             echo -e "${MAGENTA}${f}${NC}"
         done
     else
-        echo -e "${GREEN}No Dockerfile(s) have been changed in this commit, nothing to build.${NC}"
+        echo -e "${GREEN}No Dockerfiles changed, nothing to build.${NC}"
         echo "Exiting..."
         exit 0
     fi
@@ -45,7 +50,7 @@ function build_dockerfile_amd64() {
         echo -e "Building ---> ${YELLOW}${FILE}${NC}"
         echo ""
         DIR=$(dirname "${FILE}")
-        docker build -f "${FILE}" -t crazyuploader/"${DIR}":latest .
+        docker build --progress=plain -f "${FILE}" -t crazyuploader/"${DIR}":latest .
         ERROR_CODE="$?"
         (( NFILES = NFILES + 1 ))
         if [[ "${ERROR_CODE}" -ne "0" ]]; then
@@ -64,13 +69,20 @@ function build_dockerfile_amd64() {
 }
 
 function build_dockerfile_arm64() {
-    files="$(grep -v -E "\#|^$" arm64.list)"
-    for directory in ${files}; do
-        echo ""
-        echo -e "Building --> ${GREEN}${directory}/Dockerfile${NC}"
-        echo ""
-        docker build --file "${directory}"/Dockerfile --tag crazyuploader/"${directory}":arm64 .
-    done
+    CHANGED_DIRS="$(get_changed_dockerfiles | sed 's|/Dockerfile$||')"
+    if [[ -z "${CHANGED_DIRS}" ]]; then
+        echo -e "${GREEN}No Dockerfiles changed, nothing to build.${NC}"
+        exit 0
+    fi
+    while IFS= read -r directory; do
+        [[ -z "${directory}" ]] && continue
+        if echo "${CHANGED_DIRS}" | grep -qx "${directory}"; then
+            echo ""
+            echo -e "Building --> ${GREEN}${directory}/Dockerfile${NC}"
+            echo ""
+            docker build --progress=plain --file "${directory}"/Dockerfile --tag crazyuploader/"${directory}":arm64 .
+        fi
+    done < <(grep -v -E "\#|^$" arm64.list)
     docker images
 }
 

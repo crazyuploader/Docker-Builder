@@ -29,7 +29,7 @@ RUN apt-get clean && \
 # Install Gradle
 RUN GRADLE_VERSION="$(curl -fsSL --retry 3 https://services.gradle.org/versions/current | jq -er '.version')" && \
     mkdir /opt/gradle && \
-    curl -fsSLo --retry 3 gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip" && \
+    curl -fsSL --retry 3 -o gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip" && \
     unzip -d /opt/gradle gradle.zip 1> /dev/null && \
     rm gradle.zip && \
     ln -s "/opt/gradle/gradle-${GRADLE_VERSION}" /opt/gradle/latest
@@ -37,7 +37,7 @@ RUN GRADLE_VERSION="$(curl -fsSL --retry 3 https://services.gradle.org/versions/
 # Install Kotlin
 RUN KOTLIN_VERSION="$(curl -fsSL --retry 3 https://api.github.com/repos/JetBrains/kotlin/releases/latest | jq -er '.tag_name' | sed 's/^v//')" && \
     cd /opt && \
-    curl -fsSLo --retry 3 kotlin.zip "https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip" && \
+    curl -fsSL --retry 3 -o kotlin.zip "https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip" && \
     unzip kotlin.zip && \
     rm kotlin.zip
 
@@ -51,7 +51,7 @@ ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platfo
 RUN CMDLINE_BUILD="$(curl -fsSL --retry 3 'https://developer.android.com/studio' | grep -oE 'commandlinetools-linux-[0-9]+_latest\.zip' | head -1 | grep -oE '[0-9]+')" && \
     mkdir -p /opt/android-sdk/cmdline-tools && \
     cd /opt/android-sdk/cmdline-tools && \
-    curl -fsSLo --retry 3 cmdline-tools.zip "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_BUILD}_latest.zip" && \
+    curl -fsSL --retry 3 -o cmdline-tools.zip "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_BUILD}_latest.zip" && \
     unzip cmdline-tools.zip 1> /dev/null && \
     rm cmdline-tools.zip && \
     mv cmdline-tools latest
