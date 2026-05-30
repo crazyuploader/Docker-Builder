@@ -12,6 +12,7 @@ The Docker Builder repository contains Dockerfiles for various tools and environ
 [![Docker Image CI](https://github.com/crazyuploader/Docker-Builder/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/crazyuploader/Docker-Builder/actions/workflows/dockerimage.yml)
 
 [![DeepSource](https://app.deepsource.com/gh/crazyuploader/Docker-Builder.svg/?label=code+coverage&show_trend=true&token=YBzg3Wj3pNhMREqtBAbgeKPl)](https://app.deepsource.com/gh/crazyuploader/Docker-Builder/)
+
 ## Availabe Image(s)
 
 ### DockerHub

@@ -13,6 +13,7 @@ RUN apk add --no-cache \
     git \
     curl \
     jq \
+    nodejs \
     openssh-client \
     sshpass \
     rsync
@@ -27,6 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
     pip install --upgrade --no-cache-dir pip && \
     pip install --no-cache-dir \
         ansible \
+        ansible-lint \
         pyyaml \
         jinja2 \
         netaddr \
