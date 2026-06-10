@@ -2,7 +2,7 @@
 # Created by Jugal Kishore --- 2020
 #
 # Speedtest CLI Docker Image
-FROM alpine:3.23 AS builder
+FROM alpine:3.24 AS builder
 
 # Install dependencies
 RUN apk --no-cache add curl jq
@@ -27,7 +27,7 @@ RUN set -e && \
     mv speedtest /usr/bin/speedtest
 
 # Runner stage
-FROM alpine:3.23 AS runner
+FROM alpine:3.24 AS runner
 
 # Copy binary
 COPY --from=builder /usr/bin/speedtest /usr/bin/speedtest

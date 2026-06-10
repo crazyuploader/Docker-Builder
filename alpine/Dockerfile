@@ -2,7 +2,7 @@
 # Created by Jugal Kishore --- 2022
 #
 # Simple Alpine Docker Image non-root user 'worker' and sudo access
-FROM alpine:3.23.4
+FROM alpine:3.24.0
 
 # Install sudo
 RUN apk --no-cache add sudo
