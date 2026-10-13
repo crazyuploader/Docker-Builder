@@ -2,7 +2,7 @@
 # Created by Jugal Kishore --- 2025
 #
 # Docker Image for Ansible Runner
-FROM python:3.14-alpine
+FROM python:3.15-alpine
 
 # Terminal type
 ENV TERM=xterm-256color
